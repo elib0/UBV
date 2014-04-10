@@ -15,23 +15,15 @@ class Login extends CI_Controller {
 			$password = $this->input->post('password');
 
 			if ($employee = $this->Employee->login($username, $password)) {
-				$this->load->view('partial/header');
-				$this->load->view('partial/main_menu');
-				$this->load->view('main');
-				$this->load->view('partial/footer');
+				redirect('home');
 			}else{
-				$this->load->view('partial/header');
 				$this->load->view('login');
-				$this->load->view('partial/footer');
 			}
 		}else{
 			if ($this->Employee->is_logged_in()) {
-				redirect('main');
+				redirect('home');
 			}else{
-				$this->load->view('partial/header');
 				$this->load->view('login', array('msg'=>''));
-				$this->load->view('partial/footer');
-				//si va a loguear
 			}
 			
 		}

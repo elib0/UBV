@@ -30,12 +30,49 @@ class Employee extends CI_Model {
 
 	function exists($employee_cod)
 	{
-		$this->con->from('empleado');
+		$this->db->from('empleado');
 		$this->db->join('persona', 'empleado.cedula = persona.cedula');
-		$this->con->where('empleado.cod_empleado',$employee_cod);
-		$query = $this->con->get();
+		$this->db->where('empleado.cod_empleado',$employee_cod);
+		$query = $this->db->get();
 
 		return ($query->num_rows()==1);
+	}
+
+	function get_logged_in_employee_info(){
+		return $this->session->userdata('employee');
+	}
+
+	function get_allowed_modules($employee_cod = 0){
+		$modules_allowed = array();
+		$result = array();
+		$this->db->select('nivel.modulos');
+		$this->db->from('nivel');
+		$this->db->join('empleado', 'empleado.cod_nivel = nivel.cod_nivel');
+		$this->db->where('empleado.cod_empleado',$employee_cod);
+
+		$query = $this->db->get();
+
+		if ($query->num_rows() == 1) {
+			$modules_allowed = explode(',', $query->row()->modulos);
+		}
+
+		return $modules_allowed;
+	}
+
+	function has_permission($module_id, $employee_cod){
+		$modules_allowed = array();
+		$this->db->select('nivel.modulos');
+		$this->db->from('nivel');
+		$this->db->join('empleado', 'empleado.cod_nivel = nivel.cod_nivel');
+		$this->db->where('empleado.cod_empleado',$employee_cod);
+
+		$query = $this->db->get();
+
+		if ($query->num_rows() == 1) {
+			$modules_allowed = explode(',', $query->row()->modulos);
+		}
+
+		return in_array($module_id, $modules_allowed);
 	}
 
 }
