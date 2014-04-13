@@ -1,4 +1,15 @@
 @import 'reset.css';
+#wrapper {
+  *zoom: 1;
+}
+#wrapper:before,
+#wrapper:after {
+  content: '';
+  display: table;
+}
+#wrapper:after {
+  clear: both;
+}
 * * {
   background: #eee;
   background: rgba(0,0,0,0.05);
@@ -29,4 +40,14 @@ footer {
 .message.success {
   background-color: #e8f5df;
   border-color: #9ece9e;
+}
+#wrapper {
+  width: auto;
+  max-width: 1024px;
+  float: none;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 0;
+  padding-right: 0;
 }

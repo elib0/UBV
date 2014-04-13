@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>UBV System</title>
+    <title><?php echo $title.' - ' ?>UBV System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/main.css">
     <!--[if lt IE 9]><script src="<?php echo base_url(); ?>js/vendor/selectivizr-1.0.2.min.js"></script><![endif]-->
@@ -23,4 +23,21 @@
         </p>
       </div>
     <![endif]-->
-    <div class=".message"></div>
+    <div class=".message"><?php echo $system_message; ?></div>
+    <?php if ($show_menu): ?>
+    <header>
+      <div class="logo">Aqui va el logo</div>
+      <ul class="main-menu">
+      <?php
+      foreach ($allowed_modules->result() as $module) {
+          echo '<li><a href="'.$module->modulo_id.'" title="'.$module->nombre.'">'.$module->nombre.'</a></li>';
+      }
+      ?>
+      </ul>
+      <div class="header-footer">
+        <h5>Bienvenido: <?php echo $user_info->nombre.' '.$user_info->apellido.'.'; ?></h5>
+        <?php echo anchor('employee/logout','Salir del Sistema'); ?>
+      </div>
+    </header>
+    <?php endif ?>
+    <div id="wrapper">

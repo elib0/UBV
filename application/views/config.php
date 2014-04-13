@@ -1,5 +1,4 @@
 <?php $this->load->view('partial/header'); ?>
-<?php $this->load->view('partial/main_menu'); ?>
 <section class="config-system">
 	<h1>Configuración del sistema</h1>
 	<ul>
