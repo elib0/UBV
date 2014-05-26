@@ -23,7 +23,5 @@
 			?>
 		</li>
 	</ul>
-	<?php
-	?>
 </section>
 <?php $this->load->view('partial/footer'); ?>

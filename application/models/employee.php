@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Employee extends CI_Model {
+require_once ("person.php");
+class Employee extends Person {
 
 	public function __construct()
 	{
@@ -21,6 +22,10 @@ class Employee extends CI_Model {
 		}
 
 		return false;
+	}
+
+	public function logout(){
+		$this->session->sess_destroy();
 	}
 
 	function is_logged_in()
@@ -73,6 +78,101 @@ class Employee extends CI_Model {
 		}
 
 		return in_array($module_id, $modules_allowed);
+	}
+
+	function get_all_info(){
+		$this->db->from('empleado');
+		$this->db->where('eliminado', 0);
+		return $this->db->get();
+	}
+
+	function get_info($employee_id)
+	{
+		$this->con->from('empleado');
+		$this->con->join('persona', 'persona.cedula = empleado.cedula');
+		$this->con->where('empleado.cedula',$employee_id);
+		$query = $this->con->get();
+
+		if($query->num_rows()==1)
+		{
+			return $query->row();
+		}
+		else
+		{
+			//Get empty base parent object, as $employee_id is NOT an employee
+			$person_obj=parent::get_info(-1);
+
+			//Get all the fields from employee table
+			$fields = $this->con->list_fields('empleado');
+
+			//append those fields to base parent object, we we have a complete empty object
+			foreach ($fields as $field)
+			{
+				$person_obj->$field='';
+			}
+
+			return $person_obj;
+		}
+	}
+
+	function get_multiple_info($cod_empleado = null){
+		if ( is_string($module_id) ) {
+			$this->db->where('cod_empleado', $cod_empleado);
+		}elseif( is_array($module_id) ){
+			$this->db->where_in('cod_empleado', $cod_empleado);
+			$this->db->order_by('orden', 'asc');
+		}
+
+		$query = $this->db->get();
+
+		if ( $query->num_rows == 1) {
+			return $query->row();
+		}
+		
+		return $query;
+	}
+
+	function save(&$person_data, &$employee_data,&$permission_data,$employee_id=false)
+	{
+		$success=false;
+
+		//Run these queries as a transaction, we want to make sure we do all or nothing
+		$this->con->trans_start();
+
+		if($idaux = parent::save($person_data,$employee_id))
+		{
+			if (!$employee_id or !$this->exists($employee_id))
+			{
+				$employee_data['person_id'] = $employee_id = $person_data['person_id'];
+				if( $this->con->insert('empleado',$employee_data) ) $success = $employee_data['person_id'];
+			}
+			else
+			{
+				$this->con->where('person_id', $employee_id);
+				$success = $this->con->update('empleado',$employee_data);
+			}
+		}
+
+		$this->con->trans_complete();
+		return $success;
+	}
+
+	function delete($employee_id)
+	{
+		$success=false;
+
+		//Don't let employee delete their self
+		if($employee_id==$this->get_logged_in_employee_info()->person_id)
+			return false;
+
+		//Run these queries as a transaction, we want to make sure we do all or nothing
+		$this->con->trans_start();
+
+		$this->con->where('cod_empleado', $employee_id);
+		$success = $this->con->update('empleado', array('eliminado' => 1));
+
+		$this->con->trans_complete();
+		return $success;
 	}
 
 }

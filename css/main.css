@@ -51,3 +51,19 @@ footer {
   padding-left: 0;
   padding-right: 0;
 }
+.required {
+  color: #b90000;
+}
+textarea {
+  width: 770px;
+}
+form > div.form-content ul {
+  display: block;
+  clear: both;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+form > div.form-content ul li {
+  float: left;
+}

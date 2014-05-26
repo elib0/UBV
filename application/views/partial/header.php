@@ -9,6 +9,8 @@
     <title><?php echo $title.' - ' ?>UBV System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/main.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>css/plugins/thickbox.css" media="screen">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>css/plugins/tablesorter.css" media="screen">
     <!--[if lt IE 9]><script src="<?php echo base_url(); ?>js/vendor/selectivizr-1.0.2.min.js"></script><![endif]-->
     <script src="<?php echo base_url(); ?>js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
   </head>
@@ -27,17 +29,20 @@
     <?php if ($show_menu): ?>
     <header>
       <div class="logo">Aqui va el logo</div>
-      <ul class="main-menu">
-      <?php
-      foreach ($allowed_modules->result() as $module) {
-          echo '<li><a href="'.$module->modulo_id.'" title="'.$module->nombre.'">'.$module->nombre.'</a></li>';
-      }
-      ?>
-      </ul>
-      <div class="header-footer">
+      <nav class="main-menu">
+        <ul>
+        <?php
+        foreach ($allowed_modules->result() as $module) {
+            $href = (str_replace('-', '/',$module->modulo_id)) ? str_replace('-', '/',$module->modulo_id) : $module->modulo_id;
+            echo '<li><a href="'.$href.'" title="'.$module->nombre.'">'.$module->nombre.'</a></li>';
+        }
+        ?>
+        </ul>
+      </nav>
+      <nav class="user-menu">
         <h5>Bienvenido: <?php echo $user_info->nombre.' '.$user_info->apellido.'.'; ?></h5>
-        <?php echo anchor('employee/logout','Salir del Sistema'); ?>
-      </div>
+        <?php echo anchor('logout','Salir del Sistema'); ?>
+      </nav>
     </header>
     <?php endif ?>
     <div id="wrapper">

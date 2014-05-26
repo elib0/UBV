@@ -11,6 +11,7 @@
       <script>window.jQuery || document.write('<script src="<?php echo base_url(); ?>js/vendor/jquery-2.0.3.min.js"><\/script>')</script>
     <!--<![endif]-->
     <script src="<?php echo base_url(); ?>js/plugins.js"></script>
+    <script src="<?php echo base_url(); ?>js/thickbox.js"></script>
     <script src="<?php echo base_url(); ?>js/anchorific.js"></script>
     <script src="<?php echo base_url(); ?>js/main.js"></script>
   </body>

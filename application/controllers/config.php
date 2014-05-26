@@ -20,20 +20,24 @@ class Config extends Secure_Area {
 
 	function backup(){
 		$nombre_archivo = date('d-m-Y');
-		$nombre_archivo .= '.gz';
-		// Load the DB utility class
+		$nombre_archivo .= '.sql';
+
+		//Cargo utilidad de base de datos
 		$this->load->dbutil();
 
-		// Backup your entire database and assign it to a variable
-		$backup =& $this->dbutil->backup(); 
+		$backup =& $this->dbutil->backup(array('format'=>'sql')); 
 
 		// Load the file helper and write the file to your server
 		$this->load->helper('file');
-		write_file('/path/to/'.$nombre_archivo, $backup); 
+		write_file('/backups/'.$nombre_archivo, $backup); 
 
 		// Load the download helper and send the file to your desktop
 		$this->load->helper('download');
 		force_download($nombre_archivo, $backup);
+	}
+
+	function restore(){
+
 	}
 
 }
