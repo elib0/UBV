@@ -4,15 +4,17 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
+    <base href="<?php echo base_url(); ?>" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title><?php echo $title.' - ' ?>UBV System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>css/main.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>css/plugins/thickbox.css" media="screen">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>css/plugins/tablesorter.css" media="screen">
-    <!--[if lt IE 9]><script src="<?php echo base_url(); ?>js/vendor/selectivizr-1.0.2.min.js"></script><![endif]-->
-    <script src="<?php echo base_url(); ?>js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/plugins/select2.css" media="screen">
+    <link rel="stylesheet" href="css/plugins/thickbox.css" media="screen">
+    <link rel="stylesheet" href="css/plugins/tablesorter.css" media="screen">
+    <!--[if lt IE 9]><script src="js/vendor/selectivizr-1.0.2.min.js"></script><![endif]-->
+    <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
   </head>
   <body>
     <!--[if lt IE 9]>
@@ -33,8 +35,8 @@
         <ul>
         <?php
         foreach ($allowed_modules->result() as $module) {
-            $href = (str_replace('-', '/',$module->modulo_id)) ? str_replace('-', '/',$module->modulo_id) : $module->modulo_id;
-            echo '<li><a href="'.$href.'" title="'.$module->nombre.'">'.$module->nombre.'</a></li>';
+            $href = ( strpos($module->modulo_id, '-') !== FALSE ) ? str_replace('-', '/',$module->modulo_id) : $module->modulo_id;
+            echo '<li>'.anchor($href, $module->nombre, 'title="'.$module->nombre.'"').'</li>';
         }
         ?>
         </ul>

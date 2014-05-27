@@ -75,6 +75,10 @@ class Employee extends Person {
 
 		if ($query->num_rows() == 1) {
 			$modules_allowed = explode(',', $query->row()->modulos);
+			foreach ($modules_allowed as $key => $value) {
+				//Fixed Modulos uni control
+				$modules_allowed[$key] = (strpos($value, '-') !== FALSE) ? substr($value, 0,strpos($value, '-')): $value;
+			}
 		}
 
 		return in_array($module_id, $modules_allowed);

@@ -5,20 +5,26 @@ class Requests extends Secure_Area {
 	public function __construct()
 	{
 		parent::__construct('requests');
-		$this->load->model('Request');
+		// $this->load->model('Request');
 	}
 
-	public function index($type='notes')
-	{
+	// public function index($type='notes')
+	// {
 		
-	}
+	// }
 
 	public function notes(){
-		echo 'Solicitud de notas';
+		$data['title'] = 'Notas';
+		$this->load->view('requests/form',$data);
 	}
 
 	public function transfer(){
-		echo 'Solicitud de Traslado';
+		$data['title'] = 'Notas';
+		$this->load->view('requests/form', $data);
+	}
+
+	public function save(){
+
 	}
 
 }

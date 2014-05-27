@@ -35,7 +35,4 @@
 		</thead>
 	</table>
 </section>
-<script>
-	
-</script>
 <?php $this->load->view('partial/footer'); ?>
