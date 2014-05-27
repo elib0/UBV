@@ -1,15 +1,5 @@
 @import 'reset.css';
-#wrapper {
-  *zoom: 1;
-}
-#wrapper:before,
-#wrapper:after {
-  content: '';
-  display: table;
-}
-#wrapper:after {
-  clear: both;
-}
+@import 'buttons-bootstrap.css';
 * * {
   background: #eee;
   background: rgba(0,0,0,0.05);
@@ -42,6 +32,7 @@ footer {
   border-color: #9ece9e;
 }
 #wrapper {
+  *zoom: 1;
   width: auto;
   max-width: 1024px;
   float: none;
@@ -50,6 +41,14 @@ footer {
   margin-left: auto;
   padding-left: 0;
   padding-right: 0;
+}
+#wrapper:before,
+#wrapper:after {
+  content: '';
+  display: table;
+}
+#wrapper:after {
+  clear: both;
 }
 .required {
   color: #b90000;
