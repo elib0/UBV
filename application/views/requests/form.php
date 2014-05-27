@@ -5,10 +5,10 @@
 	<h3>Datos de el estudiante</h3>
 	<h5 class="required">Campos en rojo son obligatorios</h5>
 	<ul>
-		<li><?php echo form_label('Cedula Estudiante', 'buscar', array('class'=>'required')).'<br>'.form_input('cedula', '', 'id="search-student"'); ?></li>
+		<li><?php echo form_label('Cédula Estudiante', 'buscar', array('class'=>'required')).'<br>'.form_input('cedula', '', 'id="search-student"'); ?></li>
 		<li>
 			Boton Agregar Estudiante<br>
-			<span>Nombre Estudiante seleccionado</span>
+			<span id="stundet-name">Seleccione un estudiante...</span>
 		</li>
 	</ul>
 	<h3>Datos de la solicitud</h3>
@@ -27,8 +27,9 @@
 			placeholder: 'Numero de cedula...',
 			minimumInputLength: 3,
 			maximumInputLength: 11,
+			id: 'id'
 			allowClear: true,
-			data:[{id:17681201,text:'Eli Jose'},{id:1,text:'15496385'},{id:2,text:'17888040'},{id:3,text:'159954201'},{id:4,text:'21569874'}]
+			data:[{id:17681201,text:'Eli Jose'},{id:15496385,text:'Ramona Cochina'},{id:17888040,text:'Carlitos'},{id:3,text:'159954201'},{id:4,text:'21569874'}]
 		}).change(function(val, added, removed){
 			console.log(val.added);
 		});
