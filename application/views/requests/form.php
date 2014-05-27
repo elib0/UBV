@@ -1,4 +1,5 @@
 <?php $this->load->view('partial/header'); ?>
+<h1>Solicitar <?php echo $title ?></h1>
 <?php echo form_open('requests/save', 'id="form-request"'); ?>
 <div class="form-content">
 	<h3>Datos de el estudiante</h3>
@@ -27,7 +28,7 @@
 			minimumInputLength: 3,
 			maximumInputLength: 11,
 			allowClear: true,
-			data:[{id:0,text:'enhancement'},{id:1,text:'bug'},{id:2,text:'duplicate'},{id:3,text:'dinvalid'},{id:4,text:'wontfix'}]
+			data:[{id:17681201,text:'Eli Jose'},{id:1,text:'15496385'},{id:2,text:'17888040'},{id:3,text:'159954201'},{id:4,text:'21569874'}]
 		}).change(function(val, added, removed){
 			console.log(val.added);
 		});

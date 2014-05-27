@@ -19,7 +19,7 @@ class Requests extends Secure_Area {
 	}
 
 	public function transfer(){
-		$data['title'] = 'Notas';
+		$data['title'] = 'Traslado';
 		$this->load->view('requests/form', $data);
 	}
 
