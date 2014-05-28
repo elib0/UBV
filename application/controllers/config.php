@@ -37,6 +37,7 @@ class Config extends Secure_Area {
 	}
 
 	function restore(){
+		$response = array('status'=>FALSE,'messagge' => $this->upload->display_errors());
 		$config['upload_path'] = 'temp/';
 		$config['allowed_types'] = '*';
 		$config['max_size']	= '2048';
@@ -44,16 +45,26 @@ class Config extends Secure_Area {
 
 		$this->load->library('upload', $config);
 
-		if ( !$this->upload->do_upload('backup'))
-		{
-			$data = array('error' => $this->upload->display_errors());
-		}
-		else
-		{
-			$data = array('upload_data' => $this->upload->data());
+		if ( !$this->upload->do_upload('backup')){
+			$this->load->helper('file'); // Cargamos helper de archivos
+
+			$file_data = $this->upload->data();
+			$sting = read_file($config['upload_path'].$file_data['orig_name']);
+
+			//A continuacion limpiamos la cadena sql y la separamos a un arreglo
+			$sting=preg_replace("/;\s*$/","", $sting);
+			$sting=preg_replace("/;\r?\n/", ";#;;;", $sting);
+			$querys=explode('#;;;',$sting);
+
+			foreach ($querys as $query) {
+				if ($query!=''){
+					// $result = mysql_query($query,$conn); //Ejecuta 
+				}
+			}
+			$response = array('status'=>TRUE,'messagge' => $file_data);
 		}
 
-		die(json_encode($data));
+		die(json_encode($response));
 	}
 
 }
