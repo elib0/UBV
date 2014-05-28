@@ -10,6 +10,7 @@
     <title><?php echo $title.' - ' ?>UBV System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/plugins/select2.css" media="screen">
     <link rel="stylesheet" href="css/plugins/thickbox.css" media="screen">
     <link rel="stylesheet" href="css/plugins/tablesorter.css" media="screen">
@@ -36,6 +37,11 @@
         <?php
         foreach ($allowed_modules->result() as $module) {
             $href = ( strpos($module->modulo_id, '-') !== FALSE ) ? str_replace('-', '/',$module->modulo_id) : $module->modulo_id;
+
+            //Si el modulo tiene Imagen la pongo
+            if ($module->imagen) {
+              echo '<li><img src="images/menubar/'.$module->imagen.'" alt="'.$module->nombre.'"></li>';
+            }
             echo '<li>'.anchor($href, $module->nombre, 'title="'.$module->nombre.'"').'</li>';
         }
         ?>

@@ -55,6 +55,19 @@ class Student extends Person {
 		}
 	}
 
+	function search($cedula){
+		$this->db->from('estudiante');
+		$this->db->join('persona', 'estudiante.cedula = persona.cedula');
+		$this->db->like('estudiante.cedula', $cedula);
+		$result = $this->db->get();
+
+		if ($result->num_rows()>0) {
+			return $result;
+		}
+
+		return false;
+	}
+
 	function save(&$person_data, &$student_data,$student_id=false)
 	{
 		$success=false;

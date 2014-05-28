@@ -1,7 +1,7 @@
 <?php $this->load->view('partial/header'); ?>
 <section class="manage-students">
 	<h1>Administracion de Estudiantes</h1>
-	<?php echo anchor('students/view?height=500&width=800', 'Agregar Estudiante', 'title="Agregar Estudiante" class="thickbox big-button"'); ?>
+	<?php echo anchor('students/view?height=500&width=800', 'Agregar Estudiante', 'title="Agregar Estudiante" class="thickbox btn btn-primary"'); ?>
 	<div class="table-options">
 		Busqueda y otras opciones de la Tabla
 	</div>

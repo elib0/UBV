@@ -4,11 +4,11 @@
 <div class="form-content">
 	<h3>Datos de el estudiante</h3>
 	<h5 class="required">Campos en rojo son obligatorios</h5>
-	<ul>
-		<li><?php echo form_label('Cédula Estudiante', 'buscar', array('class'=>'required')).'<br>'.form_input('cedula', '', 'id="search-student"'); ?></li>
+	<ul class="stundet-info">
+		<li><?php echo form_label('Cedula Estudiante', 'buscar', array('class'=>'required')).'<br>'.form_input('cedula', '', 'id="search-student"'); ?></li>
 		<li>
-			Boton Agregar Estudiante<br>
-			<span id="stundet-name">Seleccione un estudiante...</span>
+			<?php echo anchor('students/view?height=500&width=800', '+', 'title="Agregar Estudiante" class="thickbox btn btn-primary btn-sm"'); ?><br>
+			<span>No has seleccionado ningún estudiante</span>
 		</li>
 	</ul>
 	<h3>Datos de la solicitud</h3>
@@ -27,11 +27,31 @@
 			placeholder: 'Numero de cedula...',
 			minimumInputLength: 3,
 			maximumInputLength: 11,
-			id: 'id'
 			allowClear: true,
-			data:[{id:17681201,text:'Eli Jose'},{id:15496385,text:'Ramona Cochina'},{id:17888040,text:'Carlitos'},{id:3,text:'159954201'},{id:4,text:'21569874'}]
+			formatSelection: function (item) { return item.id; },
+  			formatResult: function (item) { return item.text; },
+			ajax:{
+				url: 'index.php/students/search',
+				dataType: 'json',
+				quietMillis: 100,
+				data: function (term, page) {
+	                return {
+	                    term: term,
+	                };
+	            },
+	            results: function (data, page) {
+	            	console.log(data);
+	                return { results: data };
+	            }
+			}
 		}).change(function(val, added, removed){
-			console.log(val.added);
+			console.log(val);
+			var name = 'No has seleccionado ningun estudiante';
+			if (!val.removed) {
+				name = val.added.text
+			}
+			
+			$('.stundet-info li > span').text(name);
 		});
 
 		$('#form-request').ajaxForm({

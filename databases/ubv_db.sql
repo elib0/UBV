@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50614
 File Encoding         : 65001
 
-Date: 2014-05-02 10:00:47
+Date: 2014-05-27 23:04:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -105,12 +105,35 @@ CREATE TABLE `entidad_federal` (
   `cod_entidad_federal` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL,
   PRIMARY KEY (`cod_entidad_federal`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of entidad_federal
 -- ----------------------------
 INSERT INTO `entidad_federal` VALUES ('1', 'Amazonas');
+INSERT INTO `entidad_federal` VALUES ('2', 'Anzoátegui');
+INSERT INTO `entidad_federal` VALUES ('3', 'Apure');
+INSERT INTO `entidad_federal` VALUES ('4', 'Aragua');
+INSERT INTO `entidad_federal` VALUES ('5', 'Barinas');
+INSERT INTO `entidad_federal` VALUES ('6', 'Bolívar');
+INSERT INTO `entidad_federal` VALUES ('7', 'Carabobo');
+INSERT INTO `entidad_federal` VALUES ('8', 'Cojedes');
+INSERT INTO `entidad_federal` VALUES ('9', 'Delta Amacuro');
+INSERT INTO `entidad_federal` VALUES ('10', 'Distrito Capital');
+INSERT INTO `entidad_federal` VALUES ('11', 'Falcón');
+INSERT INTO `entidad_federal` VALUES ('12', 'Guárico');
+INSERT INTO `entidad_federal` VALUES ('13', 'Lara');
+INSERT INTO `entidad_federal` VALUES ('14', 'Mérida');
+INSERT INTO `entidad_federal` VALUES ('15', 'Miranda');
+INSERT INTO `entidad_federal` VALUES ('16', 'Monagas');
+INSERT INTO `entidad_federal` VALUES ('17', 'Nueva Esparta');
+INSERT INTO `entidad_federal` VALUES ('18', 'Portuguesa');
+INSERT INTO `entidad_federal` VALUES ('19', 'Sucre');
+INSERT INTO `entidad_federal` VALUES ('20', 'Táchira');
+INSERT INTO `entidad_federal` VALUES ('21', 'Trujillo');
+INSERT INTO `entidad_federal` VALUES ('22', 'Vargas');
+INSERT INTO `entidad_federal` VALUES ('23', 'Yaracuy');
+INSERT INTO `entidad_federal` VALUES ('24', 'Zulia');
 
 -- ----------------------------
 -- Table structure for `estudiante`
@@ -167,8 +190,11 @@ CREATE TABLE `modulo` (
 -- ----------------------------
 -- Records of modulo
 -- ----------------------------
-INSERT INTO `modulo` VALUES ('config', 'Configuracion del sistema', null, '8');
+INSERT INTO `modulo` VALUES ('config', 'Configuracion del sistema', 'configuracion.png', '8');
 INSERT INTO `modulo` VALUES ('home', 'Inicio', null, '1');
+INSERT INTO `modulo` VALUES ('requests-notes', 'Solicitud de Notas', 'notas.png', '2');
+INSERT INTO `modulo` VALUES ('requests-transfer', 'Solicitud de Traslado', 'traslado.png', '3');
+INSERT INTO `modulo` VALUES ('students', 'Administracion de Bachilleres', 'estudiantes.png', '6');
 
 -- ----------------------------
 -- Table structure for `municipio`
@@ -181,11 +207,25 @@ CREATE TABLE `municipio` (
   PRIMARY KEY (`cod_municipio`),
   KEY `municipio_entidad_federal` (`cod_entidad_federal`),
   CONSTRAINT `municipio_entidad_federal` FOREIGN KEY (`cod_entidad_federal`) REFERENCES `entidad_federal` (`cod_entidad_federal`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of municipio
 -- ----------------------------
+INSERT INTO `municipio` VALUES ('1', '7', 'Bejuma');
+INSERT INTO `municipio` VALUES ('2', '7', 'Carlos Arvelo');
+INSERT INTO `municipio` VALUES ('4', '7', 'Diego Ibarra');
+INSERT INTO `municipio` VALUES ('5', '7', 'Guacara');
+INSERT INTO `municipio` VALUES ('6', '7', 'Juan Jose Mora');
+INSERT INTO `municipio` VALUES ('7', '7', 'Libertador');
+INSERT INTO `municipio` VALUES ('8', '7', 'Los Guayos');
+INSERT INTO `municipio` VALUES ('9', '7', 'Miranda');
+INSERT INTO `municipio` VALUES ('10', '7', 'Montalban');
+INSERT INTO `municipio` VALUES ('11', '7', 'Naguanagua');
+INSERT INTO `municipio` VALUES ('12', '7', 'Puerto Cabello');
+INSERT INTO `municipio` VALUES ('13', '7', 'San Diego');
+INSERT INTO `municipio` VALUES ('14', '7', 'San Joaquin');
+INSERT INTO `municipio` VALUES ('15', '7', 'Valencia');
 
 -- ----------------------------
 -- Table structure for `nivel`
@@ -201,7 +241,7 @@ CREATE TABLE `nivel` (
 -- ----------------------------
 -- Records of nivel
 -- ----------------------------
-INSERT INTO `nivel` VALUES ('0', 'Administrador', 'home,config');
+INSERT INTO `nivel` VALUES ('0', 'Administrador', 'home,config,students,requests-notes,requests-transfer');
 INSERT INTO `nivel` VALUES ('1', 'Analista', 'home');
 INSERT INTO `nivel` VALUES ('2', 'Coordinador', 'home');
 
@@ -241,4 +281,22 @@ CREATE TABLE `pfg` (
 
 -- ----------------------------
 -- Records of pfg
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `solicitud`
+-- ----------------------------
+DROP TABLE IF EXISTS `solicitud`;
+CREATE TABLE `solicitud` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `tipo` varchar(10) NOT NULL,
+  `cedula` int(11) NOT NULL,
+  `fecha_solicitud` datetime NOT NULL,
+  `fecha_retiro` datetime DEFAULT NULL,
+  `status` int(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of solicitud
 -- ----------------------------

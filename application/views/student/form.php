@@ -3,20 +3,20 @@
 	<h3>Datos personales</h3>
 	<h5 class="required">Campos en rojo son obligatorios</h5>
 	<ul>
-		<li><?php echo form_label('Cédula de identidad', 'cedula', array('class'=>'required')).'<br>'.form_input('cedula', '$cedula'); ?></li>
+		<li><?php echo form_label('Cédula de identidad', 'cedula', array('class'=>'required')).'<br>'.form_input('cedula', $student->cedula); ?></li>
 	</ul>
 	<ul>
-		<li><?php echo form_label('Nombres', 'nombre', array('class'=>'required')).'<br>'.form_input('nombre', '$nombre'); ?></li>
-		<li><?php echo form_label('Apellidos', 'apellido', array('class'=>'required')).'<br>'.form_input('apellido', '$apellido'); ?></li>
-	</ul>
-	<br>
-	<ul>
-		<li><?php echo form_label('Teléfono', 'telefono').'<br>'.form_input('telefono', '$telefono'); ?></li>
-		<li><?php echo form_label('Correo Electronico', 'correo').'<br>'.form_input('correo', '$correo'); ?></li>
+		<li><?php echo form_label('Nombres', 'nombre', array('class'=>'required')).'<br>'.form_input('nombre', $student->nombre); ?></li>
+		<li><?php echo form_label('Apellidos', 'apellido', array('class'=>'required')).'<br>'.form_input('apellido', $student->apellido); ?></li>
 	</ul>
 	<br>
 	<ul>
-		<li><?php echo form_label('Dirección', 'direccion').'<br>'.form_textarea('direccion', '$direccion'); ?></li>
+		<li><?php echo form_label('Teléfono', 'telefono').'<br>'.form_input('telefono', $student->telefono); ?></li>
+		<li><?php echo form_label('Correo Electronico', 'correo').'<br>'.form_input('correo', $student->email); ?></li>
+	</ul>
+	<br>
+	<ul>
+		<li><?php echo form_label('Dirección', 'direccion').'<br>'.form_textarea('direccion', $student->direccion); ?></li>
 	</ul>
 	<br>
 	<h3>Datos del Estudiante</h3>

@@ -13,8 +13,11 @@
 			echo form_submit('submit', 'Guardar');
 			echo form_close();
 			?>
-			<input type="button" id="button-municipio">
-			<input type="button" id="button-aldea">
+		</li>
+		<li>
+			<h3>Configuración de Aldeas</h3>
+			<?php echo anchor('url', 'Aldea', 'title="Administrar Aldeas" class="thickbox btn btn-primary btn-sm"'); ?>
+			<?php echo anchor('url', 'Pfg', 'title="Administrar PFG" class="thickbox btn btn-primary btn-sm"'); ?>
 		</li>
 		<li>
 			<h3>Usuarios del Sistema</h3>

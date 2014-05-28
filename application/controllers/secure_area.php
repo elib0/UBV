@@ -26,6 +26,7 @@ class Secure_Area extends CI_Controller {
 		//Modulos permitidos por el usuario
 		$allowed_modules_ids = $this->Employee->get_allowed_modules($data['user_info']->cod_empleado);
 		$data['allowed_modules']=$this->Module->get_modules_info($allowed_modules_ids);
+		
 		$this->load->vars($data);
 	}
 

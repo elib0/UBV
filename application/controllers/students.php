@@ -17,6 +17,10 @@ class Students extends Secure_Area {
 	public function view($person_id = 0){
 		$data['aldeas'] = array('0'=>'prueba');
 		$data['pfg'] = array('0'=>'Informatica');
+
+		//Si es editar
+		$data['student'] = $this->Student->get_info($person_id);
+
 		$this->load->view('student/form', $data);
 	}
 
@@ -44,6 +48,19 @@ class Students extends Secure_Area {
 		}
 
 		echo json_encode($response);
+	}
+
+	public function search(){
+		$students = $this->Student->search($this->input->get('term'));
+		$result = array();
+
+		if ($students) {
+			foreach ($students as $row) {
+				$result[] = array('id'=>$row->cedula, 'text'=>$row->apellido.' '.$row->nombre);
+			}
+		}
+
+		die(json_encode($result));
 	}
 
 }
