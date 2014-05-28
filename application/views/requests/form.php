@@ -19,8 +19,8 @@
 	<br><br><br>
 	<input type="submit" value="Registrar">
 </div>
-<?php $this->load->view('partial/footer'); ?>
 <?php echo form_close(); ?>
+<?php $this->load->view('partial/footer'); ?>
 <script type="text/javascript">
 	$(function() {
 		$('#search-student').select2({

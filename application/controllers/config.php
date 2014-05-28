@@ -37,7 +37,23 @@ class Config extends Secure_Area {
 	}
 
 	function restore(){
+		$config['upload_path'] = 'temp/';
+		$config['allowed_types'] = '*';
+		$config['max_size']	= '2048';
+		$config['overwrite'] = TRUE;
 
+		$this->load->library('upload', $config);
+
+		if ( !$this->upload->do_upload('backup'))
+		{
+			$data = array('error' => $this->upload->display_errors());
+		}
+		else
+		{
+			$data = array('upload_data' => $this->upload->data());
+		}
+
+		die(json_encode($data));
 	}
 
 }

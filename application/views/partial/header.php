@@ -38,11 +38,13 @@
         foreach ($allowed_modules->result() as $module) {
             $href = ( strpos($module->modulo_id, '-') !== FALSE ) ? str_replace('-', '/',$module->modulo_id) : $module->modulo_id;
 
-            //Si el modulo tiene Imagen la pongo
-            if ($module->imagen) {
-              echo '<li><img src="images/menubar/'.$module->imagen.'" alt="'.$module->nombre.'"></li>';
+            if ($module->in_menu) {
+                //Si el modulo tiene Imagen la pongo
+                if ($module->imagen) {
+                    echo '<li><img src="images/menubar/'.$module->imagen.'" alt="'.$module->nombre.'"></li>';
+                }
+                echo '<li>'.anchor($href, $module->nombre, 'title="'.$module->nombre.'"').'</li>';
             }
-            echo '<li>'.anchor($href, $module->nombre, 'title="'.$module->nombre.'"').'</li>';
         }
         ?>
         </ul>
