@@ -6,6 +6,7 @@ class Secure_Area extends CI_Controller {
 	{
 		parent::__construct();	
 		$this->load->model('Employee');
+		$this->load->model('Configapp');
 		if(!$this->Employee->is_logged_in())
 		{
 			redirect('login');
@@ -17,7 +18,8 @@ class Secure_Area extends CI_Controller {
 
 		//Datos HTML para vistas
 		$data['title'] = '';
-		$data['show_menu'] = true;
+		$data['config_title'] = $this->Configapp->get_config()->name;
+		$data['show_menu'] = TRUE;
 		$data['system_message'] = '';
 
 		//Datos de usuario en sesion

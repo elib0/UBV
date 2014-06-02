@@ -5,23 +5,27 @@
 	<div class="table-options">
 		Busqueda y otras opciones de la Tabla
 	</div>
-	<table id="table-sorter">
+	<table id="table-sorter" width="100%">
 		<thead>
 			<tr>
-				<th>Cedula</th>
+				<th>Cédula</th>
 				<th>Nombre</th>
 				<th>Apellido</th>
-				<th>Mencion</th>
-				<th># Solicitudes</th>
+				<th>PFG</th>
+				<th>Solicitudes</th>
+				<th>Acciones</th>
 				<tbody>
 					<?php if ($students->num_rows() > 0): ?>
 					<?php foreach ($students->result() as $value): ?>
 						<tr>
-							<td><?php echo $value['cedula'] ?></td>
-							<td><?php echo $value['nombre'] ?></td>
-							<td><?php echo $value['apellido'] ?></td>
-							<td><?php echo $value['cod_mencion'] ?></td>
-							<td><?php echo $value['cedula'] ?></td>
+							<td><?php echo $value->cedula ?></td>
+							<td><?php echo $value->nombre ?></td>
+							<td><?php echo $value->apellido ?></td>
+							<td><?php echo $value->cod_pfg ?></td>
+							<td><?php echo $this->Student->get_student_requests($value->cedula)->num_rows() ?></td>
+							<td>
+								<?php echo anchor('students/view/'.$value->cedula.'?height=500&width=800', 'Editar', 'title="Editar Estudiante" class="thickbox btn btn-primary"'); ?>
+							</td>
 						</tr>
 					<?php endforeach ?>
 					<?php else: ?>

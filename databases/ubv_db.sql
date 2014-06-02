@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50614
 File Encoding         : 65001
 
-Date: 2014-05-27 23:04:17
+Date: 2014-06-01 16:32:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,18 +27,19 @@ CREATE TABLE `aldea` (
   PRIMARY KEY (`cod_aldea`),
   KEY `aldea_municipio` (`cod_municipio`),
   CONSTRAINT `aldea_municipio` FOREIGN KEY (`cod_municipio`) REFERENCES `municipio` (`cod_municipio`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of aldea
 -- ----------------------------
+INSERT INTO `aldea` VALUES ('1', 'Tupamaro', 'POr ahi en algun beta', '7');
 
 -- ----------------------------
 -- Table structure for `cohorte`
 -- ----------------------------
 DROP TABLE IF EXISTS `cohorte`;
 CREATE TABLE `cohorte` (
-  `cod_cohorte` int(11) NOT NULL,
+  `cod_cohorte` int(11) NOT NULL AUTO_INCREMENT,
   `anno` int(4) NOT NULL,
   `inicio` int(2) NOT NULL,
   `fin` int(2) NOT NULL,
@@ -48,6 +49,22 @@ CREATE TABLE `cohorte` (
 -- ----------------------------
 -- Records of cohorte
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `configuracion`
+-- ----------------------------
+DROP TABLE IF EXISTS `configuracion`;
+CREATE TABLE `configuracion` (
+  `id` int(2) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) NOT NULL,
+  `admin_email` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of configuracion
+-- ----------------------------
+INSERT INTO `configuracion` VALUES ('1', 'Sistema UBV', 'administracion@ubv.com');
 
 -- ----------------------------
 -- Table structure for `documentos`
@@ -142,37 +159,19 @@ DROP TABLE IF EXISTS `estudiante`;
 CREATE TABLE `estudiante` (
   `matricula` int(11) NOT NULL,
   `cedula` int(11) NOT NULL,
-  `cod_mencion` int(4) NOT NULL,
+  `cod_pfg` int(4) NOT NULL,
   `cod_cohorte` int(11) NOT NULL,
   PRIMARY KEY (`matricula`),
   KEY `estudiante_persona` (`cedula`),
-  KEY `estudiante_mencion` (`cod_mencion`),
+  KEY `estudiante_mencion` (`cod_pfg`),
   KEY `estudiante_cohorte` (`cod_cohorte`),
+  CONSTRAINT `estudiante_mencion` FOREIGN KEY (`cod_pfg`) REFERENCES `pfg` (`cod_pfg`),
   CONSTRAINT `estudiante_cohorte` FOREIGN KEY (`cod_cohorte`) REFERENCES `cohorte` (`cod_cohorte`),
-  CONSTRAINT `estudiante_mencion` FOREIGN KEY (`cod_mencion`) REFERENCES `mencion` (`cod_mencion`),
   CONSTRAINT `estudiante_persona` FOREIGN KEY (`cedula`) REFERENCES `persona` (`cedula`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of estudiante
--- ----------------------------
-
--- ----------------------------
--- Table structure for `mencion`
--- ----------------------------
-DROP TABLE IF EXISTS `mencion`;
-CREATE TABLE `mencion` (
-  `cod_mencion` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) NOT NULL,
-  `descripcion` text,
-  `cod_pfg` int(11) NOT NULL,
-  PRIMARY KEY (`cod_mencion`),
-  KEY `mencion_pfg` (`cod_pfg`),
-  CONSTRAINT `mencion` FOREIGN KEY (`cod_pfg`) REFERENCES `pfg` (`cod_pfg`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- ----------------------------
--- Records of mencion
 -- ----------------------------
 
 -- ----------------------------
@@ -183,6 +182,7 @@ CREATE TABLE `modulo` (
   `modulo_id` varchar(20) NOT NULL,
   `nombre` varchar(60) NOT NULL,
   `imagen` varchar(100) DEFAULT NULL,
+  `in_menu` int(1) DEFAULT '1',
   `orden` int(2) DEFAULT NULL,
   PRIMARY KEY (`modulo_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -190,11 +190,12 @@ CREATE TABLE `modulo` (
 -- ----------------------------
 -- Records of modulo
 -- ----------------------------
-INSERT INTO `modulo` VALUES ('config', 'Configuracion del sistema', 'configuracion.png', '8');
-INSERT INTO `modulo` VALUES ('home', 'Inicio', null, '1');
-INSERT INTO `modulo` VALUES ('requests-notes', 'Solicitud de Notas', 'notas.png', '2');
-INSERT INTO `modulo` VALUES ('requests-transfer', 'Solicitud de Traslado', 'traslado.png', '3');
-INSERT INTO `modulo` VALUES ('students', 'Administracion de Bachilleres', 'estudiantes.png', '6');
+INSERT INTO `modulo` VALUES ('config', 'Configuracion del sistema', 'configuracion.png', '1', '8');
+INSERT INTO `modulo` VALUES ('home', 'Inicio', null, '1', '1');
+INSERT INTO `modulo` VALUES ('requests-notes', 'Solicitud de Notas', 'notas.png', '1', '2');
+INSERT INTO `modulo` VALUES ('requests-transfer', 'Solicitud de Traslado', 'traslado.png', '1', '3');
+INSERT INTO `modulo` VALUES ('students', 'Administracion de Bachilleres', 'estudiantes.png', '1', '6');
+INSERT INTO `modulo` VALUES ('universities', 'Administrar Aldeas', null, '0', '0');
 
 -- ----------------------------
 -- Table structure for `municipio`
@@ -207,7 +208,7 @@ CREATE TABLE `municipio` (
   PRIMARY KEY (`cod_municipio`),
   KEY `municipio_entidad_federal` (`cod_entidad_federal`),
   CONSTRAINT `municipio_entidad_federal` FOREIGN KEY (`cod_entidad_federal`) REFERENCES `entidad_federal` (`cod_entidad_federal`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of municipio
@@ -241,7 +242,7 @@ CREATE TABLE `nivel` (
 -- ----------------------------
 -- Records of nivel
 -- ----------------------------
-INSERT INTO `nivel` VALUES ('0', 'Administrador', 'home,config,students,requests-notes,requests-transfer');
+INSERT INTO `nivel` VALUES ('0', 'Administrador', 'home,config,students,requests-notes,requests-transfer,universities');
 INSERT INTO `nivel` VALUES ('1', 'Analista', 'home');
 INSERT INTO `nivel` VALUES ('2', 'Coordinador', 'home');
 
@@ -277,11 +278,12 @@ CREATE TABLE `pfg` (
   PRIMARY KEY (`cod_pfg`),
   KEY `pfg_aldea` (`cod_aldea`),
   CONSTRAINT `pfg_aldea` FOREIGN KEY (`cod_aldea`) REFERENCES `aldea` (`cod_aldea`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of pfg
 -- ----------------------------
+INSERT INTO `pfg` VALUES ('1', 'Informatica', 'Todo sobre la informatica', '1');
 
 -- ----------------------------
 -- Table structure for `solicitud`

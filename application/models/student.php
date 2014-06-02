@@ -55,6 +55,13 @@ class Student extends Person {
 		}
 	}
 
+	function get_student_requests($student_id){
+		$this->db->from('solicitud');
+		$this->db->join('estudiante', 'estudiante.matricula = solicitud.matricula');
+		$this->db->where('estudiante.cedula',$student_id);
+		return $this->db->get();
+	}
+
 	function search($cedula){
 		$this->db->from('estudiante');
 		$this->db->join('persona', 'estudiante.cedula = persona.cedula');
@@ -65,27 +72,28 @@ class Student extends Person {
 			return $result;
 		}
 
-		return false;
+		return FALSE;
 	}
 
-	function save(&$person_data, &$student_data,$student_id=false)
+	function save(&$person_data, &$student_data,$student_id=0)
 	{
-		$success=false;
+		$success=FALSE;
 
 		//Run these queries as a transaction, we want to make sure we do all or nothing
 		$this->db->trans_start();
 
 		if($idaux = parent::save($person_data,$student_id))
 		{
-			if (!$student_id or !$this->exists($student_id))
+			if ( !$this->exists($student_id) )
 			{
-				$student_data['person_id'] = $student_id = $person_data['person_id'];
-				if( $this->db->insert('estudiante',$student_data) ) $success = $student_data['person_id'];
-			}
-			else
-			{
-				$this->db->where('person_id', $student_id);
-				$success = $this->db->update('estudiante',$student_data);
+				if( $this->db->insert('estudiante',$student_data) ) {
+					$success = $idaux;
+				}
+			}else{
+				$this->db->where('cedula', $student_id);
+				if ($this->db->update('estudiante',$student_data)) {
+					$success = TRUE;
+				}
 			}
 		}
 

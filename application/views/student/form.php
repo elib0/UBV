@@ -1,4 +1,4 @@
-<?php echo form_open('students/save', 'id="form-student"'); ?>
+<?php echo form_open('students/save/'.$student->cedula, 'id="form-student"'); ?>
 <div class="form-content">
 	<h3>Datos personales</h3>
 	<h5 class="required">Campos en rojo son obligatorios</h5>
@@ -21,11 +21,11 @@
 	<br>
 	<h3>Datos del Estudiante</h3>
 	<ul>
-		<li><?php echo form_label('Aldea', 'aldea', array('class'=>'required')).'<br>'.form_dropdown('aldea', $aldeas); ?></li>
+		<!-- <li><?php echo form_label('Aldea', 'aldea').'<br><span>Prueba</span>'?></li> -->
 		<li><?php echo form_label('Pfg', 'pfg', array('class'=>'required')).'<br>'.form_dropdown('pfg', $pfg); ?></li>
 	</ul>
 	<br><br><br>
-	<input type="submit" value="Registrar">
+	<input type="submit" value="Guardar">
 </div>
 <?php echo form_close(); ?>
 <script type="text/javascript">

@@ -49,8 +49,8 @@ class Person extends CI_Model {
 		{
 			if ($this->con->insert('persona',$person_data))
 			{
-				$person_data['cedula']=$this->con->insert_id();
-				return $this->con->insert_id();
+				// $person_data['cedula']=$this->con->insert_id();
+				return $person_data['cedula'];
 			}
 
 			return false;

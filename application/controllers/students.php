@@ -6,6 +6,7 @@ class Students extends Secure_Area {
 	{
 		parent::__construct('students');
 		$this->load->model('Student');
+		$this->load->model('University');
 	}
 
 	public function index()
@@ -15,8 +16,13 @@ class Students extends Secure_Area {
 	}
 
 	public function view($person_id = 0){
-		$data['aldeas'] = array('0'=>'prueba');
-		$data['pfg'] = array('0'=>'Informatica');
+		$data['pfg'] = array();
+
+		if ($query = $this->University->get_all_pfg()) {
+			foreach ($query->result() as $pfg) {
+				$data['pfg'][$pfg->cod_pfg] = $pfg->nombre_aldea.':'.$pfg->nombre_pfg;
+			}
+		}
 
 		//Si es editar
 		$data['student'] = $this->Student->get_info($person_id);
@@ -24,7 +30,7 @@ class Students extends Secure_Area {
 		$this->load->view('student/form', $data);
 	}
 
-	public function save($person_id = 0){
+	public function save($person_id = false){
 		$response = array('status'=>false, 'messagge'=>'Error al registrar al estudiante');
 
 		$person_data['cedula'] = $this->input->post('cedula');
@@ -35,15 +41,17 @@ class Students extends Secure_Area {
 		$person_data['direccion'] = $this->input->post('direccion');
 
 		// $student_data['aldea'] = $this->input->post('aldea');
-		$student_data['cod_mencion'] = $this->input->post('pfg');
+		$student_data['matricula'] = date("dmhis");
+		$student_data['cod_pfg'] = $this->input->post('pfg');
 		$student_data['cedula'] = $person_data['cedula'];
+		$student_data['cod_cohorte'] = 1;
 		
 
-		if ($result = $this->Student->save($person_data, $student_data)) {
-			if ($result > 0) {
-				$response = array('status'=>true, 'messagge'=>'El estudiante se a registrado satisfactoriamente!');
-			}elseif ($result) {
+		if ($result = $this->Student->save($person_data, $student_data,$person_id)) {
+			if (is_bool($result)) {
 				$response = array('status'=>true, 'messagge'=>'Se han actualizado los datos del estudiante satisfactoriamente!');
+			}elseif ($result > 0) {
+				$response = array('status'=>true, 'messagge'=>'El estudiante se a registrado satisfactoriamente!');
 			}
 		}
 
