@@ -55,9 +55,13 @@ class Student extends Person {
 		}
 	}
 
+	function get_studing_info(){
+		$this->db->from('Table');
+	}
+
 	function get_student_requests($student_id){
 		$this->db->from('solicitud');
-		$this->db->join('estudiante', 'estudiante.matricula = solicitud.matricula');
+		$this->db->join('estudiante', 'estudiante.cedula = solicitud.cedula');
 		$this->db->where('estudiante.cedula',$student_id);
 		return $this->db->get();
 	}
@@ -84,7 +88,7 @@ class Student extends Person {
 
 		if($idaux = parent::save($person_data,$student_id))
 		{
-			if ( !$this->exists($student_id) )
+			if ( !$student_id || !$this->exists($student_id) )
 			{
 				if( $this->db->insert('estudiante',$student_data) ) {
 					$success = $idaux;

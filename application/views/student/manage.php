@@ -3,7 +3,11 @@
 	<h1>Administracion de Estudiantes</h1>
 	<?php echo anchor('students/view?height=500&width=800', 'Agregar Estudiante', 'title="Agregar Estudiante" class="thickbox btn btn-primary"'); ?>
 	<div class="table-options">
-		Busqueda y otras opciones de la Tabla
+		<?php echo form_open('stundets/search'); ?>
+		<?php echo form_label('Buscar Estudiante', 'buscar', array('class'=>'required')).form_input('cedula', '', 'id="search-student"'); ?>
+		<?php echo form_label('Filtrar con solicitudes pendiente?', 'buscar', array('class'=>'required')).form_checkbox('request', 'true'); ?>
+		<input type="submit" value="Filtrar">
+		</form>
 	</div>
 	<table id="table-sorter" width="100%">
 		<thead>
@@ -40,3 +44,35 @@
 	</table>
 </section>
 <?php $this->load->view('partial/footer'); ?>
+<script>
+	$('#search-student').select2({
+			placeholder: 'Numero de cedula...',
+			minimumInputLength: 3,
+			maximumInputLength: 11,
+			allowClear: true,
+			formatSelection: function (item) { return item.id; },
+  			formatResult: function (item) { return item.text; },
+			ajax:{
+				url: 'index.php/students/suggest',
+				dataType: 'json',
+				quietMillis: 100,
+				data: function (term, page) {
+	                return {
+	                    term: term,
+	                };
+	            },
+	            results: function (data, page) {
+	            	console.log(data);
+	                return { results: data };
+	            }
+			}
+		}).change(function(val, added, removed){
+			console.log(val);
+			var name = 'No has seleccionado ningun estudiante';
+			if (!val.removed) {
+				name = val.added.text
+			}
+			
+			$('.stundet-info li > span').text(name);
+		});
+</script>

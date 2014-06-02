@@ -24,7 +24,7 @@ class Requests extends Secure_Area {
 	}
 
 	public function save(){
-
+		echo $this->input->get_post('cedula');
 	}
 
 }

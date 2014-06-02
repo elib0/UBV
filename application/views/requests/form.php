@@ -1,6 +1,6 @@
 <?php $this->load->view('partial/header'); ?>
 <h1>Solicitar <?php echo $title ?></h1>
-<?php echo form_open('requests/save', 'id="form-request"'); ?>
+<?php echo form_open('requests/save', 'id="form-request" class="ajax-form"'); ?>
 <div class="form-content">
 	<h3>Datos de el estudiante</h3>
 	<h5 class="required">Campos en rojo son obligatorios</h5>
@@ -14,10 +14,10 @@
 	<h3>Datos de la solicitud</h3>
 	<ul>
 		<li><?php echo form_label('Aldea Anterior', 'anterior', array('class'=>'required')).'<br>'.form_input('anterior', '$anterior'); ?></li>
-		<li><?php echo form_label('Aldea Actual', 'actual', array('class'=>'required')).'<br>'.form_input('actual', '$actual'); ?></li>
+		<li><?php echo form_label('Aldea Actual', 'actual', array('class'=>'required')).'<br><span id="aldea-actual"></span>' ?></li>
 	</ul>
 	<br><br><br>
-	<input type="submit" value="Registrar">
+	<input type="submit" value="Solicitar">
 </div>
 <?php echo form_close(); ?>
 <?php $this->load->view('partial/footer'); ?>
@@ -31,7 +31,7 @@
 			formatSelection: function (item) { return item.id; },
   			formatResult: function (item) { return item.text; },
 			ajax:{
-				url: 'index.php/students/search',
+				url: 'index.php/students/suggest',
 				dataType: 'json',
 				quietMillis: 100,
 				data: function (term, page) {
@@ -52,13 +52,15 @@
 			}
 			
 			$('.stundet-info li > span').text(name);
+			$('#aldea-actual').text(val.added.pfg);
+
 		});
 
-		$('#form-request').ajaxForm({
-			dataType: 'json',
-			success: function(response){
-				console.log(response);
-			}
-		});
+		// $('#form-request').ajaxForm({
+		// 	dataType: 'json',
+		// 	success: function(response){
+		// 		console.log(response);
+		// 	}
+		// });
 	});
 </script>

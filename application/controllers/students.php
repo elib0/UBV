@@ -58,13 +58,13 @@ class Students extends Secure_Area {
 		echo json_encode($response);
 	}
 
-	public function search(){
+	public function suggest(){
 		$students = $this->Student->search($this->input->get('term'));
 		$result = array();
 
 		if ($students) {
-			foreach ($students as $row) {
-				$result[] = array('id'=>$row->cedula, 'text'=>$row->apellido.' '.$row->nombre);
+			foreach ($students->result() as $row) {
+				$result[] = array('id'=>$row->cedula, 'text'=>$row->apellido.' '.$row->nombre, 'pfg'=>$row->cod_pfg);
 			}
 		}
 
