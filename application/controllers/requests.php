@@ -6,6 +6,7 @@ class Requests extends Secure_Area {
 	{
 		parent::__construct('requests');
 		// $this->load->model('Request');
+		$this->load->model('Student');
 	}
 
 	// public function index($type='notes')
@@ -24,7 +25,8 @@ class Requests extends Secure_Area {
 	}
 
 	public function save(){
-		echo $this->input->get_post('cedula');
+		$stundet_data = $this->Student->get_info($this->input->post('cedula'));
+		$stunding_data = $this->Student->get_studing_info();
 	}
 
 }

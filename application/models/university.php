@@ -24,6 +24,17 @@ class University extends CI_Model {
 		return FALSE;
 	}
 
+	public function get_aldea_info($aldea_cod = 0){
+		$this->db->select('aldea.cod_aldea, aldea.nombre, 
+							municipio.nombre AS nombre_municipio,
+							pfg.cod_pfg, pfg.nombre AS pfg_nombre');
+		$this->con->from('aldea');
+		$this->con->join('pfg', 'aldea.cod_aldea = pfg.cod_aldea');
+		$this->db->where('cod_aldea', $aldea_cod);
+		return $this->db->get();
+
+	}
+
 	public function get_all_municipios(){
 		$this->con->select('municipio.cod_municipio,
 						   municipio.nombre AS nombre_municipio,
@@ -37,6 +48,8 @@ class University extends CI_Model {
 	}
 
 	public function get_all_aldeas(){
+		$this->con->select('aldea.*,
+						   municipio.nombre AS nombre_municipio');
 		$this->con->from('aldea');
 		$this->con->join('municipio', 'aldea.cod_municipio = municipio.cod_municipio');
 		return $this->con->get();

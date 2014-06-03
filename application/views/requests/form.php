@@ -13,6 +13,9 @@
 	</ul>
 	<h3>Datos de la solicitud</h3>
 	<ul>
+		<li><?php echo form_label('Semestre solicitado', 'semestre', array('class'=>'required')).'<br>'.form_dropdown('semestre', range(1, 12)); ?></li>
+	</ul>
+	<ul>
 		<li><?php echo form_label('Aldea Anterior', 'anterior', array('class'=>'required')).'<br>'.form_input('anterior', '$anterior'); ?></li>
 		<li><?php echo form_label('Aldea Actual', 'actual', array('class'=>'required')).'<br><span id="aldea-actual"></span>' ?></li>
 	</ul>
