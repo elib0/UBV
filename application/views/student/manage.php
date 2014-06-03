@@ -70,7 +70,7 @@
 			console.log(val);
 			var name = 'No has seleccionado ningun estudiante';
 			if (!val.removed) {
-				name = val.added.text
+				name = val.added.text;
 			}
 			
 			$('.stundet-info li > span').text(name);

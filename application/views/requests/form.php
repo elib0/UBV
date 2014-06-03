@@ -18,8 +18,8 @@
 	<ul>
 		<li><?php echo form_label('Aldea Anterior', 'anterior', array('class'=>'required')).'<br>'.form_input('anterior', '$anterior'); ?></li>
 		<li><?php echo form_label('Aldea Actual', 'actual', array('class'=>'required')).'<br><span id="aldea-actual"></span>' ?></li>
+		<li><?php echo form_label('Comentarios:', 'comentarios').'<br>'.form_textarea('comentarios'); ?></li>
 	</ul>
-	<br><br><br>
 	<input type="submit" value="Solicitar">
 </div>
 <?php echo form_close(); ?>
@@ -46,12 +46,21 @@
 	            	console.log(data);
 	                return { results: data };
 	            }
+			},
+			initSelection: function(element, callback){
+				var id=$(element).val();
+		        if (id!=="") {
+		            $.ajax('index.php/students/suggest', {
+		            	dataType: "json",
+		                data: {term: id}
+		            }).done(function(data) { callback(data[0]); });
+		        }
 			}
 		}).change(function(val, added, removed){
 			console.log(val);
 			var name = 'No has seleccionado ningun estudiante';
 			if (!val.removed) {
-				name = val.added.text
+				name = val.added.text;
 			}
 			
 			$('.stundet-info li > span').text(name);
