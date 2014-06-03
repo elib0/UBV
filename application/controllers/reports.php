@@ -9,7 +9,7 @@ class Reports extends Secure_Area {
 
 	public function index()
 	{
-		echo 'Estadistica y Reportes';
+		$this->load->view('reports/list');
 	}
 
 }

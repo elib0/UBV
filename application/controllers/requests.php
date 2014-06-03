@@ -26,7 +26,7 @@ class Requests extends Secure_Area {
 
 	public function save(){
 		$stundet_data = $this->Student->get_info($this->input->post('cedula'));
-		$stunding_data = $this->Student->get_studing_info();
+		// $stunding_data = $this->Student->get_studing_info();
 	}
 
 }
