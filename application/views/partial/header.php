@@ -52,7 +52,7 @@
       </ul>
     </nav>
     <header>
-      <div class="logo">Aqui va el logo</div>
+      <div class="logo"><a href="index.php">Aqui va el logo</a></div>
       <nav class="user-menu">
         <h5>Bienvenido: <?php echo $user_info->nombre.' '.$user_info->apellido.'.'; ?></h5>
         <?php echo anchor('logout','Salir del Sistema'); ?>

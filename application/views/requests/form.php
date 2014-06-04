@@ -1,29 +1,31 @@
 <?php $this->load->view('partial/header'); ?>
-<h1>Solicitar <?php echo $title ?></h1>
-<?php echo form_open('requests/save', 'id="form-request"'); ?>
-<?php echo form_hidden('tipo', strtolower($title)); ?>
-<div class="form-content">
-	<h3>Datos de el estudiante</h3>
-	<h5 class="required">Campos en rojo son obligatorios</h5>
-	<ul class="stundet-info">
-		<li><?php echo form_label('Cedula Estudiante', 'buscar', array('class'=>'required')).'<br>'.form_input('cedula', '', 'id="search-student"'); ?></li>
-		<li>
-			<?php echo anchor('students/view?height=500&width=800', '+', 'title="Agregar Estudiante" class="thickbox btn btn-primary btn-sm"'); ?><br>
-			<span>No has seleccionado ningún estudiante</span>
-		</li>
-	</ul>
-	<h3>Datos de la solicitud</h3>
-	<ul>
-		<li><?php echo form_label('Semestre solicitado', 'semestre', array('class'=>'required')).'<br>'.form_dropdown('semestre', range(1, 12)); ?></li>
-	</ul>
-	<ul>
-		<li><?php echo form_label('Aldea Anterior', 'anterior', array('class'=>'required')).'<br>'.form_input('anterior', '$anterior'); ?></li>
-		<li><?php echo form_label('Aldea Actual', 'actual', array('class'=>'required')).'<br><span id="aldea-actual"></span>' ?></li>
-		<li><?php echo form_label('Comentarios:', 'comentarios').'<br>'.form_textarea('comentarios'); ?></li>
-	</ul>
-	<input type="submit" value="Solicitar">
-</div>
-<?php echo form_close(); ?>
+<section class="request">
+	<h1>Solicitar <?php echo $title ?></h1>
+	<?php echo form_open('requests/save', 'id="form-request"'); ?>
+	<?php echo form_hidden('tipo', strtolower($title)); ?>
+	<div class="form-content">
+		<h3>Datos de el estudiante</h3>
+		<h5 class="required">Campos en rojo son obligatorios</h5>
+		<ul class="stundet-info">
+			<li><?php echo form_label('Cedula Estudiante', 'buscar', array('class'=>'required')).'<br>'.form_input('cedula', '', 'id="search-student"'); ?></li>
+			<li>
+				<?php echo anchor('students/view?height=500&width=800', '+', 'title="Agregar Estudiante" class="thickbox btn btn-primary btn-sm"'); ?><br>
+				<span>No has seleccionado ningún estudiante</span>
+			</li>
+		</ul>
+		<h3>Datos de la solicitud</h3>
+		<ul>
+			<li><?php echo form_label('Semestre solicitado', 'semestre', array('class'=>'required')).'<br>'.form_dropdown('semestre', range(1, 12)); ?></li>
+		</ul>
+		<ul>
+			<li><?php echo form_label('Aldea Anterior', 'anterior', array('class'=>'required')).'<br>'.form_input('anterior', '$anterior'); ?></li>
+			<li><?php echo form_label('Aldea Actual', 'actual', array('class'=>'required')).'<br><span id="aldea-actual"></span>' ?></li>
+			<li><?php echo form_label('Comentarios:', 'comentarios').'<br>'.form_textarea('comentarios'); ?></li>
+		</ul>
+		<input type="submit" value="Solicitar">
+	</div>
+	<?php echo form_close(); ?>
+</section>
 <?php $this->load->view('partial/footer'); ?>
 <script type="text/javascript">
 	$(function() {
