@@ -6,7 +6,7 @@ class Secure_Area extends CI_Controller {
 	{
 		parent::__construct();	
 		$this->load->model('Employee');
-		$this->load->model('Configapp');
+		
 		if(!$this->Employee->is_logged_in())
 		{
 			redirect('login');

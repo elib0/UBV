@@ -1,0 +1,18 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+require_once ("secure_area.php");
+class Constancy extends Secure_Area {
+
+	public function __construct()
+	{
+		parent::__construct('constancy');
+	}
+
+	public function index()
+	{
+		$this->load->view('constancies/form');
+	}
+
+}
+
+/* End of file constancy.php */
+/* Location: ./application/controllers/constancy.php */

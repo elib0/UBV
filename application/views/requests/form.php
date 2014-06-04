@@ -1,6 +1,6 @@
 <?php $this->load->view('partial/header'); ?>
 <h1>Solicitar <?php echo $title ?></h1>
-<?php echo form_open('requests/save', 'id="form-request" class="ajax-form"'); ?>
+<?php echo form_open('requests/save', 'id="form-request"'); ?>
 <?php echo form_hidden('tipo', strtolower($title)); ?>
 <div class="form-content">
 	<h3>Datos de el estudiante</h3>

@@ -30,25 +30,29 @@
     <![endif]-->
     <div class=".message"><?php echo $system_message; ?></div>
     <?php if ($show_menu): ?>
+    <nav class="main-menu">
+      <ul>
+      <?php
+      foreach ($allowed_modules->result() as $module) {
+          $href = ( strpos($module->modulo_id, '-') !== FALSE ) ? str_replace('-', '/',$module->modulo_id) : $module->modulo_id;
+
+          if ($module->in_menu) {
+              //Si el modulo tiene Imagen la pongo
+              echo "<li><ul>";
+              if ($module->imagen) {
+                  echo '<li><img src="images/menubar/'.$module->imagen.'" alt="'.$module->nombre.'"></li>';
+              }else{
+                echo "<li></li>";
+              }
+              echo '<li>'.anchor($href, $module->nombre, 'title="'.$module->nombre.'"').'</li>';
+              echo "</ul></li>";
+          }
+      }
+      ?>
+      </ul>
+    </nav>
     <header>
       <div class="logo">Aqui va el logo</div>
-      <nav class="main-menu">
-        <ul>
-        <?php
-        foreach ($allowed_modules->result() as $module) {
-            $href = ( strpos($module->modulo_id, '-') !== FALSE ) ? str_replace('-', '/',$module->modulo_id) : $module->modulo_id;
-
-            if ($module->in_menu) {
-                //Si el modulo tiene Imagen la pongo
-                if ($module->imagen) {
-                    echo '<li><img src="images/menubar/'.$module->imagen.'" alt="'.$module->nombre.'"></li>';
-                }
-                echo '<li>'.anchor($href, $module->nombre, 'title="'.$module->nombre.'"').'</li>';
-            }
-        }
-        ?>
-        </ul>
-      </nav>
       <nav class="user-menu">
         <h5>Bienvenido: <?php echo $user_info->nombre.' '.$user_info->apellido.'.'; ?></h5>
         <?php echo anchor('logout','Salir del Sistema'); ?>

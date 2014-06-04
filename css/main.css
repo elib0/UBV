@@ -10,10 +10,6 @@
 #wrapper:after {
   clear: both;
 }
-* * {
-  background: #eee;
-  background: rgba(0,0,0,0.05);
-}
 footer {
   text-align: center;
 }
@@ -68,5 +64,27 @@ form > div.form-content ul {
   padding: 0;
 }
 form > div.form-content ul li {
+  float: left;
+}
+header {
+  height: 42px;
+}
+nav.user-menu > * {
+  display: inline;
+  float: left;
+}
+nav.main-menu {
+  width: 300px;
+  position: fixed;
+  top: 35px;
+  left: 0;
+}
+nav.main-menu ul {
+  padding: 0 0 0 10px;
+}
+nav.main-menu ul li {
+  min-height: 50px;
+}
+nav.main-menu ul li ul > li {
   float: left;
 }
