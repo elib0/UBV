@@ -31,7 +31,9 @@ a, a:hover, a:visited, a:active
 
 //Contenedor Principal
 #wrapper
-    center(1024px);
+    center(900px);
+    margin-top 58px
+    margin-left 235px
 
 //Formularios
 form > div.form-content
@@ -47,7 +49,11 @@ form > div.form-content
             float left
 
 header
-    height 42px
+    background-color white
+    position fixed
+    width 100%
+    height 62px
+    z-index 2
 
 //Menu Usuario
 nav.user-menu > *
@@ -57,16 +63,28 @@ nav.user-menu > *
 
 //Menu Principal
 nav.main-menu
-    width 300px
-    position fixed
-    top 35px
-    left 0
+    position:fixed;
+    top:55px;
+    left:0;
+    width:180px;
+    z-index:1;
+    height:100%;
+    background-color:hsl(0,0%,100%);
+    -webkit-box-shadow:-1px 0px 8px hsl(0,0%,60%) inset;
+    -moz-box-shadow:-1px 0px 8px hsl(0,0%,60%) inset;
+    box-shadow:-1px 0px 8px hsl(0,0%,60%) inset;
+    font-weight:bold;
     ul
-        padding 0 0 0 10px
-        li
-            min-height 50px
-            ul > li
-                float left
+        padding 0
+    > ul
+        > li
+            position:relative;
+            float:none;
+            height:100%;
+            border-bottom:1px solid hsl(0,0%,80%);
+            font-size:8pt;
+            cursor:pointer;
+                
         
             
 
