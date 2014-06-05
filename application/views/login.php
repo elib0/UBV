@@ -1,4 +1,4 @@
-<?php $this->load->view('partial/header'); ?>
+<?php $this->load->view('partial/header', array('class'=>'login')); ?>
 	<section class="login-form">
 		<h1>Control de acceso: </h1>
 		<?php 
@@ -9,7 +9,7 @@
 		echo form_label('Contraseña:', 'password');
 		echo form_password(array('name'=>'password', 'id'=>'password', 'required'=>'required'));
 		echo "<br />";
-		echo form_submit('submit', 'Entrar');
+		echo form_submit('submit', 'Entrar', 'class="btn btn-default"');
 		echo form_close();
 		?>
 	</section>

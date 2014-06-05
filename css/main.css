@@ -35,6 +35,9 @@ a:active {
 body {
   background-color: #fafafa;
 }
+body.login {
+  background: url("../images/background.png");
+}
 form > div.form-content h3 {
   clear: both;
 }
@@ -155,6 +158,26 @@ nav.main-menu > ul > li > ul > li:first-child {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
+}
+#wrapper section.login-form {
+  *zoom: 1;
+  width: auto;
+  max-width: 500px;
+  float: none;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 0;
+  padding-right: 0;
+  text-align: center;
+}
+#wrapper section.login-form:before,
+#wrapper section.login-form:after {
+  content: '';
+  display: table;
+}
+#wrapper section.login-form:after {
+  clear: both;
 }
 footer {
   position: fixed;
