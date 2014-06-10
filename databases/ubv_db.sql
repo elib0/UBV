@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50614
 File Encoding         : 65001
 
-Date: 2014-06-03 23:29:01
+Date: 2014-06-09 22:48:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -66,6 +66,25 @@ CREATE TABLE `configuracion` (
 -- Records of configuracion
 -- ----------------------------
 INSERT INTO `configuracion` VALUES ('1', 'Sistema UBV', 'carlos@ubv.com');
+
+-- ----------------------------
+-- Table structure for `coordinador_aldea`
+-- ----------------------------
+DROP TABLE IF EXISTS `coordinador_aldea`;
+CREATE TABLE `coordinador_aldea` (
+  `cod_coordinador` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `cedula` int(11) NOT NULL,
+  `cod_aldea` int(11) NOT NULL,
+  PRIMARY KEY (`cod_coordinador`),
+  KEY `coordinador_persona` (`cedula`),
+  KEY `coordinador_aldea` (`cod_aldea`),
+  CONSTRAINT `coordinador_persona` FOREIGN KEY (`cedula`) REFERENCES `persona` (`cedula`),
+  CONSTRAINT `coordinador_aldea` FOREIGN KEY (`cod_aldea`) REFERENCES `aldea` (`cod_aldea`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of coordinador_aldea
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `documentos`
@@ -196,7 +215,7 @@ CREATE TABLE `modulo` (
 -- ----------------------------
 INSERT INTO `modulo` VALUES ('config', 'Configuracion del sistema', 'configuracion.png', '1', '8');
 INSERT INTO `modulo` VALUES ('constancy', 'Constancia de Culminacion', 'culminacion.png', '1', '5');
-INSERT INTO `modulo` VALUES ('home', 'Inicio', null, '1', '1');
+INSERT INTO `modulo` VALUES ('home', 'Inicio', null, '0', '1');
 INSERT INTO `modulo` VALUES ('reports', 'Estadisticas y Reportes', 'reportes.png', '1', '7');
 INSERT INTO `modulo` VALUES ('requests-notes', 'Solicitud de Notas', 'notas.png', '1', '2');
 INSERT INTO `modulo` VALUES ('requests-transfer', 'Solicitud de Traslado', 'traslado.png', '1', '3');
@@ -307,7 +326,6 @@ CREATE TABLE `solicitud` (
   `fecha_solicitud` datetime NOT NULL,
   `fecha_retiro` datetime DEFAULT NULL,
   `status` int(1) DEFAULT '0',
-  `comentario` text,
   PRIMARY KEY (`id`),
   KEY `solicitud_estudiante_idx` (`matricula`),
   CONSTRAINT `solicitud_estudiante` FOREIGN KEY (`matricula`) REFERENCES `estudiante` (`matricula`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -316,4 +334,4 @@ CREATE TABLE `solicitud` (
 -- ----------------------------
 -- Records of solicitud
 -- ----------------------------
-INSERT INTO `solicitud` VALUES ('1', 'nota', '306052200', '2014-06-02 22:55:45', null, '0', null);
+INSERT INTO `solicitud` VALUES ('1', 'nota', '0', '2014-06-02 22:55:45', null, '0');
