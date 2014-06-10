@@ -51,6 +51,10 @@ form > div.form-content ul {
 form > div.form-content ul li {
   float: left;
 }
+form > div.form-content input[type=submit] {
+  display: block;
+  float: right;
+}
 header {
   background-color: #fff;
   position: fixed;

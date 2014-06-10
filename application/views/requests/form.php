@@ -18,11 +18,11 @@
 			<li><?php echo form_label('Semestre solicitado', 'semestre', array('class'=>'required')).'<br>'.form_dropdown('semestre', range(1, 12)); ?></li>
 		</ul>
 		<ul>
-			<li><?php echo form_label('Aldea Anterior', 'anterior', array('class'=>'required')).'<br>'.form_input('anterior', '$anterior'); ?></li>
-			<li><?php echo form_label('Aldea Actual', 'actual', array('class'=>'required')).'<br><span id="aldea-actual"></span>' ?></li>
-			<li><?php echo form_label('Comentarios:', 'comentarios').'<br>'.form_textarea('comentarios'); ?></li>
+			<li><?php echo form_label('Aldea Actual', 'actual', array('class'=>'required')).'<br><span id="aldea-actual">No has seleccionado ningun estudiante</span>' ?></li>
+			<li><?php echo form_label('Aldea Anterior', 'anterior', array('class'=>'required')).'<br>'.form_dropdown('anterior', $aldeas, '', 'disabled="disabled" id="aldea_anterior"'); ?></li>
+			<li style=" width:100%"><?php echo form_label('Comentarios:', 'comentarios').'<br>'.form_textarea('comentarios'); ?></li>
 		</ul>
-		<input type="submit" value="Solicitar">
+		<input type="submit" value="Solicitar" class="btn btn-default">
 	</div>
 	<?php echo form_close(); ?>
 </section>
@@ -60,14 +60,16 @@
 		        }
 			}
 		}).change(function(val, added, removed){
-			console.log(val);
 			var name = 'No has seleccionado ningun estudiante';
+			var aldea = name;
 			if (!val.removed) {
 				name = val.added.text;
+				aldea = val.added.pfg;
+				$('#aldea_anterior > option[val='+val.added.pfg+']').remove();
 			}
 			
 			$('.stundet-info li > span').text(name);
-			$('#aldea-actual').text(val.added.pfg);
+			$('#aldea-actual').text(aldea);
 
 		});
 

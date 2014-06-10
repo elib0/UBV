@@ -47,12 +47,22 @@ class University extends CI_Model {
 
 	}
 
-	public function get_all_aldeas(){
+	public function get_all_aldeas($for_dropdown=false){
+		$result = array();
 		$this->con->select('aldea.*,
 						   municipio.nombre AS nombre_municipio');
 		$this->con->from('aldea');
 		$this->con->join('municipio', 'aldea.cod_municipio = municipio.cod_municipio');
-		return $this->con->get();
+		
+		if ($for_dropdown) {
+			if ($query = $this->con->get()) {
+				foreach ($query->result() as $aldea) {
+					$result[$aldea->cod_aldea] = $aldea->nombre;
+				}
+			}
+		}else{
+			return $this->con->get();
+		}
 	}
 
 	public function get_all_pfg(){
