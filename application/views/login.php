@@ -1,4 +1,5 @@
 <?php $this->load->view('partial/header', array('class'=>'login')); ?>
+	<img src="images/logo.png" alt="">
 	<section class="login-form">
 		<h1>Control de acceso: </h1>
 		<?php 
