@@ -19,7 +19,7 @@
 		</ul>
 		<ul>
 			<li><?php echo form_label('Aldea Actual', 'actual', array('class'=>'required')).'<br><span id="aldea-actual">No has seleccionado ningun estudiante</span>' ?></li>
-			<li><?php echo form_label('Aldea Anterior', 'anterior', array('class'=>'required')).'<br>'.form_dropdown('anterior', $aldeas, '', 'disabled="disabled" id="aldea_anterior"'); ?></li>
+			<li><?php echo form_label('Aldea Anterior', 'anterior', array('class'=>'required')).'<br>'.form_dropdown('anterior', $aldeas, '', 'id="aldea_anterior"'); ?></li>
 			<li style=" width:100%"><?php echo form_label('Comentarios:', 'comentarios').'<br>'.form_textarea('comentarios'); ?></li>
 		</ul>
 		<input type="submit" value="Solicitar" class="btn btn-default">

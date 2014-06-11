@@ -39,8 +39,14 @@ class Requests extends Secure_Area {
 	}
 
 	public function save(){
-		$stundet_data = $this->Student->get_info($this->input->post('cedula'));
-		// $stunding_data = $this->Student->get_studing_info();
+		$data['stundet_matricula'] = $this->Student->get_info($this->input->post('cedula'))->matricula;
+		$data['tipo'] = $this->input->post('tipo');
+		$data['semestre_solicitado'] = $this->input->post('semestre');
+		$data['anterior'] = $this->input->post('anterior');
+		$data['comentarios'] = $this->input->post('comentarios');
+		echo "<pre>";
+		var_dump($data);
+		echo "</pre>";
 	}
 
 }
