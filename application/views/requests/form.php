@@ -73,11 +73,11 @@
 
 		});
 
-		// $('#form-request').ajaxForm({
-		// 	dataType: 'json',
-		// 	success: function(response){
-		// 		console.log(response);
-		// 	}
-		// });
+		$('#form-request').ajaxForm({
+			dataType: 'json',
+			success: function(response){
+				console.log(response);
+			}
+		});
 	});
 </script>

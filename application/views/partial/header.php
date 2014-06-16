@@ -52,10 +52,14 @@
       </ul>
     </nav>
     <header>
-      <div class="logo"><a href="index.php">Aqui va el logo</a></div>
+      <div class="logo"><a href="index.php"><img src="images/logo.png" alt="" width="72px"></a></div>
       <nav class="user-menu">
         <h5>Bienvenido: <?php echo $user_info->nombre.' '.$user_info->apellido.'.'; ?></h5>
         <?php echo anchor('logout','Salir del Sistema'); ?>
+        <div id="clock">
+          <?php echo date('F d, Y');?>
+          <span></span>
+        </div>
       </nav>
     </header>
     <?php endif ?>

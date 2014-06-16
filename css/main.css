@@ -1,4 +1,23 @@
 @import 'reset.css';
+#wrapper,
+#wrapper section.login-form,
+#wrapper section.main li {
+  *zoom: 1;
+}
+#wrapper:before,
+#wrapper section.login-form:before,
+#wrapper section.main li:before,
+#wrapper:after,
+#wrapper section.login-form:after,
+#wrapper section.main li:after {
+  content: '';
+  display: table;
+}
+#wrapper:after,
+#wrapper section.login-form:after,
+#wrapper section.main li:after {
+  clear: both;
+}
 footer {
   text-align: center;
 }
@@ -7,6 +26,18 @@ a:hover,
 a:visited,
 a:active {
   text-decoration: none;
+}
+/*tooltip*/
+.tooltip {
+  display: none;
+  position: absolute;
+  border: 1px solid #333;
+  background-color: #161616;
+  border-radius: 5px;
+  padding: 10px;
+  color: #fff;
+  font-size: 12px Arial;
+  z-index: 999;
 }
 .message {
   padding: 20px 20px 20px 40px;
@@ -63,9 +94,32 @@ header {
   z-index: 2;
   background-color: #009bd1;
 }
+.form-content {
+  *zoom: 1;
+}
+.form-content:before,
+.form-content:after {
+  content: '';
+  display: table;
+}
+.form-content:after {
+  clear: both;
+}
 nav.user-menu > * {
   display: inline;
   float: left;
+}
+#clock {
+  padding-left: 25px;
+  width: 100px;
+  background: transparent url("../images/menubar/reloj.png") no-repeat left center;
+  background-size: 20px 20px;
+  color: #fff;
+  font-size: 8pt;
+  position: absolute;
+  top: 1.5em;
+  right: 20px;
+  text-align: right;
 }
 nav.main-menu {
   position: fixed;
@@ -134,7 +188,6 @@ nav.main-menu > ul > li > ul > li:first-child {
   width: 54px;
 }
 #wrapper {
-  *zoom: 1;
   width: auto;
   max-width: 1060px;
   float: none;
@@ -147,14 +200,6 @@ nav.main-menu > ul > li > ul > li:first-child {
   margin-right: 58px;
   margin-left: 235px;
 }
-#wrapper:before,
-#wrapper:after {
-  content: '';
-  display: table;
-}
-#wrapper:after {
-  clear: both;
-}
 #wrapper section {
   margin-top: 1em;
   background-color: #fff;
@@ -163,8 +208,11 @@ nav.main-menu > ul > li > ul > li:first-child {
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
+#wrapper section > h1 {
+  color: #fff;
+  text-shadow: 1px 0px 3px #000;
+}
 #wrapper section.login-form {
-  *zoom: 1;
   width: auto;
   max-width: 500px;
   float: none;
@@ -175,12 +223,59 @@ nav.main-menu > ul > li > ul > li:first-child {
   padding-right: 0;
   text-align: center;
 }
-#wrapper section.login-form:before,
-#wrapper section.login-form:after {
+#wrapper section.main a,
+#wrapper section.main a:active,
+#wrapper section.main a:hover {
+  display: block;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+}
+#wrapper section.main ul {
+  *zoom: 1;
+  padding: 0;
+  list-style: none;
+}
+#wrapper section.main ul:before,
+#wrapper section.main ul:after {
   content: '';
   display: table;
 }
-#wrapper section.login-form:after {
+#wrapper section.main ul:after {
+  clear: both;
+}
+#wrapper section.main li {
+  float: left;
+  display: inline;
+  clear: none;
+  text-align: inherit;
+  padding-left: 0;
+  padding-right: 0;
+  width: 31.33333333333333%;
+  margin-left: 0%;
+  margin-right: 3%;
+  height: 200px;
+  float: left;
+  background-color: #009bd1;
+  text-align: center;
+  font-size: 2em;
+}
+#wrapper section.main li:nth-child(3n) {
+  margin-right: 0%;
+  float: right;
+}
+#wrapper section.main li span {
+  font-size: 3em;
+}
+#wrapper section.config-system ul {
+  *zoom: 1;
+}
+#wrapper section.config-system ul:before,
+#wrapper section.config-system ul:after {
+  content: '';
+  display: table;
+}
+#wrapper section.config-system ul:after {
   clear: both;
 }
 footer {
@@ -196,7 +291,7 @@ footer {
   text-align: center;
   font-size: 12px;
 }
-@media screen and (max-width: 1100px) {
+@media screen and (max-width:1100px) {
   #wrapper {
     margin-left: 155px;
     margin-right: 38px;

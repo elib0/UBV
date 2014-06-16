@@ -8,6 +8,18 @@ footer
 a, a:hover, a:visited, a:active
     text-decoration none
 
+/*tooltip*/
+.tooltip
+    display:none;
+    position:absolute;
+    border:1px solid #333;
+    background-color:#161616;
+    border-radius:5px;
+    padding:10px;
+    color:#fff;
+    font-size:12px Arial;
+    z-index:999;
+
 //Mensajes de alerta
 .message
     padding: 20px 20px 20px 40px
@@ -58,11 +70,26 @@ header
     z-index 2
     background-color #009bd1
 
+.form-content
+    cf()
+
 //Menu Usuario
 nav.user-menu > *
     display inline
     float left
 
+
+#clock
+    padding-left: 25px;
+    width: 100px;
+    background: transparent url("../images/menubar/reloj.png") no-repeat left center;
+    background-size: 20px 20px;
+    color: #fff;
+    font-size: 8pt;
+    position: absolute;
+    top: 1.5em;
+    right: 20px;
+    text-align: right;
 
 //Menu Principal
 nav.main-menu
@@ -136,9 +163,35 @@ nav.main-menu
         -webkit-border-radius 5px
         -moz-border-radius 5px
         border-radius 5px
+        & > h1
+            color: white
+            text-shadow: 1px 0px 3px black
         &.login-form
             center(500px)
             text-align center
+        &.main
+            a,a:active,a:hover
+                display block
+                color white
+                width 100%
+                height 100%
+            ul
+                cf()
+                padding 0
+                list-style none
+            li
+                col(1/3, cycle:3)
+                height 200px
+                float left
+                background-color #009bd1
+                text-align center
+                font-size 2em
+                span
+                    font-size 3em
+        &.config-system
+            ul
+                cf()
+                
                 
         
 footer

@@ -11,7 +11,13 @@ class Students extends Secure_Area {
 
 	public function index()
 	{
-		$data['students'] = $this->Student->get_all_info();
+		$cedula = $this->input->post('cedula');
+
+		if (!$cedula) {
+			$data['students'] = $this->Student->get_all_info();
+		}else{
+			$data['students'] = $this->Student->search($cedula);
+		}
 		$this->load->view('student/manage', $data);
 	}
 

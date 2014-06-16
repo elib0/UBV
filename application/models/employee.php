@@ -85,7 +85,10 @@ class Employee extends Person {
 	}
 
 	function get_all_info(){
+		$this->db->select('empleado.*, persona.*, nivel.nombre AS nivel');
 		$this->db->from('empleado');
+		$this->con->join('persona', 'persona.cedula = empleado.cedula');
+		$this->con->join('nivel', 'empleado.cod_nivel = nivel.cod_nivel');
 		$this->db->where('eliminado', 0);
 		return $this->db->get();
 	}
@@ -136,28 +139,29 @@ class Employee extends Person {
 		return $query;
 	}
 
-	function save(&$person_data, &$employee_data,&$permission_data,$employee_id=false)
+	function save(&$person_data, &$employee_data,$employee_id=0)
 	{
-		$success=false;
+		$success=FALSE;
 
 		//Run these queries as a transaction, we want to make sure we do all or nothing
-		$this->con->trans_start();
+		$this->db->trans_start();
 
 		if($idaux = parent::save($person_data,$employee_id))
 		{
-			if (!$employee_id or !$this->exists($employee_id))
+			if ( !$employee_id || !$this->exists($employee_id) )
 			{
-				$employee_data['person_id'] = $employee_id = $person_data['person_id'];
-				if( $this->con->insert('empleado',$employee_data) ) $success = $employee_data['person_id'];
-			}
-			else
-			{
-				$this->con->where('person_id', $employee_id);
-				$success = $this->con->update('empleado',$employee_data);
+				if( $this->db->insert('empleado',$employee_data) ) {
+					$success = $idaux;
+				}
+			}else{
+				$this->db->where('cedula', $employee_id);
+				if ($this->db->update('empleado',$employee_data)) {
+					$success = TRUE;
+				}
 			}
 		}
 
-		$this->con->trans_complete();
+		$this->db->trans_complete();
 		return $success;
 	}
 
@@ -177,6 +181,21 @@ class Employee extends Person {
 
 		$this->con->trans_complete();
 		return $success;
+	}
+
+	function search($cedula){
+		$this->db->select('empleado.*, persona.*, nivel.nombre AS nivel');
+		$this->db->from('empleado');
+		$this->con->join('persona', 'persona.cedula = empleado.cedula');
+		$this->con->join('nivel', 'empleado.cod_nivel = nivel.cod_nivel');
+		$this->db->like('empleado.cedula', $cedula);
+		$result = $this->db->get();
+
+		if ($result->num_rows()>0) {
+			return $result;
+		}
+
+		return FALSE;
 	}
 
 }

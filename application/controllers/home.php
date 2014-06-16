@@ -7,11 +7,20 @@ class Home extends Secure_Area {
 	public function __construct()
 	{
 		parent::__construct('home');
+		$this->load->model('Student');
+		$this->load->model('Request');
 	}
 
 	public function index()
 	{
-		$this->load->view('home');
+		$data['notifications']['students']['title'] = 'Bachilleres registardos';
+		$data['notifications']['students']['count'] = $this->Student->get_all_info()->num_rows();
+		$data['notifications']['students']['url'] = 'students';
+
+		$data['notifications']['requests']['title'] = 'Solicitudes no procesadas';
+		$data['notifications']['requests']['count'] = $this->Request->get_all()->num_rows();
+		$data['notifications']['requests']['url'] = 'requests';
+		$this->load->view('home', $data);
 	}
 
 }

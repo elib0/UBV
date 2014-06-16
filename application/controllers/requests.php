@@ -7,7 +7,7 @@ class Requests extends Secure_Area {
 	public function __construct()
 	{
 		parent::__construct('requests');
-		// $this->load->model('Request');
+		$this->load->model('Request');
 		$this->load->model('Student');
 		$this->load->model('University');
 		$this->aldeas = $this->University->get_all_aldeas();
@@ -38,15 +38,27 @@ class Requests extends Secure_Area {
 		$this->load->view('requests/form', $data);
 	}
 
-	public function save(){
-		$data['stundet_matricula'] = $this->Student->get_info($this->input->post('cedula'))->matricula;
-		$data['tipo'] = $this->input->post('tipo');
-		$data['semestre_solicitado'] = $this->input->post('semestre');
-		$data['anterior'] = $this->input->post('anterior');
-		$data['comentarios'] = $this->input->post('comentarios');
-		echo "<pre>";
-		var_dump($data);
-		echo "</pre>";
+	public function save($request_id = false){
+		$response = array('status'=>false, 'messagge'=>'Hubo un problema con la solicitud, Porfavor Inténtelo de nuevo!');
+
+		$request_data['tipo'] = $this->input->post('tipo');
+		$request_data['matricula'] = $this->Student->get_info($this->input->post('cedula'))->matricula;
+		$request_data['fecha_solicitud'] = date('Y-m-d H:i:s');
+		// $request_data['semestre_solicitado'] = $this->input->post('semestre');
+		// $request_data['anterior'] = $this->input->post('anterior');
+		// $request_data['comentarios'] = $this->input->post('comentarios');
+		// echo "<pre>";
+		// var_dump($request_data);
+		// echo "</pre>";
+		if ($result = $this->Request->save($request_data,$request_id)) {
+			if (is_bool($result)) {
+				$response = array('status'=>true, 'messagge'=>'Se han actualizado los datos del empleado satisfactoriamente!');
+			}elseif ($result > 0) {
+				$response = array('status'=>true, 'messagge'=>'Su solicitud a sido procesada satisfactoriamente!');
+			}
+		}
+
+		echo json_encode($response);
 	}
 
 }

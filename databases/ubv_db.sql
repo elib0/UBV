@@ -334,4 +334,3 @@ CREATE TABLE `solicitud` (
 -- ----------------------------
 -- Records of solicitud
 -- ----------------------------
-INSERT INTO `solicitud` VALUES ('1', 'nota', '0', '2014-06-02 22:55:45', null, '0');

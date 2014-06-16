@@ -1,11 +1,10 @@
 <?php $this->load->view('partial/header'); ?>
-<section class="manage-students">
-	<h1>Administracion de Estudiantes</h1>
-	<?php echo anchor('students/view?height=500&width=800', 'Agregar Estudiante', 'title="Agregar Estudiante" class="thickbox btn btn-primary"'); ?>
+<section class="manage-employees">
+	<h1>Usuarios del Sistema</h1>
+	<?php echo anchor('employees/view?height=550&width=800', 'Registrar Empleado', 'title="Registrar Empleado" class="thickbox btn btn-primary"'); ?>
 	<div class="table-options">
-		<?php echo form_open('students'); ?>
-		<?php echo form_label('Buscar Estudiante', 'buscar', array('class'=>'required')).form_input('cedula', '', 'id="search-student"'); ?>
-		<?php echo form_label('Filtrar con solicitudes pendiente?', 'buscar', array('class'=>'required')).form_checkbox('request', 'true'); ?>
+		<?php echo form_open('employees'); ?>
+		<?php echo form_label('Buscar Empleado', 'buscar', array('class'=>'required')).form_input('cedula', '', 'id="search-student"'); ?>
 		<input type="submit" value="Filtrar" class="btn btn-default btn-sm">
 		</form>
 	</div>
@@ -15,26 +14,24 @@
 				<th>Cédula</th>
 				<th>Nombre</th>
 				<th>Apellido</th>
-				<th>PFG</th>
-				<th>Solicitudes</th>
+				<th>Tipo de empleado</th>
 				<th>Acciones</th>
 				<tbody>
-					<?php if ($students->num_rows() > 0): ?>
-					<?php foreach ($students->result() as $value): ?>
+					<?php if ($employees->num_rows() > 0): ?>
+					<?php foreach ($employees->result() as $value): ?>
 						<tr>
 							<td><?php echo $value->cedula ?></td>
 							<td><?php echo $value->nombre ?></td>
 							<td><?php echo $value->apellido ?></td>
-							<td><?php echo $value->cod_pfg ?></td>
-							<td><?php echo $this->Student->get_student_requests($value->cedula)->num_rows() ?></td>
+							<td><?php echo $value->nivel ?></td>
 							<td>
-								<?php echo anchor('students/view/'.$value->cedula.'?height=500&width=800', 'Editar', 'title="Editar Estudiante" class="thickbox btn btn-danger btn-sm"'); ?>
+								<?php echo anchor('employees/view/'.$value->cedula.'?height=550&width=800', 'Editar', 'title="Editar Usuario" class="thickbox btn btn-danger btn-sm"'); ?>
 							</td>
 						</tr>
 					<?php endforeach ?>
 					<?php else: ?>
 						<tr>
-							<td colspan="5">No hay estudiantes registrados actualmente</td>
+							<td colspan="5">No hay usuarios registrados actualmente.</td>
 						</tr>	
 					<?php endif ?>
 					
@@ -53,7 +50,7 @@
 			formatSelection: function (item) { return item.id; },
   			formatResult: function (item) { return item.text; },
 			ajax:{
-				url: 'index.php/students/suggest',
+				url: 'index.php/employees/suggest',
 				dataType: 'json',
 				quietMillis: 100,
 				data: function (term, page) {
@@ -62,13 +59,11 @@
 	                };
 	            },
 	            results: function (data, page) {
-	            	console.log(data);
 	                return { results: data };
 	            }
 			}
 		}).change(function(val, added, removed){
-			console.log(val);
-			var name = 'No has seleccionado ningun estudiante';
+			var name = 'No has seleccionado ningun empleado';
 			if (!val.removed) {
 				name = val.added.text;
 			}

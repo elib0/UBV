@@ -6,6 +6,8 @@
 		<ul>
 			<li><?php echo form_label('Cédula de identidad', 'cedula', array('class'=>'required')).'<br>'.form_input('cedula', $student->cedula); ?></li>
 		</ul>
+	<?php else: ?>
+		<?php echo form_hidden('cedula', $student->cedula); ?>
 	<?php endif ?>
 	<ul>
 		<li><?php echo form_label('Nombres', 'nombre', array('class'=>'required')).'<br>'.form_input('nombre', $student->nombre); ?></li>
@@ -27,7 +29,7 @@
 		<li><?php echo form_label('Pfg', 'pfg', array('class'=>'required')).'<br>'.form_dropdown('pfg', $pfg); ?></li>
 	</ul>
 	<br><br><br>
-	<input type="submit" value="Guardar">
+	<input type="submit" value="Guardar" class="btn btn-default">
 </div>
 <?php echo form_close(); ?>
 <script type="text/javascript">

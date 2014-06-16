@@ -23,6 +23,10 @@ class Configapp extends CI_Model {
 		return $this->con->update('configuracion', $config_data, "id = 1");
 	}
 
+	public function get_all_levels(){
+		return $this->db->get('nivel')->result();
+	}
+
 }
 
 /* End of file config.php */
