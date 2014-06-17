@@ -6,6 +6,7 @@ class Documents extends Secure_Area {
 	{
 		parent::__construct('documents');
 		$this->load->model('Document');
+		$this->load->model('Student');
 
 		$data['title'] = 'Administrar Usuarios';
 		$data['config_title'] = $this->Configapp->get_config()->name;
@@ -17,6 +18,17 @@ class Documents extends Secure_Area {
 	public function index()
 	{
 		$this->load->view('documents/manage');
+	}
+
+	public function view(){
+		$student = $this->Student->get_info( $this->input->post('cedula') );
+		$result = $this->Document->get_info($student->matricula);
+
+		die(json_encode($result));
+	}
+
+	public function save(){
+		
 	}
 
 }

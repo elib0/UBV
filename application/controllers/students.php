@@ -70,7 +70,7 @@ class Students extends Secure_Area {
 
 		if ($students) {
 			foreach ($students->result() as $row) {
-				$result[] = array('id'=>$row->cedula, 'text'=>$row->apellido.' '.$row->nombre, 'pfg'=>$row->cod_pfg);
+				$result[] = array('id'=>$row->cedula, 'text'=>$row->apellido.' '.$row->nombre, 'student_cod'=>$row->matricula, 'pfg'=>$row->cod_pfg);
 			}
 		}
 

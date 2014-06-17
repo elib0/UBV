@@ -2,7 +2,7 @@
 <section class="manage-documents">
 	<h1>Consignación de Recaudos</h1>
 	<div class="table-options">
-		<?php echo form_open('documents/view'); ?>
+		<?php echo form_open('documents/view', 'id="form-documents"'); ?>
 		<?php echo form_label('Buscar Estudiante', 'buscar', array('class'=>'required')).form_input('cedula', '', 'id="search-student"'); ?>
 		<input type="submit" value="Consultar" class="btn btn-default btn-sm">
 		</form>
@@ -75,18 +75,21 @@
 				<td><input type="checkbox"></td>
 			</tr>
 		</table>
+		<input type="submit" value="Guaradar e Imprimir">
 		<?php echo form_close(); ?>
 	</div>
 </section>
 <?php $this->load->view('partial/footer'); ?>
 <script>
-	$('#search-student').select2({
-			placeholder: 'Numero de cedula...',
+	$(function() {
+		$('.documents-data').hide();
+		$('#search-student').select2({
+			placeholder: 'Cedula, Nombre o Apellido...',
 			minimumInputLength: 3,
 			maximumInputLength: 11,
 			allowClear: true,
 			formatSelection: function (item) { return item.id; },
-  			formatResult: function (item) { return item.text; },
+			formatResult: function (item) { return item.text; },
 			ajax:{
 				url: 'index.php/students/suggest',
 				dataType: 'json',
@@ -100,12 +103,14 @@
 	                return { results: data };
 	            }
 			}
-		}).change(function(val, added, removed){
-			var name = 'No has seleccionado ningun empleado';
-			if (!val.removed) {
-				name = val.added.text;
-			}
-			
-			$('.stundet-info li > span').text(name);
 		});
+
+		$('#form-documents').ajaxForm({
+			dataType: 'json',
+			success: function(response){
+				$('.documents-data').slideDown('fast');
+				console.log(response);
+			}
+		});
+	});
 </script>

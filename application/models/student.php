@@ -65,7 +65,7 @@ class Student extends Person {
 	function search($cedula){
 		$this->db->from('estudiante');
 		$this->db->join('persona', 'estudiante.cedula = persona.cedula');
-		$this->db->like('estudiante.cedula', $cedula);
+		$this->db->like("CONCAT(persona.cedula, ' ', persona.nombre, ' ', persona.apellido)", $cedula);
 		$result = $this->db->get();
 
 		if ($result->num_rows()>0) {

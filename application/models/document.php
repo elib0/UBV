@@ -30,15 +30,16 @@ class Document extends CI_Model {
 		}
 		else
 		{
-			$fields = $this->con->list_fields('documentos');
+			$result = array();
+			$fields = $this->db->list_fields('documentos');
 
 			//append those fields to base parent object, we we have a complete empty object
 			foreach ($fields as $field)
 			{
-				$docu_obj->$field='';
+				$result[$field]=false;
 			}
 
-			return $docu_obj;
+			return (Object)$result;
 		}
 	}
 

@@ -46,7 +46,7 @@
 <?php $this->load->view('partial/footer'); ?>
 <script>
 	$('#search-student').select2({
-			placeholder: 'Numero de cedula...',
+			placeholder: 'Cedula, Nombre o Apellido...',
 			minimumInputLength: 3,
 			maximumInputLength: 11,
 			allowClear: true,

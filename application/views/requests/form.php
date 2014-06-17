@@ -30,7 +30,7 @@
 <script type="text/javascript">
 	$(function() {
 		$('#search-student').select2({
-			placeholder: 'Numero de cedula...',
+			placeholder: 'Cedula, Nombre o Apellido...',
 			minimumInputLength: 3,
 			maximumInputLength: 11,
 			allowClear: true,
@@ -76,7 +76,7 @@
 		$('#form-request').ajaxForm({
 			dataType: 'json',
 			success: function(response){
-				console.log(response);
+				console.table(response);
 			}
 		});
 	});
