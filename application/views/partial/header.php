@@ -9,11 +9,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title><?php echo $title.' - '.$config_title ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/plugins/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/plugins/select2.css" media="screen">
     <link rel="stylesheet" href="css/plugins/thickbox.css" media="screen">
     <link rel="stylesheet" href="css/plugins/tablesorter.css" media="screen">
+    <link href="css/plugins/bootstrap-dialog.min.css" rel="stylesheet" type="text/css" />
+
     <!--[if lt IE 9]><script src="js/vendor/selectivizr-1.0.2.min.js"></script><![endif]-->
     <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
   </head>

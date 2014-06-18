@@ -28,28 +28,45 @@ $(function() {
 	});
 
 	showclock('#clock span');
+	set_feedback(false, 'hola que hace', 'Esto es contenido', 'primary', false);
 });
 
 
 //Funciones
-function set_feedback(text, classname, keep_displayed)
+function set_feedback(type, title, text, messageType, closeTb)
 {
-	if(text!='')
-	{
-		$('#feedback_bar').removeClass();
-		$('#feedback_bar').addClass(classname);
-		$('#feedback_bar').text(text);
-		$('#feedback_bar').css('opacity','1');
+	closeTb = closeTb || false;
+	if (closeTb) { tb_remove();} //Cierra el ThinckBox
 
-		if(!keep_displayed)
-		{
-			$('#feedback_bar').fadeTo(5000, 1);
-			$('#feedback_bar').fadeTo("fast",0);
-		}
-	}
-	else
-	{
-		$('#feedback_bar').css('opacity','0');
+	var types = new Array();
+ 	types['default'] = BootstrapDialog.TYPE_DEFAULT;
+ 	types['info'] = BootstrapDialog.TYPE_INFO;
+ 	types['primary'] = BootstrapDialog.TYPE_PRIMARY;
+ 	types['success'] = BootstrapDialog.TYPE_SUCCESS;
+ 	types['warning'] = BootstrapDialog.TYPE_WARNING;
+ 	types['danger'] = BootstrapDialog.TYPE_DANGER;
+
+	var options = {
+		'title': title,
+		'message': text,
+		'type': types[messageType],
+		'closable': false,
+        'closeByBackdrop': false,
+        'closeByKeyboard': true,
+        onhide: function(dialogRef){
+        	if (closeTb) { location.reload(); } //Recarga si se cierra el alert
+        },
+        buttons: [{
+	        label: 'Aceptar',
+	        action: function(dialogItself){
+	            dialogItself.close();
+	        }
+        }]
+	};
+	if (type=='alert'){
+		BootstrapDialog.alert(options);
+	}else{
+		BootstrapDialog.show(options);
 	}
 }
 
