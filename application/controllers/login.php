@@ -10,6 +10,7 @@ class Login extends CI_Controller {
 		$data['config_title'] = $this->Configapp->get_config()->name;
 		$data['show_menu'] = false;
 		$data['system_message'] = '';
+		$data['class'] = 'login';
 		$this->load->vars($data);
 	}
 
