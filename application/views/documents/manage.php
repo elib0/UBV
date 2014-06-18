@@ -75,7 +75,7 @@
 				<td><input type="checkbox"></td>
 			</tr>
 		</table>
-		<input type="submit" value="Guaradar e Imprimir">
+		<input type="submit" value="Guardar" class="btn btn-default">
 		<?php echo form_close(); ?>
 	</div>
 </section>
@@ -103,14 +103,21 @@
 	                return { results: data };
 	            }
 			}
-		});
-
-		$('#form-documents').ajaxForm({
-			dataType: 'json',
-			success: function(response){
-				$('.documents-data').slideDown('fast');
-				console.log(response);
+		}).change(function(val, added, removed){
+			if (val.removed) {
+				$('.documents-data').slideUp('fast');
+			}
+			if (val.added) {
+				$('#form-documents').ajaxSubmit({
+					dataType: 'json',
+					success: function(response){
+							$('.documents-data').slideDown('fast');
+							console.log(response);
+						}
+				});
 			}
 		});
+
+		
 	});
 </script>

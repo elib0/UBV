@@ -198,9 +198,6 @@ nav.main-menu > ul > li > ul > li:first-child {
 #wrapper section {
   margin-top: 1em;
   background-color: #fff;
-  border: 1px solid #ccc;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
   border-radius: 5px;
 }
 #wrapper section > h1 {
