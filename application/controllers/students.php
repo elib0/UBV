@@ -7,6 +7,9 @@ class Students extends Secure_Area {
 		parent::__construct('students');
 		$this->load->model('Student');
 		$this->load->model('University');
+
+		$data['title'] = 'Administrar Estudiantes';
+		$this->load->vars($data);
 	}
 
 	public function index()

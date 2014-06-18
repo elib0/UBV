@@ -8,6 +8,9 @@ class Config extends Secure_Area {
 	{
 		parent::__construct('config');
 		$this->load->model('Configapp');
+
+		$data['title'] = 'Configuracion del Sistema';
+		$this->load->vars($data);
 	}
 
 	public function index()

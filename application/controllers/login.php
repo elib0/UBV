@@ -7,8 +7,7 @@ class Login extends CI_Controller {
 		parent::__construct();
 		//Datos HTML para vistas
 		$data['title'] = 'Login';
-		$data['config_title'] = $this->Configapp->get_config()->name;
-		$data['show_menu'] = false;
+		$data['show_menu'] = FALSE;
 		$data['system_message'] = '';
 		$data['class'] = 'login';
 		$this->load->vars($data);

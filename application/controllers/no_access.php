@@ -5,6 +5,8 @@ class No_Access extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
+		$data['title'] = 'Error';
+		$this->load->vars($data);
 	}
 
 	function index($module_id='')

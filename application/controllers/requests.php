@@ -3,6 +3,7 @@ require_once ("secure_area.php");
 class Requests extends Secure_Area {
 
 	private $aldeas = array();
+	private $default_title = 'Solicitud ';
 
 	public function __construct()
 	{
@@ -24,7 +25,7 @@ class Requests extends Secure_Area {
 				$data['aldeas'][$aldea->cod_aldea] = $aldea->nombre;
 			}
 		}
-		$data['title'] = 'Notas';
+		$data['title'] = $this->default_title.'Notas';
 		$this->load->view('requests/form',$data);
 	}
 
@@ -34,7 +35,7 @@ class Requests extends Secure_Area {
 				$data['aldeas'][$aldea->cod_aldea] = $aldea->nombre;
 			}
 		}
-		$data['title'] = 'Traslado';
+		$data['title'] = $this->default_title.'Traslado';
 		$this->load->view('requests/form', $data);
 	}
 

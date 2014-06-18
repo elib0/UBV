@@ -6,6 +6,9 @@ class Universities extends Secure_Area {
 	{
 		parent::__construct('universities');
 		$this->load->model('University');
+
+		$data['title'] = 'Administracion de aldeas';
+		$this->load->vars($data);
 	}
 
 	public function index()

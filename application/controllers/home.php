@@ -9,6 +9,9 @@ class Home extends Secure_Area {
 		parent::__construct('home');
 		$this->load->model('Student');
 		$this->load->model('Request');
+
+		$data['title'] = 'Inicio';
+		$this->load->vars($data);
 	}
 
 	public function index()

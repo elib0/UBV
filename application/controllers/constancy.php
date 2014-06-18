@@ -5,6 +5,9 @@ class Constancy extends Secure_Area {
 	public function __construct()
 	{
 		parent::__construct('constancy');
+
+		$data['title'] = 'Contsancia de Culminacion';
+		$this->load->vars($data);
 	}
 
 	public function index()

@@ -8,10 +8,7 @@ class Documents extends Secure_Area {
 		$this->load->model('Document');
 		$this->load->model('Student');
 
-		$data['title'] = 'Administrar Usuarios';
-		$data['config_title'] = $this->Configapp->get_config()->name;
-		$data['show_menu'] = true;
-		$data['system_message'] = '';
+		$data['title'] = 'Consignacion de Recaudos';
 		$this->load->vars($data);
 	}
 

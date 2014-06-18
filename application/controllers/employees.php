@@ -7,10 +7,7 @@ class Employees extends Secure_Area {
 		parent::__construct('employees');
 		$this->load->model('Employee');
 
-		$data['title'] = 'Administrar Usuarios';
-		$data['config_title'] = $this->Configapp->get_config()->name;
-		$data['show_menu'] = true;
-		$data['system_message'] = '';
+		$data['title'] = 'Administrar Empleados';
 		$this->load->vars($data);
 	}
 

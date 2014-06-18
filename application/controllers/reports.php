@@ -5,6 +5,8 @@ class Reports extends Secure_Area {
 	public function __construct()
 	{
 		parent::__construct('reports');
+		$data['title'] = 'Reportes';
+		$this->load->vars($data);
 	}
 
 	public function index()
