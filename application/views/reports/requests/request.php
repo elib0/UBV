@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
-	<title>Solicitud</title>
+	<title>Solicitud de <?php echo $titulo ?></title>
 </head>
 <body>
 	<header>
@@ -10,6 +10,16 @@
 	</header>
 	<h5><span><?php echo $cod ?></span></h5>
 	<h2>Solicitud de <?php echo $titulo ?></h2>
-	
+	<h2><?php echo $cod_solicitud ?></h2>
+	<p>
+		Nombres y Apellidos: <?php echo $nombre ?><br>
+		C.I: <?php echo $cedula ?> Programa: <?php echo $programa ?><br>
+		Cohorte: <?php echo $cohorte ?> Semestre Solicitado: <?php echo $semestre ?><br>
+		Aldea Anterior: <?php echo $alde_anterior ?> Aldea Actual: <?php echo $alde_actual ?><br>
+		Numero telefónico: <?php echo $telefono ?><br>
+		Fecha de la solicitud <?php echo $var ?> Fecha Retiro <?php echo date('m/d/Y') ?><br><br>
+
+		Notas: <?php echo $notas ?>
+	</p>
 </body>
 </html>
