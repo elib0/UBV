@@ -28,7 +28,6 @@ $(function() {
 	});
 
 	showclock('#clock span');
-	set_feedback(false, 'hola que hace', 'Esto es contenido', 'primary', false);
 });
 
 

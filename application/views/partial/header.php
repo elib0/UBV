@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title><?php echo $title.' - '.$config_title ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/plugins/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/plugins/bootstrap.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/plugins/select2.css" media="screen">
     <link rel="stylesheet" href="css/plugins/thickbox.css" media="screen">

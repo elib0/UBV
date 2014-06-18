@@ -16,7 +16,7 @@
 		</div>
 		<br>
 		Fecha de Emisión: <?php echo date('d/m/Y') ?>
-		<input type="submit" value="Solicitar">
+		<input type="submit" value="Solicitar" class="btn btn-default">
 	</div>
 	<?php echo form_close(); ?>
 </section>
