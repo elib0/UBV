@@ -27,7 +27,9 @@ body
 //Formularios
 .required
     color: #B90000
-form > div.form-content
+
+.form-content
+    cf()
     h3
         clear both
     ul
@@ -43,33 +45,31 @@ form > div.form-content
         float right
 
 header
-    background-color white
     position fixed
     width 100%
     height 62px
     z-index 2
     background-color #009bd1
-
-.form-content
-    cf()
+    & > div, & > nav
+        col(1/3)
+    .logo
+        background url(../images/logo-png) no-repeat
+    #clock
+        padding-left: 25px;
+        width: 100px;
+        background: transparent url("../images/menubar/reloj.png") no-repeat left center;
+        background-size: 20px 20px;
+        color: #fff;
+        font-size: 8pt;
+        position: absolute;
+        top: 1.5em;
+        right: 20px;
+        text-align: right;
 
 //Menu Usuario
 nav.user-menu > *
     display inline
     float left
-
-
-#clock
-    padding-left: 25px;
-    width: 100px;
-    background: transparent url("../images/menubar/reloj.png") no-repeat left center;
-    background-size: 20px 20px;
-    color: #fff;
-    font-size: 8pt;
-    position: absolute;
-    top: 1.5em;
-    right: 20px;
-    text-align: right;
 
 //Menu Principal
 nav.main-menu
@@ -167,12 +167,7 @@ nav.main-menu
                 text-align center
                 font-size 2em
                 span
-                    font-size 3em
-        &.config-system
-            ul
-                cf()
-                
-                
+                    font-size 3em   
         
 footer
     position:fixed;

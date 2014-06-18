@@ -15,11 +15,10 @@
     <link rel="stylesheet" href="css/plugins/thickbox.css" media="screen">
     <link rel="stylesheet" href="css/plugins/tablesorter.css" media="screen">
     <link href="css/plugins/bootstrap-dialog.min.css" rel="stylesheet" type="text/css" />
-
     <!--[if lt IE 9]><script src="js/vendor/selectivizr-1.0.2.min.js"></script><![endif]-->
-    <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <!--<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>-->
   </head>
-  <body <?php (isset($class)) ? 'class="'.$class.'"' : '' ; ?>>
+  <body <?php echo (isset($class)) ? 'class="'.$class.'"' : '' ; ?>>
     <!--[if lt IE 9]>
       <div class="browsehappy">
         <p>
@@ -58,11 +57,11 @@
       <nav class="user-menu">
         <h5>Bienvenido: <?php echo $user_info->nombre.' '.$user_info->apellido.'.'; ?></h5>
         <?php echo anchor('logout','Salir del Sistema'); ?>
-        <div id="clock">
-          <?php echo date('F d, Y');?>
-          <span></span>
-        </div>
       </nav>
+      <div id="clock">
+        <?php echo date('F d, Y');?>
+        <span></span>
+      </div>
     </header>
     <?php endif ?>
     <div id="wrapper">
