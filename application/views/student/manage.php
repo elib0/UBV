@@ -45,8 +45,11 @@
 <?php $this->load->view('partial/footer'); ?>
 <script>
 	$(function() {
-		$("#table-sorter").tablesorter();
-		
+		$("#table-sorter").tablesorter({
+			headers: {5:{sorter: false},3:{sorter:false}},
+			sortList: [[1,0],[2,0]]
+		});
+
 		$('#search-student').select2({
 			placeholder: 'Cedula, Nombre o Apellido...',
 			minimumInputLength: 3,
