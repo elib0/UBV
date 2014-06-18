@@ -43,7 +43,16 @@
 		$('#form-restore, #form-save').ajaxForm({
 			dataType: 'json',
 			success: function(response){
-				console.log(response);
+				var title = 'Error General';
+				var type = 'alert';
+				var messaggeType = 'dager';
+				var closeTb = false;
+				if (response.status){
+					title = '';
+					type = false;
+					messaggeType = 'success';
+				}
+				set_feedback(type, title, response.messagge, messaggeType, closeTb);
 			}
 		});
 	});

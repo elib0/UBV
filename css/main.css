@@ -1,18 +1,25 @@
-@import 'reset.css';
+header > div,
+header > nav,
 #wrapper,
 #wrapper section.login-form,
 #wrapper section.main li {
   *zoom: 1;
 }
+header > div:before,
+header > nav:before,
 #wrapper:before,
 #wrapper section.login-form:before,
 #wrapper section.main li:before,
+header > div:after,
+header > nav:after,
 #wrapper:after,
 #wrapper section.login-form:after,
 #wrapper section.main li:after {
   content: '';
   display: table;
 }
+header > div:after,
+header > nav:after,
 #wrapper:after,
 #wrapper section.login-form:after,
 #wrapper section.main li:after {
@@ -48,31 +55,6 @@ body.login {
 .required {
   color: #b90000;
 }
-form > div.form-content h3 {
-  clear: both;
-}
-form > div.form-content ul {
-  display: block;
-  clear: both;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-form > div.form-content ul li {
-  float: left;
-}
-form > div.form-content input[type=submit] {
-  display: block;
-  float: right;
-}
-header {
-  background-color: #fff;
-  position: fixed;
-  width: 100%;
-  height: 62px;
-  z-index: 2;
-  background-color: #009bd1;
-}
 .form-content {
   *zoom: 1;
 }
@@ -84,11 +66,47 @@ header {
 .form-content:after {
   clear: both;
 }
-nav.user-menu > * {
-  display: inline;
+.form-content h3 {
+  clear: both;
+}
+.form-content ul {
+  display: block;
+  clear: both;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.form-content ul li {
   float: left;
 }
-#clock {
+.form-content input[type=submit] {
+  display: block;
+  float: right;
+}
+header {
+  position: fixed;
+  width: 100%;
+  height: 62px;
+  z-index: 2;
+  background-color: #009bd1;
+}
+header > div,
+header > nav {
+  float: left;
+  display: inline;
+  clear: none;
+  text-align: inherit;
+  padding-left: 0;
+  padding-right: 0;
+  width: 31.33333333333333%;
+  margin-left: 0%;
+  margin-right: 3%;
+}
+header > div:last-child,
+header > nav:last-child {
+  margin-right: 0%;
+}
+header #clock {
   padding-left: 25px;
   width: 100px;
   background: transparent url("../images/menubar/reloj.png") no-repeat left center;
@@ -99,6 +117,10 @@ nav.user-menu > * {
   top: 1.5em;
   right: 20px;
   text-align: right;
+}
+nav.user-menu > * {
+  display: inline;
+  float: left;
 }
 nav.main-menu {
   position: fixed;
@@ -245,17 +267,6 @@ nav.main-menu > ul > li > ul > li:first-child {
 }
 #wrapper section.main li span {
   font-size: 3em;
-}
-#wrapper section.config-system ul {
-  *zoom: 1;
-}
-#wrapper section.config-system ul:before,
-#wrapper section.config-system ul:after {
-  content: '';
-  display: table;
-}
-#wrapper section.config-system ul:after {
-  clear: both;
 }
 footer {
   position: fixed;
