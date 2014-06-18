@@ -3,10 +3,10 @@
 	<h1>Administracion de Estudiantes</h1>
 	<?php echo anchor('students/view?height=500&width=800', 'Agregar Estudiante', 'title="Agregar Estudiante" class="thickbox btn btn-primary"'); ?>
 	<div class="table-options">
-		<?php echo form_open('students'); ?>
+		<?php echo form_open('students', 'id="search-form"'); ?>
 		<?php echo form_label('Buscar Estudiante', 'buscar', array('class'=>'required')).form_input('cedula', '', 'id="search-student"'); ?>
-		<?php echo form_label('Filtrar con solicitudes pendiente?', 'buscar', array('class'=>'required')).form_checkbox('request', 'true'); ?>
-		<input type="submit" value="Filtrar" class="btn btn-default btn-sm">
+		<?php echo form_checkbox('request', 'true').form_label('Solicitudes pendiente', 'buscar', array('class'=>'required')); ?>
+		<?php echo anchor('stundent', 'Reiniciar Busqueda', 'class="btn btn-default btn-sm"'); ?>
 		</form>
 	</div>
 	<table id="table-sorter" class="tablesorter" width="100%">
@@ -16,7 +16,7 @@
 				<th>Nombre</th>
 				<th>Apellido</th>
 				<th>PFG</th>
-				<th>Solicitudes</th>
+				<th>Solicitudes pendientes</th>
 				<th>Acciones</th>
 			</tr>
 		</thead>
@@ -72,13 +72,9 @@
 	            }
 			}
 		}).change(function(val, added, removed){
-			console.log(val);
-			var name = 'No has seleccionado ningun estudiante';
-			if (!val.removed) {
-				name = val.added.text;
+			if (val.added) {
+				$('#search-form').submit();
 			}
-			
-			$('.stundet-info li > span').text(name);
 		});
 	});
 </script>

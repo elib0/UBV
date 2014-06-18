@@ -3,9 +3,9 @@
 	<h1>Usuarios del Sistema</h1>
 	<?php echo anchor('employees/view?height=550&width=800', 'Registrar Empleado', 'title="Registrar Empleado" class="thickbox btn btn-primary"'); ?>
 	<div class="table-options">
-		<?php echo form_open('employees'); ?>
+		<?php echo form_open('employees', 'id="search-form"'); ?>
 		<?php echo form_label('Buscar Empleado', 'buscar', array('class'=>'required')).form_input('cedula', '', 'id="search-student"'); ?>
-		<input type="submit" value="Filtrar" class="btn btn-default btn-sm">
+		<?php echo anchor('employees', 'Reiniciar Busqueda', 'class="btn btn-default btn-sm"'); ?>
 		</form>
 	</div>
 	<table id="table-sorter" class="tablesorter" width="100%">
@@ -68,12 +68,9 @@
 	            }
 			}
 		}).change(function(val, added, removed){
-			var name = 'No has seleccionado ningun empleado';
-			if (!val.removed) {
-				name = val.added.text;
+			if (val.added) {
+				$('#search-form').submit();
 			}
-			
-			$('.stundet-info li > span').text(name);
 		});
 	});
 </script>
