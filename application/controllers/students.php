@@ -12,6 +12,7 @@ class Students extends Secure_Area {
 	public function index()
 	{
 		$cedula = $this->input->post('cedula');
+		$filtro = $this->input->post('request');
 
 		if (!$cedula) {
 			$data['students'] = $this->Student->get_all_info();
@@ -53,15 +54,18 @@ class Students extends Secure_Area {
 		$student_data['cod_cohorte'] = 1;
 		
 
-		if ($result = $this->Student->save($person_data, $student_data,$person_id)) {
+		if (@$result = $this->Student->save($person_data, $student_data,$person_data['cedula'])) {
 			if (is_bool($result)) {
-				$response = array('status'=>true, 'messagge'=>'Se han actualizado los datos del estudiante satisfactoriamente!');
+				if ($result) {
+					$response = array('status'=>true, 'messagge'=>'Se han actualizado los datos del estudiante satisfactoriamente!');
+				}
 			}elseif ($result > 0) {
 				$response = array('status'=>true, 'messagge'=>'El estudiante se a registrado satisfactoriamente!');
 			}
 		}
 
 		echo json_encode($response);
+		// var_dump($student_data);
 	}
 
 	public function suggest(){

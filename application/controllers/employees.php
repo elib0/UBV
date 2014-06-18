@@ -53,9 +53,11 @@ class Employees extends Secure_Area {
 		$employee_data['cod_nivel'] = $this->input->post('nivel');
 		$employee_data['cedula'] = $person_data['cedula'];
 
-		if ($result = $this->Employee->save($person_data, $employee_data,$person_id)) {
+		if (@$result = $this->Employee->save($person_data, $employee_data,$person_id)) {
 			if (is_bool($result)) {
-				$response = array('status'=>true, 'messagge'=>'Se han actualizado los datos del empleado satisfactoriamente!');
+				if ($result) {
+					$response = array('status'=>true, 'messagge'=>'Se han actualizado los datos del empleado satisfactoriamente!');
+				}
 			}elseif ($result > 0) {
 				$response = array('status'=>true, 'messagge'=>'El empleado se a registrado satisfactoriamente!');
 			}
