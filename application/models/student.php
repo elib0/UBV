@@ -13,8 +13,7 @@ class Student extends Person {
 	function exists($student_id)
 	{
 		$this->db->from('estudiante');
-		$this->db->join('persona', 'estudiante.cedula = persona.cedula');
-		$this->db->where('estudiante.cedula',$student_id);
+		$this->db->where('cedula',$student_id);
 		$query = $this->db->get();
 
 		return ($query->num_rows()==1);
@@ -62,9 +61,12 @@ class Student extends Person {
 		return $this->db->get();
 	}
 
-	function search($cedula){
+	function search($cedula, $filtro = false){
 		$this->db->from('estudiante');
 		$this->db->join('persona', 'estudiante.cedula = persona.cedula');
+		if ($filtro) {
+			$this->db->join('solicitud', 'estudiante.matricula = solicitud.matricula');
+		}
 		$this->db->like("CONCAT(persona.cedula, ' ', persona.nombre, ' ', persona.apellido)", $cedula);
 		$result = $this->db->get();
 
