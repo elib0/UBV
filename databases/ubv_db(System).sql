@@ -27,7 +27,7 @@ CREATE TABLE `aldea` (
   PRIMARY KEY (`cod_aldea`),
   KEY `aldea_municipio` (`cod_municipio`),
   CONSTRAINT `aldea_municipio` FOREIGN KEY (`cod_municipio`) REFERENCES `municipio` (`cod_municipio`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of aldea
@@ -44,7 +44,7 @@ CREATE TABLE `cohorte` (
   `inicio` int(2) NOT NULL,
   `fin` int(2) NOT NULL,
   PRIMARY KEY (`cod_cohorte`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of cohorte
@@ -60,7 +60,7 @@ CREATE TABLE `configuracion` (
   `name` varchar(200) NOT NULL,
   `admin_email` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of configuracion
@@ -80,7 +80,7 @@ CREATE TABLE `coordinador_aldea` (
   KEY `coordinador_aldea` (`cod_aldea`),
   CONSTRAINT `coordinador_aldea` FOREIGN KEY (`cod_aldea`) REFERENCES `aldea` (`cod_aldea`),
   CONSTRAINT `coordinador_persona` FOREIGN KEY (`cedula`) REFERENCES `persona` (`cedula`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of coordinador_aldea
@@ -105,7 +105,7 @@ CREATE TABLE `documentos` (
   `notas_bachillerato` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`matricula`),
   CONSTRAINT `documentos_estudiante` FOREIGN KEY (`matricula`) REFERENCES `estudiante` (`matricula`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of documentos
@@ -127,7 +127,7 @@ CREATE TABLE `empleado` (
   KEY `empleado_nivel` (`cod_nivel`),
   CONSTRAINT `empleado_nivel` FOREIGN KEY (`cod_nivel`) REFERENCES `nivel` (`cod_nivel`),
   CONSTRAINT `empleado_persona` FOREIGN KEY (`cedula`) REFERENCES `persona` (`cedula`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of empleado
@@ -143,7 +143,7 @@ CREATE TABLE `entidad_federal` (
   `cod_entidad_federal` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL,
   PRIMARY KEY (`cod_entidad_federal`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of entidad_federal
@@ -189,7 +189,7 @@ CREATE TABLE `estudiante` (
   CONSTRAINT `estudiante_cohorte` FOREIGN KEY (`cod_cohorte`) REFERENCES `cohorte` (`cod_cohorte`),
   CONSTRAINT `estudiante_mencion` FOREIGN KEY (`cod_pfg`) REFERENCES `pfg` (`cod_pfg`),
   CONSTRAINT `estudiante_persona` FOREIGN KEY (`cedula`) REFERENCES `persona` (`cedula`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of estudiante
@@ -212,7 +212,7 @@ CREATE TABLE `modulo` (
   `in_menu` int(1) DEFAULT '1',
   `orden` int(2) DEFAULT NULL,
   PRIMARY KEY (`modulo_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of modulo
@@ -239,7 +239,7 @@ CREATE TABLE `municipio` (
   PRIMARY KEY (`cod_municipio`),
   KEY `municipio_entidad_federal` (`cod_entidad_federal`),
   CONSTRAINT `municipio_entidad_federal` FOREIGN KEY (`cod_entidad_federal`) REFERENCES `entidad_federal` (`cod_entidad_federal`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of municipio
@@ -268,7 +268,7 @@ CREATE TABLE `nivel` (
   `nombre` varchar(20) NOT NULL,
   `modulos` varchar(200) NOT NULL,
   PRIMARY KEY (`cod_nivel`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of nivel
@@ -290,12 +290,11 @@ CREATE TABLE `persona` (
   `direccion` text NOT NULL,
   `discapacidad` varchar(100) DEFAULT 'ninguna',
   PRIMARY KEY (`cedula`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of persona
 -- ----------------------------
-INSERT INTO `persona` VALUES ('0', '0', '0', '0', '0', '0', 'ninguna');
 INSERT INTO `persona` VALUES ('11258999', 'Carlos', 'Lopez', '', '', '', 'ninguna');
 INSERT INTO `persona` VALUES ('11954827', 'Sinforozo', 'Petro', '', '', '', 'ninguna');
 INSERT INTO `persona` VALUES ('15210364', 'Manuel', 'Ramirez', '', '', '', 'ninguna');
@@ -317,7 +316,7 @@ CREATE TABLE `pfg` (
   PRIMARY KEY (`cod_pfg`),
   KEY `pfg_aldea` (`cod_aldea`),
   CONSTRAINT `pfg_aldea` FOREIGN KEY (`cod_aldea`) REFERENCES `aldea` (`cod_aldea`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of pfg
@@ -343,7 +342,7 @@ CREATE TABLE `solicitud` (
   PRIMARY KEY (`id`),
   KEY `solicitud_estudiante_idx` (`matricula`),
   CONSTRAINT `solicitud_estudiante` FOREIGN KEY (`matricula`) REFERENCES `estudiante` (`matricula`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of solicitud
