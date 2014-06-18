@@ -15,7 +15,9 @@
 		</ul>
 		<h3>Datos de la solicitud</h3>
 		<ul>
-			<li><?php echo form_label('Semestre solicitado', 'semestre', array('class'=>'required')).'<br>'.form_dropdown('semestre', range(1, 12)); ?></li>
+			<!--<li><?php //echo form_label('Semestre solicitado', 'semestre', array('class'=>'required')).'<br>'.form_dropdown('semestre', range(1, 12)); ?></li>-->
+			<label for="semestre">Semestre Solicitado</label>
+			<input type="number" name="semestre" value="1" min="1" max="12">
 		</ul>
 		<ul>
 			<li><?php echo form_label('Aldea Actual', 'actual', array('class'=>'required')).'<br><span id="aldea-actual">No has seleccionado ningun estudiante</span>' ?></li>
