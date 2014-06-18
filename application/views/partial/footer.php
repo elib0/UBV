@@ -7,7 +7,7 @@
       <script>window.jQuery || document.write('<script src="<?php echo base_url(); ?>js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
     <![endif]-->
     <!--[if gt IE 8]><!-->
-      <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+      <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
       <script>window.jQuery || document.write('<script src="<?php echo base_url(); ?>js/vendor/jquery-2.0.3.min.js"><\/script>')</script>
     <!--<![endif]-->
     <script src="<?php echo base_url(); ?>js/main.js"></script>
