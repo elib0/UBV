@@ -9,7 +9,7 @@
 		<input type="submit" value="Filtrar" class="btn btn-default btn-sm">
 		</form>
 	</div>
-	<table id="table-sorter" width="100%">
+	<table id="table-sorter" class="tablesorter" width="100%">
 		<thead>
 			<tr>
 				<th>Cédula</th>
@@ -18,40 +18,42 @@
 				<th>PFG</th>
 				<th>Solicitudes</th>
 				<th>Acciones</th>
-				<tbody>
-					<?php if ($students->num_rows() > 0): ?>
-					<?php foreach ($students->result() as $value): ?>
-						<tr>
-							<td><?php echo $value->cedula ?></td>
-							<td><?php echo $value->nombre ?></td>
-							<td><?php echo $value->apellido ?></td>
-							<td><?php echo $value->cod_pfg ?></td>
-							<td><?php echo $this->Student->get_student_requests($value->cedula)->num_rows() ?></td>
-							<td>
-								<?php echo anchor('students/view/'.$value->cedula.'?height=500&width=800', 'Editar', 'title="Editar Estudiante" class="thickbox btn btn-danger btn-sm"'); ?>
-							</td>
-						</tr>
-					<?php endforeach ?>
-					<?php else: ?>
-						<tr>
-							<td colspan="5">No hay estudiantes registrados actualmente</td>
-						</tr>	
-					<?php endif ?>
-					
-				</tbody>
 			</tr>
 		</thead>
+		<tbody>
+		<?php if ($students->num_rows() > 0): ?>
+		<?php foreach ($students->result() as $value): ?>
+			<tr>
+				<td><?php echo $value->cedula ?></td>
+				<td><?php echo $value->nombre ?></td>
+				<td><?php echo $value->apellido ?></td>
+				<td><?php echo $value->cod_pfg ?></td>
+				<td><?php echo $this->Student->get_student_requests($value->cedula)->num_rows() ?></td>
+				<td>
+					<?php echo anchor('students/view/'.$value->cedula.'?height=500&width=800', 'Editar', 'title="Editar Estudiante" class="thickbox btn btn-danger btn-sm"'); ?>
+				</td>
+			</tr>
+		<?php endforeach ?>
+		<?php else: ?>
+			<tr>
+				<td colspan="5">No hay estudiantes registrados actualmente</td>
+			</tr>	
+		<?php endif ?>
+		</tbody>
 	</table>
 </section>
 <?php $this->load->view('partial/footer'); ?>
 <script>
-	$('#search-student').select2({
+	$(function() {
+		$("#table-sorter").tablesorter();
+		
+		$('#search-student').select2({
 			placeholder: 'Cedula, Nombre o Apellido...',
 			minimumInputLength: 3,
 			maximumInputLength: 11,
 			allowClear: true,
 			formatSelection: function (item) { return item.id; },
-  			formatResult: function (item) { return item.text; },
+				formatResult: function (item) { return item.text; },
 			ajax:{
 				url: 'index.php/students/suggest',
 				dataType: 'json',
@@ -75,4 +77,5 @@
 			
 			$('.stundet-info li > span').text(name);
 		});
+	});
 </script>

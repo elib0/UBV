@@ -15,5 +15,6 @@
     <script src="<?php echo base_url(); ?>js/thickbox.js"></script>
     <script src="<?php echo base_url(); ?>js/run_prettify.js"></script>
     <script src="<?php echo base_url(); ?>js/plugins.js"></script>
+    <script src="<?php echo base_url(); ?>js/jquery.tablesorter.min.js"></script>
   </body>
 </html>
