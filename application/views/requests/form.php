@@ -4,17 +4,17 @@
 	<?php echo form_open('requests/save', 'id="form-request"'); ?>
 	<?php echo form_hidden('tipo', strtolower($title)); ?>
 	<div class="form-content">
-		<h3>Datos de el estudiante</h3>
 		<h5 class="required">Campos en rojo son obligatorios</h5>
 		<ul class="stundet-info">
+			<h3>Datos de el estudiante</h3>
 			<li><?php echo form_label('Cedula Estudiante', 'buscar', array('class'=>'required')).'<br>'.form_input('cedula', '', 'id="search-student"'); ?></li>
 			<li>
 				<?php echo anchor('students/view?height=500&width=800', '+', 'title="Agregar Estudiante" class="thickbox btn btn-primary btn-sm"'); ?><br>
 				<span>No has seleccionado ningún estudiante</span>
 			</li>
 		</ul>
-		<h3>Datos de la solicitud</h3>
 		<ul>
+			<h3>Datos de la solicitud</h3>
 			<!--<li><?php //echo form_label('Semestre solicitado', 'semestre', array('class'=>'required')).'<br>'.form_dropdown('semestre', range(1, 12)); ?></li>-->
 			<label for="semestre">Semestre Solicitado</label>
 			<input type="number" name="semestre" value="1" min="1" max="12">
