@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50614
 File Encoding         : 65001
 
-Date: 2014-06-09 22:48:33
+Date: 2014-06-17 22:14:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -78,8 +78,8 @@ CREATE TABLE `coordinador_aldea` (
   PRIMARY KEY (`cod_coordinador`),
   KEY `coordinador_persona` (`cedula`),
   KEY `coordinador_aldea` (`cod_aldea`),
-  CONSTRAINT `coordinador_persona` FOREIGN KEY (`cedula`) REFERENCES `persona` (`cedula`),
-  CONSTRAINT `coordinador_aldea` FOREIGN KEY (`cod_aldea`) REFERENCES `aldea` (`cod_aldea`)
+  CONSTRAINT `coordinador_aldea` FOREIGN KEY (`cod_aldea`) REFERENCES `aldea` (`cod_aldea`),
+  CONSTRAINT `coordinador_persona` FOREIGN KEY (`cedula`) REFERENCES `persona` (`cedula`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
@@ -92,17 +92,17 @@ CREATE TABLE `coordinador_aldea` (
 DROP TABLE IF EXISTS `documentos`;
 CREATE TABLE `documentos` (
   `matricula` int(11) NOT NULL,
-  `verificacion_academica` tinyint(1) NOT NULL DEFAULT '0',
-  `contancia_culminacion` tinyint(1) NOT NULL DEFAULT '0',
-  `trabajo_grado` tinyint(1) NOT NULL DEFAULT '0',
-  `consignacion_recaudos` tinyint(1) NOT NULL DEFAULT '0',
-  `fotografia` tinyint(1) NOT NULL DEFAULT '0',
-  `copia_cedula` tinyint(1) NOT NULL DEFAULT '0',
-  `partida_nacimiento` tinyint(1) NOT NULL DEFAULT '0',
-  `titulo_bachiller` tinyint(1) NOT NULL DEFAULT '0',
-  `fondo_negro` tinyint(1) NOT NULL DEFAULT '0',
-  `autenticidad_titulo` tinyint(1) NOT NULL DEFAULT '0',
-  `notas_bachillerato` tinyint(1) NOT NULL DEFAULT '0',
+  `verificacion_academica` tinyint(1) DEFAULT '0',
+  `contancia_culminacion` tinyint(1) DEFAULT '0',
+  `trabajo_grado` tinyint(1) DEFAULT '0',
+  `consignacion_recaudos` tinyint(1) DEFAULT '0',
+  `fotografia` tinyint(1) DEFAULT '0',
+  `copia_cedula` tinyint(1) DEFAULT '0',
+  `partida_nacimiento` tinyint(1) DEFAULT '0',
+  `titulo_bachiller` tinyint(1) DEFAULT '0',
+  `fondo_negro` tinyint(1) DEFAULT '0',
+  `autenticidad_titulo` tinyint(1) DEFAULT '0',
+  `notas_bachillerato` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`matricula`),
   CONSTRAINT `documentos_estudiante` FOREIGN KEY (`matricula`) REFERENCES `estudiante` (`matricula`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -127,12 +127,13 @@ CREATE TABLE `empleado` (
   KEY `empleado_nivel` (`cod_nivel`),
   CONSTRAINT `empleado_nivel` FOREIGN KEY (`cod_nivel`) REFERENCES `nivel` (`cod_nivel`),
   CONSTRAINT `empleado_persona` FOREIGN KEY (`cedula`) REFERENCES `persona` (`cedula`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of empleado
 -- ----------------------------
 INSERT INTO `empleado` VALUES ('1', '17681201', 'admin', '21232f297a57a5a743894a0e4a801fc3', '0', '0');
+INSERT INTO `empleado` VALUES ('2', '158889623', 'prueba', '21232f297a57a5a743894a0e4a801fc3', '0', '0');
 
 -- ----------------------------
 -- Table structure for `entidad_federal`
@@ -193,9 +194,11 @@ CREATE TABLE `estudiante` (
 -- ----------------------------
 -- Records of estudiante
 -- ----------------------------
-INSERT INTO `estudiante` VALUES ('33333', '21040999', '1', '1');
-INSERT INTO `estudiante` VALUES ('206050337', '85965412', '1', '1');
-INSERT INTO `estudiante` VALUES ('306052200', '18054822', '1', '1');
+INSERT INTO `estudiante` VALUES ('1806040752', '18054822', '2', '1');
+INSERT INTO `estudiante` VALUES ('1806040843', '15210364', '1', '1');
+INSERT INTO `estudiante` VALUES ('1806041136', '85965412', '1', '1');
+INSERT INTO `estudiante` VALUES ('1806041219', '21040999', '1', '1');
+INSERT INTO `estudiante` VALUES ('1806041404', '11258999', '1', '1');
 
 -- ----------------------------
 -- Table structure for `modulo`
@@ -215,6 +218,8 @@ CREATE TABLE `modulo` (
 -- ----------------------------
 INSERT INTO `modulo` VALUES ('config', 'Configuracion del sistema', 'configuracion.png', '1', '8');
 INSERT INTO `modulo` VALUES ('constancy', 'Constancia de Culminacion', 'culminacion.png', '1', '5');
+INSERT INTO `modulo` VALUES ('documents', 'Consignacion de Recaudos', 'documentos.png', '1', '6');
+INSERT INTO `modulo` VALUES ('employees', 'Usuarios del Sistema', null, '0', '0');
 INSERT INTO `modulo` VALUES ('home', 'Inicio', null, '0', '1');
 INSERT INTO `modulo` VALUES ('reports', 'Estadisticas y Reportes', 'reportes.png', '1', '7');
 INSERT INTO `modulo` VALUES ('requests-notes', 'Solicitud de Notas', 'notas.png', '1', '2');
@@ -267,9 +272,9 @@ CREATE TABLE `nivel` (
 -- ----------------------------
 -- Records of nivel
 -- ----------------------------
-INSERT INTO `nivel` VALUES ('0', 'Administrador', 'home,config,students,requests-notes,requests-transfer,universities,reports,constancy');
+INSERT INTO `nivel` VALUES ('0', 'Administrador', 'home,config,students,requests-notes,requests-transfer,universities,reports,constancy,employees,documents');
 INSERT INTO `nivel` VALUES ('1', 'Analista', 'home');
-INSERT INTO `nivel` VALUES ('2', 'Coordinador', 'home');
+INSERT INTO `nivel` VALUES ('2', 'Coordinador de Aldea', 'home,students,reports');
 
 -- ----------------------------
 -- Table structure for `persona`
@@ -289,11 +294,14 @@ CREATE TABLE `persona` (
 -- ----------------------------
 -- Records of persona
 -- ----------------------------
-INSERT INTO `persona` VALUES ('0', '', '', '', '', '', 'ninguna');
+INSERT INTO `persona` VALUES ('0', '0', '0', '0', '0', '0', 'ninguna');
+INSERT INTO `persona` VALUES ('11258999', 'Carlitos', 'Lopez', '', '', '', 'ninguna');
+INSERT INTO `persona` VALUES ('15210364', 'Manuel', 'Ramirez', '', '', '', 'ninguna');
 INSERT INTO `persona` VALUES ('17681201', 'Eli', 'Chavez', '0414-4720780', 'elijose.c@gmail.com', 'Trigal Norte', 'ninguna');
 INSERT INTO `persona` VALUES ('18054822', 'LLuvia', 'DNMC', '0424-4954451', 'nohely28@hotmail.com', 'Nirgua. Edo Yaracuy', 'ninguna');
-INSERT INTO `persona` VALUES ('21040999', 'Anotnio', 'Ortega', '', '', '', 'ninguna');
-INSERT INTO `persona` VALUES ('85965412', 'Aleluya', 'MUchas', '', '', 'Naguanagua', 'ninguna');
+INSERT INTO `persona` VALUES ('21040999', 'Antonio', 'Ortega', '', '', '', 'ninguna');
+INSERT INTO `persona` VALUES ('85965412', 'Aristoteles', 'Chonfin', '', '', 'Naguanagua', 'ninguna');
+INSERT INTO `persona` VALUES ('158889623', 'Prueba', 'Prueba', '', '', '', 'ninguna');
 
 -- ----------------------------
 -- Table structure for `pfg`
@@ -326,6 +334,10 @@ CREATE TABLE `solicitud` (
   `fecha_solicitud` datetime NOT NULL,
   `fecha_retiro` datetime DEFAULT NULL,
   `status` int(1) DEFAULT '0',
+  `semestre_solicitado` int(2) DEFAULT NULL,
+  `aldea_anterior` int(11) DEFAULT NULL,
+  `aldea_nueva` int(11) DEFAULT NULL,
+  `comentarios` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `solicitud_estudiante_idx` (`matricula`),
   CONSTRAINT `solicitud_estudiante` FOREIGN KEY (`matricula`) REFERENCES `estudiante` (`matricula`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -334,3 +346,4 @@ CREATE TABLE `solicitud` (
 -- ----------------------------
 -- Records of solicitud
 -- ----------------------------
+INSERT INTO `solicitud` VALUES ('1', 'traslado', '1806040752', '2014-06-18 04:09:54', null, '0', null, null, null, null);
