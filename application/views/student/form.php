@@ -37,8 +37,17 @@
 		$('#form-student').ajaxForm({
 			dataType: 'json',
 			success: function(response){
-				console.log(response);
-				// $('#search-student').select2('val','response.cedula',true);
+				var title = 'Error General';
+				var type = 'alert';
+				var messaggeType = 'dager';
+				var closeTb = false;
+				if (response.status){
+					title = '';
+					type = false;
+					messaggeType = 'success';
+					closeTb = true;
+				}
+				set_feedback(type, title, response.messagge, messaggeType, closeTb);
 			}
 		});
 	});

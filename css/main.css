@@ -39,35 +39,14 @@ a:active {
   font-size: 12px Arial;
   z-index: 999;
 }
-.message {
-  padding: 20px 20px 20px 40px;
-  margin-bottom: 15px;
-  border-style: solid;
-  border-width: 1px;
-  background-position: 10px 10px;
-  background-repeat: no-repeat;
-}
-.message.warning {
-  background-color: #f8fad5;
-  border-color: #e5d35b;
-}
-.message.error {
-  background-color: #f5dfdf;
-  border-color: #ce9e9e;
-}
-.message.info {
-  background-color: #dfeff5;
-  border-color: #9ebcce;
-}
-.message.success {
-  background-color: #e8f5df;
-  border-color: #9ece9e;
-}
 body {
   background-color: #fafafa;
 }
 body.login {
   background: url("../images/background.png");
+}
+.required {
+  color: #b90000;
 }
 form > div.form-content h3 {
   clear: both;

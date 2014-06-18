@@ -44,12 +44,9 @@ class Requests extends Secure_Area {
 		$request_data['tipo'] = $this->input->post('tipo');
 		$request_data['matricula'] = $this->Student->get_info($this->input->post('cedula'))->matricula;
 		$request_data['fecha_solicitud'] = date('Y-m-d H:i:s');
-		// $request_data['semestre_solicitado'] = $this->input->post('semestre');
+		$request_data['semestre_solicitado'] = $this->input->post('semestre');
 		// $request_data['anterior'] = $this->input->post('anterior');
-		// $request_data['comentarios'] = $this->input->post('comentarios');
-		// echo "<pre>";
-		// var_dump($request_data);
-		// echo "</pre>";
+		$request_data['comentarios'] = $this->input->post('comentarios');
 		if ($result = $this->Request->save($request_data,$request_id)) {
 			if (is_bool($result)) {
 				$response = array('status'=>true, 'messagge'=>'Se han actualizado los datos del empleado satisfactoriamente!');
