@@ -19,7 +19,7 @@ class Requests extends Secure_Area {
 		
 	// }
 	
-	public function print(){
+	public function printing(){
 		$this->load->view('prints/request');
 	}
 

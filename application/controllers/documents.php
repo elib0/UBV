@@ -31,7 +31,7 @@ class Documents extends Secure_Area {
 		$this->load->view('documents/manage', $data);
 	}
 
-	public function print(){
+	public function printing(){
 		$this->load->view('prints/documents');
 	}
 

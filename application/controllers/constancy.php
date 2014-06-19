@@ -15,7 +15,7 @@ class Constancy extends Secure_Area {
 		$this->load->view('constancies/form');
 	}
 
-	public function print(){
+	public function printing(){
 		$this->load->view('prints/constancy');
 	}
 
