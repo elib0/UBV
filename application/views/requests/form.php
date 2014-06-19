@@ -10,7 +10,7 @@
 			<h3>Datos de el estudiante</h3>
 			<li>
 				<?php echo form_label('Cedula Estudiante', 'buscar', array('class'=>'required')).'<br>'.form_input('cedula', '', 'id="search-student"'); ?>
-				<?php echo anchor('students/view?height=500&width=800', '+', 'title="Agregar Estudiante" class="thickbox btn btn-primary btn-sm"'); ?><br>
+				<?php echo anchor('students/view?height=500&width=800', '+', 'title="Agregar Estudiante" class="thickbox btn btn-success btn-sm"'); ?><br>
 			</li>
 			<li id="stundet-info">
 				Matricula #:<span id="student-matricula"></span><br>

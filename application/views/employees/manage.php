@@ -27,7 +27,8 @@
 				<td><?php echo $value->apellido ?></td>
 				<td><?php echo $value->nivel ?></td>
 				<td>
-					<?php echo anchor('employees/view/'.$value->cedula.'?height=550&width=800', 'Editar', 'title="Editar Usuario" class="thickbox btn btn-danger btn-sm"'); ?>
+					<?php echo anchor('employees/view/'.$value->cedula.'?height=550&width=800', 'Editar', 'title="Editar Usuario" class="thickbox btn btn-info btn-sm"'); ?>
+					<?php echo anchor('employees/delete/'.$value->cedula, 'Deshabilitar', 'title="Deshabilitar Usuario" class="btn btn-danger btn-sm"'); ?>
 				</td>
 			</tr>
 		<?php endforeach ?>

@@ -4,13 +4,13 @@
 	<hr>
 	<?php echo form_open('requests/save', 'id="form-constancie"'); ?>
 	<div class="form-content">
-		<h3>Datos de el estudiante</h3>
 		<h5 class="required">Campos en rojo son obligatorios</h5>
 		<div>
 			<ul>
+				<h3>Datos de el estudiante</h3>
 				<li>
 					<?php echo form_label('Cedula Estudiante', 'buscar', array('class'=>'required')).'<br>'.form_input('cedula', '', 'id="search-student"'); ?>
-					<?php echo anchor('students/view?height=500&width=800', '+', 'title="Agregar Estudiante" class="thickbox btn btn-primary btn-sm"'); ?>
+					<?php echo anchor('students/view?height=500&width=800', '+', 'title="Agregar Estudiante" class="thickbox btn btn-success btn-sm"'); ?>
 				</li>
 				<li id="stundet-info">
 					Matricula #:<span id="student-matricula"></span><br>
