@@ -35,7 +35,7 @@ $(function() {
 		maximumInputLength: 11,
 		allowClear: true,
 		formatSelection: function (item) { return item.id; },
-			formatResult: function (item) { return item.text; },
+		// formatResult: function (item) { return item.text; },
 		ajax:{
 			url: 'index.php/students/suggest',
 			dataType: 'json',

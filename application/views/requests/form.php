@@ -44,7 +44,7 @@ $(function() {
 		maximumInputLength: 11,
 		allowClear: true,
 		formatSelection: function (item) { return item.id; },
-			formatResult: function (item) { return item.text; },
+		// formatResult: function (item) { return item.text; },
 		ajax:{
 			url: 'index.php/students/suggest',
 			dataType: 'json',
@@ -72,7 +72,6 @@ $(function() {
 			$('#stundet-info').slideUp('fast');
 		}
 		if (val.added) {
-			console.log(val.added);
 			$('#student-matricula').text(val.added.student_cod);
 			$('#student-name').text(val.added.text);
 			$('#student-aldea').text(val.added.aldea.nombre);
@@ -94,7 +93,6 @@ $(function() {
 				closeTb = true;
 			}
 			set_feedback(type, title, response.messagge, messaggeType, closeTb);
-			// $('#search-student').select2('val','response.cedula',true);
 		}
 	});
 });

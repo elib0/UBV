@@ -31,6 +31,10 @@ class Documents extends Secure_Area {
 		$this->load->view('documents/manage', $data);
 	}
 
+	public function print(){
+		$this->load->view('prints/documents');
+	}
+
 	public function view(){
 		$student = $this->Student->get_info( $this->input->post('cedula') );
 		$result = $this->Document->get_info($student->matricula);

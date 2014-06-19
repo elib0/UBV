@@ -18,6 +18,10 @@ class Requests extends Secure_Area {
 	// {
 		
 	// }
+	
+	public function print(){
+		$this->load->view('prints/request');
+	}
 
 	public function notes(){
 		if ($this->aldeas) {
