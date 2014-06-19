@@ -3,7 +3,7 @@ require_once ("secure_area.php");
 class Requests extends Secure_Area {
 
 	private $aldeas = array();
-	private $default_title = 'Solicitud ';
+	private $default_title = 'Solicitud de ';
 
 	public function __construct()
 	{
@@ -50,7 +50,9 @@ class Requests extends Secure_Area {
 		$request_data['comentarios'] = $this->input->post('comentarios');
 		if ($result = $this->Request->save($request_data,$request_id)) {
 			if (is_bool($result)) {
-				$response = array('status'=>true, 'messagge'=>'Se han actualizado los datos del empleado satisfactoriamente!');
+				if ($result) {
+					$response = array('status'=>true, 'messagge'=>'Se han actualizado los datos del empleado satisfactoriamente!');
+				}
 			}elseif ($result > 0) {
 				$response = array('status'=>true, 'messagge'=>'Su solicitud a sido procesada satisfactoriamente!');
 			}

@@ -1,6 +1,7 @@
 <?php $this->load->view('partial/header'); ?>
 <section class="config-system">
 	<h1>Configuración del sistema</h1>
+	<hr>
 	<ul>
 		<li>
 			<h3>Configuración General</h3>

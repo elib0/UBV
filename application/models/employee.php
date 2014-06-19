@@ -188,7 +188,7 @@ class Employee extends Person {
 		$this->db->from('empleado');
 		$this->con->join('persona', 'persona.cedula = empleado.cedula');
 		$this->con->join('nivel', 'empleado.cod_nivel = nivel.cod_nivel');
-		$this->db->like('empleado.cedula', $cedula);
+		$this->db->like("CONCAT(empleado.cedula, ' ', persona.nombre, ' ', persona.apellido)", $cedula);
 		$result = $this->db->get();
 
 		if ($result->num_rows()>0) {

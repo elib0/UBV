@@ -40,14 +40,20 @@
 				var title = 'Error General';
 				var type = 'alert';
 				var messaggeType = 'dager';
-				var closeTb = false;
+				var closeTb = reload = false;
+
 				if (response.status){
 					title = '';
 					type = false;
 					messaggeType = 'success';
-					closeTb = true;
+					closeTb = reload = true;
+					if (response.person_id) {
+						$('#search-student').select2('val',response.person_id,true);
+						reload = false;
+					};
+					
 				}
-				set_feedback(type, title, response.messagge, messaggeType, closeTb);
+				set_feedback(type, title, response.messagge, messaggeType, closeTb, reload);
 			}
 		});
 	});

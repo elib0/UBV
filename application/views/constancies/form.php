@@ -1,21 +1,26 @@
 <?php $this->load->view('partial/header'); ?>
 <section>
 	<h1>Constancia de Culminación</h1>
+	<hr>
 	<?php echo form_open('requests/save', 'id="form-constancie"'); ?>
 	<div class="form-content">
 		<h3>Datos de el estudiante</h3>
 		<h5 class="required">Campos en rojo son obligatorios</h5>
 		<div>
-			<ul class="stundet-info">
-				<li><?php echo form_label('Cedula Estudiante', 'buscar', array('class'=>'required')).'<br>'.form_input('cedula', '', 'id="search-student"'); ?></li>
+			<ul>
 				<li>
-					<?php echo anchor('students/view?height=500&width=800', '+', 'title="Agregar Estudiante" class="thickbox btn btn-primary btn-sm"'); ?><br>
-					<span>No has seleccionado ningún estudiante</span>
+					<?php echo form_label('Cedula Estudiante', 'buscar', array('class'=>'required')).'<br>'.form_input('cedula', '', 'id="search-student"'); ?>
+					<?php echo anchor('students/view?height=500&width=800', '+', 'title="Agregar Estudiante" class="thickbox btn btn-primary btn-sm"'); ?>
+				</li>
+				<li id="stundet-info">
+					Matricula #:<span id="student-matricula"></span><br>
+					Nombres y Apellidos:<span id="student-name"></span><br>
+					Aldea Actual:<span id="student-aldea"></span><br>
+					Fecha de Emisión: <?php echo date('d/m/Y') ?>
 				</li>
 			</ul>
 		</div>
 		<br>
-		Fecha de Emisión: <?php echo date('d/m/Y') ?>
 		<input type="submit" value="Solicitar" class="btn btn-default">
 	</div>
 	<?php echo form_close(); ?>
@@ -23,6 +28,7 @@
 <?php $this->load->view('partial/footer'); ?>
 <script>
 $(function() {
+	$('#stundet-info').hide();
 	$('#search-student').select2({
 		placeholder: 'Cedula, Nombre o Apellido...',
 		minimumInputLength: 3,
@@ -54,16 +60,16 @@ $(function() {
 	        }
 		}
 	}).change(function(val, added, removed){
-		var name = 'No has seleccionado ningun estudiante';
-		var aldea = name;
-		if (!val.removed) {
-			name = val.added.text;
-			aldea = val.added.pfg;
+		if (val.removed) {
+			$('#stundet-info').slideUp('fast');
 		}
-		
-		$('.stundet-info li > span').text(name);
-		$('#aldea-actual').text(aldea);
-
+		if (val.added) {
+			console.log(val.added);
+			$('#student-matricula').text(val.added.student_cod);
+			$('#student-name').text(val.added.text);
+			$('#student-aldea').text(val.added.aldea.nombre);
+			$('#stundet-info').slideDown('slow');
+		}
 	});
 });
 </script>

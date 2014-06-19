@@ -62,8 +62,11 @@ class Student extends Person {
 	}
 
 	function search($cedula, $filtro = false){
+		$this->db->select('estudiante.*, persona.*, pfg.nombre AS pfg, aldea.cod_aldea, aldea.nombre AS aldea');
 		$this->db->from('estudiante');
 		$this->db->join('persona', 'estudiante.cedula = persona.cedula');
+		$this->db->join('pfg', 'estudiante.cod_pfg = pfg.cod_pfg');
+		$this->db->join('aldea', 'pfg.cod_aldea = aldea.cod_aldea');
 		if ($filtro) {
 			$this->db->join('solicitud', 'estudiante.matricula = solicitud.matricula');
 		}

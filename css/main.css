@@ -1,11 +1,33 @@
-footer {
-  text-align: center;
+header > div,
+header > nav,
+#wrapper,
+#wrapper section.login-form,
+#wrapper section.main li,
+#wrapper.center {
+  *zoom: 1;
 }
-a,
-a:hover,
-a:visited,
-a:active {
-  text-decoration: none;
+header > div:before,
+header > nav:before,
+#wrapper:before,
+#wrapper section.login-form:before,
+#wrapper section.main li:before,
+#wrapper.center:before,
+header > div:after,
+header > nav:after,
+#wrapper:after,
+#wrapper section.login-form:after,
+#wrapper section.main li:after,
+#wrapper.center:after {
+  content: '';
+  display: table;
+}
+header > div:after,
+header > nav:after,
+#wrapper:after,
+#wrapper section.login-form:after,
+#wrapper section.main li:after,
+#wrapper.center:after {
+  clear: both;
 }
 /*tooltip*/
 .tooltip {
@@ -67,31 +89,22 @@ header {
 }
 header > div,
 header > nav {
-  *zoom: 1;
   float: left;
   display: inline;
   clear: none;
   text-align: inherit;
   padding-left: 0;
   padding-right: 0;
-  width: 31.3333333333333%;
+  width: 31.33333333333333%;
   margin-left: 0%;
   margin-right: 3%;
-}
-header > div:before,
-header > nav:before,
-header > div:after,
-header > nav:after {
-  content: '';
-  display: table;
-}
-header > div:after,
-header > nav:after {
-  clear: both;
 }
 header > div:last-child,
 header > nav:last-child {
   margin-right: 0%;
+}
+header nav.user-menu > * {
+  display: inline;
 }
 header #clock {
   padding-left: 25px;
@@ -104,10 +117,6 @@ header #clock {
   top: 1.5em;
   right: 20px;
   text-align: right;
-}
-nav.user-menu > * {
-  display: inline;
-  float: left;
 }
 nav.main-menu {
   position: fixed;
@@ -176,7 +185,6 @@ nav.main-menu > ul > li > ul > li:first-child {
   width: 54px;
 }
 #wrapper {
-  *zoom: 1;
   width: auto;
   max-width: 1060px;
   float: none;
@@ -188,14 +196,6 @@ nav.main-menu > ul > li > ul > li:first-child {
   margin-top: 58px;
   margin-right: 58px;
   margin-left: 235px;
-}
-#wrapper:before,
-#wrapper:after {
-  content: '';
-  display: table;
-}
-#wrapper:after {
-  clear: both;
 }
 #wrapper section {
   margin-top: 1em;
@@ -209,9 +209,8 @@ nav.main-menu > ul > li > ul > li:first-child {
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 #wrapper section.login-form {
-  *zoom: 1;
   width: auto;
-  max-width: 500px;
+  max-width: 350px;
   float: none;
   display: block;
   margin-right: auto;
@@ -219,14 +218,50 @@ nav.main-menu > ul > li > ul > li:first-child {
   padding-left: 0;
   padding-right: 0;
   text-align: center;
+  background-color: transparent;
 }
-#wrapper section.login-form:before,
-#wrapper section.login-form:after {
-  content: '';
-  display: table;
+#wrapper section.login-form .box-login {
+  margin: 20px auto 0 auto;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #fff;
+  -webkit-box-shadow: 0 0 10px #000;
+  box-shadow: 0 0 10px #000;
+  padding: 1.5em;
 }
-#wrapper section.login-form:after {
-  clear: both;
+#wrapper section.login-form .box-login p {
+  font-size: 0.8em;
+  font-weight: bold;
+}
+#wrapper section.login-form .box-login table td.icon-user {
+  width: 30px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  background-color: #f4f4f4;
+  background-image: url("../images/user.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  webkit-top-left-radius: 5px;
+  -webkit-top-left-radius: 5px;
+}
+#wrapper section.login-form .box-login table td.icon-lock {
+  width: 30px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  background-color: #f4f4f4;
+  background-image: url("../images/lock.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  webkit-top-left-radius: 5px;
+  -webkit-top-left-radius: 5px;
+}
+#wrapper section.login-form .box-login input {
+  font-size: 19px;
+  font-weight: bold;
+  height: 2em;
+  border: 1px solid #f4f4f4;
 }
 #wrapper section.main a,
 #wrapper section.main a:active,
@@ -250,14 +285,13 @@ nav.main-menu > ul > li > ul > li:first-child {
   clear: both;
 }
 #wrapper section.main li {
-  *zoom: 1;
   float: left;
   display: inline;
   clear: none;
   text-align: inherit;
   padding-left: 0;
   padding-right: 0;
-  width: 31.3333333333333%;
+  width: 31.33333333333333%;
   margin-left: 0%;
   margin-right: 3%;
   height: 200px;
@@ -266,38 +300,41 @@ nav.main-menu > ul > li > ul > li:first-child {
   text-align: center;
   font-size: 2em;
 }
-#wrapper section.main li:before,
-#wrapper section.main li:after {
-  content: '';
-  display: table;
-}
-#wrapper section.main li:after {
-  clear: both;
-}
 #wrapper section.main li:nth-child(3n) {
   margin-right: 0%;
   float: right;
 }
-#wrapper section.main li:nth-child(3n + 1) {
-  clear: both;
-}
 #wrapper section.main li span {
   font-size: 3em;
 }
+#wrapper section.request #stundet-info {
+  background-color: #47a447;
+}
+#wrapper.center {
+  width: auto;
+  max-width: 1060px;
+  float: none;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 0;
+  padding-right: 0;
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+}
 footer {
+  width: 100%;
   position: fixed;
-  left: 155px;
-  right: 0;
   bottom: 0;
   padding: 1.5em 0;
-  min-width: 918px;
   border-top: 1px solid #ccc;
   background-color: #f4f4f4;
   color: #000;
   text-align: center;
   font-size: 12px;
 }
-@media screen and (max-width: 1100px) {
+@media screen and (max-width:1100px) {
   #wrapper {
     margin-left: 155px;
     margin-right: 38px;

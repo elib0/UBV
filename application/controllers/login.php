@@ -11,6 +11,7 @@ class Login extends CI_Controller {
 		$data['show_menu'] = FALSE;
 		$data['system_message'] = '';
 		$data['class'] = 'login';
+		$data['classWrapper'] = 'center';
 		$this->load->vars($data);
 	}
 

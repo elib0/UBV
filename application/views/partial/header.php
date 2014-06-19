@@ -53,7 +53,7 @@
       </ul>
     </nav>
     <header>
-      <div class="logo"><a href="index.php"><img src="images/logo.png" alt="" width="72px"></a></div>
+      <div class="logo"><a href="index.php"><img src="images/logo.png" alt="" width="78px"></a></div>
       <nav class="user-menu">
         <h5>Bienvenido: <?php echo $user_info->nombre.' '.$user_info->apellido.'.'; ?></h5>
         <?php echo anchor('logout','Salir del Sistema'); ?>
@@ -64,4 +64,4 @@
       </div>
     </header>
     <?php endif ?>
-    <div id="wrapper">
+    <div id="wrapper" <?php echo (isset($classWrapper)) ? 'class="'.$classWrapper.'"' : '' ; ?>>

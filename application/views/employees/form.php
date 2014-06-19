@@ -52,7 +52,6 @@
 					closeTb = true;
 				}
 				set_feedback(type, title, response.messagge, messaggeType, closeTb);
-				// $('#search-student').select2('val','response.cedula',true);
 			}
 		});
 	});

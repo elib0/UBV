@@ -63,7 +63,7 @@ class Students extends Secure_Area {
 					$response = array('status'=>true, 'messagge'=>'Se han actualizado los datos del estudiante satisfactoriamente!');
 				}
 			}elseif ($result > 0) {
-				$response = array('status'=>true, 'messagge'=>'El estudiante se a registrado satisfactoriamente!');
+				$response = array('status'=>true, 'messagge'=>'El estudiante se a registrado satisfactoriamente!', 'person_id'=>$result);
 			}
 		}
 
@@ -77,7 +77,7 @@ class Students extends Secure_Area {
 
 		if ($students) {
 			foreach ($students->result() as $row) {
-				$result[] = array('id'=>$row->cedula, 'text'=>$row->apellido.' '.$row->nombre, 'student_cod'=>$row->matricula, 'pfg'=>$row->cod_pfg);
+				$result[] = array('id'=>$row->cedula, 'text'=>$row->apellido.' '.$row->nombre, 'student_cod'=>$row->matricula, 'aldea'=> array('cod'=>$row->cod_aldea, 'nombre'=>$row->aldea));
 			}
 		}
 

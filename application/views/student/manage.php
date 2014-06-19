@@ -1,6 +1,7 @@
 <?php $this->load->view('partial/header'); ?>
 <section class="manage-students">
 	<h1>Administracion de Estudiantes</h1>
+	<hr>
 	<?php echo anchor('students/view?height=500&width=800', 'Agregar Estudiante', 'title="Agregar Estudiante" class="thickbox btn btn-primary"'); ?>
 	<div class="table-options">
 		<?php echo form_open('students', 'id="search-form"'); ?>

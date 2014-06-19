@@ -32,9 +32,10 @@ $(function() {
 
 
 //Funciones
-function set_feedback(type, title, text, messageType, closeTb)
+function set_feedback(type, title, text, messageType, closeTb, reload)
 {
 	closeTb = closeTb || false;
+	reload = reload || closeTb;
 	if (closeTb) { tb_remove();} //Cierra el ThinckBox
 
 	var types = new Array();
@@ -53,7 +54,7 @@ function set_feedback(type, title, text, messageType, closeTb)
         'closeByBackdrop': false,
         'closeByKeyboard': true,
         onhide: function(dialogRef){
-        	if (closeTb) { location.reload(); } //Recarga si se cierra el alert
+        	if (reload) { location.reload(); } //Recarga si se cierra el alert
         },
         buttons: [{
 	        label: 'Aceptar',
