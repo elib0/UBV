@@ -56,11 +56,18 @@
 					type: 'POST',
 					dataType: 'json',
 					success: function(response){
+						var title = 'Error al Eliminar';
+						var messaggeType = 'dager';
+						
 						if (response.status) {
+							title = 'Info';
+							messaggeType = 'success';
+
 							$(that).parents('tr').fadeOut('slow', function() {
 								$(this).remove();
 							});
 						}
+						set_feedback('alert', title, response.messagge, messaggeType, false);
 					}
 				});
 			}

@@ -64,9 +64,12 @@ class Employees extends Secure_Area {
 	}
 
 	public function delete($person_id=''){
-		$response = $this->Employee->delete($person_id);
+		$response = array('status'=>false, 'messagge'=>'Imposible eliminar al usuario. Contacte al administrador del sistema!');
+		if ($response['status'] = $this->Employee->delete($person_id)) {
+			$response['messagge'] = 'Se a eliminado el usuario correctanmente!';
+		}
 
-		die(json_encode(array('status'=> $response)));
+		die(json_encode( $response ));
 	}
 
 	public function suggest(){
