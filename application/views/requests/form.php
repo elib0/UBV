@@ -15,7 +15,8 @@
 			<li id="stundet-info">
 				Matricula #:<span id="student-matricula"></span><br>
 				Nombres y Apellidos:<span id="student-name"></span><br>
-				Aldea Actual:<span id="student-aldea"></span>
+				Aldea Actual:<span id="student-aldea"></span><br>
+				Fecha de Emisión: <?php echo date('d/m/Y') ?>
 				<input type="hidden" id="aldea_actual" name="aldea_actual" value="">
 			</li>
 		</ul>
@@ -25,7 +26,7 @@
 			<?php if ($type == 'traslado'): ?>
 			<li><?php echo form_label('Nueva Aldea:', 'aldea_nueva', array('class'=>'required')).'<br>'.form_input('aldea_nueva', '', 'id="search-aldea"'); ?></li>
 			<li>
-			<?php else: ?>
+			<?php elseif($type == 'notas'): ?>
 				<label for="semestre">Semestre Solicitado</label>
 				<input type="number" name="semestre" value="1" min="1" max="12">
 			</li>

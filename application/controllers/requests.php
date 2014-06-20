@@ -12,10 +12,10 @@ class Requests extends Secure_Area {
 		$this->load->model('University');
 	}
 
-	// public function index($type='notes')
-	// {
-		
-	// }
+	public function index(){
+		$data['title'] = 'Procesar Solicitudes';
+		$this->load->view('requests/manage', $data);
+	}
 	
 	public function printing(){
 		$this->load->view('prints/request');
@@ -30,6 +30,12 @@ class Requests extends Secure_Area {
 	public function transfer(){
 		$data['title'] = $this->default_title.'Traslado';
 		$data['type'] = 'traslado';
+		$this->load->view('requests/form', $data);
+	}
+
+	public function constancy(){
+		$data['title'] = $this->default_title.'Constancia de Culminación';
+		$data['type'] = 'constancia';
 		$this->load->view('requests/form', $data);
 	}
 
