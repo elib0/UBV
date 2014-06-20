@@ -26,6 +26,7 @@
 	<h3>Datos del Estudiante</h3>
 	<ul>
 		<li><?php echo form_label('PFG:', 'pfg', array('class'=>'required')).'<br>'.form_input('pfg', $student->cod_pfg, 'id="search-pfg"'); ?></li>
+		<li id="aldea"></li>
 	</ul>
 	<br><br><br>
 	<input type="submit" value="Guardar" class="btn btn-default">
@@ -33,6 +34,7 @@
 <?php echo form_close(); ?>
 <script type="text/javascript">
 	$(function() {
+		$('#aldea').hide();
 		$('#search-pfg').select2({
 			placeholder: 'Nombre del pfg o Aldea',
 			minimumInputLength: 5,
@@ -61,6 +63,8 @@
 		            }).done(function(data) { console.log(data);callback(data[0]); });
 		        }
 			}
+		}).on('select2-highlight', function(e){
+			$('#aldea').text(e.choice.aldea).fadeOut('fast').fadeIn('slow');
 		});
 
 		$('#form-student').ajaxForm({
