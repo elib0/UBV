@@ -7,7 +7,7 @@
 		<?php echo form_open('students', 'id="search-form"'); ?>
 		<?php echo form_label('Buscar Estudiante', 'buscar', array('class'=>'required')).form_input('cedula', '', 'id="search-student"'); ?>
 		<?php echo form_checkbox('request', 'true').form_label('Solicitudes pendiente', 'buscar', array('class'=>'required')); ?>
-		<?php echo anchor('stundent', 'Reiniciar', 'class="btn btn-default btn-sm" title="Reiniciar Busqueda"'); ?>
+		<?php echo anchor('students', 'Reiniciar', 'class="btn btn-default btn-sm" title="Reiniciar Busqueda"'); ?>
 		</form>
 	</div>
 	<table id="table-sorter" class="tablesorter" width="100%">

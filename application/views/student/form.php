@@ -20,7 +20,7 @@
 	</ul>
 	<br>
 	<ul>
-		<li><?php echo form_label('Dirección', 'direccion').'<br>'.form_textarea('direccion', $student->direccion); ?></li>
+		<li><?php echo form_label('Dirección', 'direccion').'<br>'.form_textarea(array('name'=>'direccion', 'value'=>$student->direccion, 'cols'=>100, 'rows'=>3)); ?></li>
 	</ul>
 	<br>
 	<h3>Datos del Estudiante</h3>

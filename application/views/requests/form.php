@@ -28,7 +28,7 @@
 			<li><?php echo form_label('Aldea Anterior', 'anterior', array('class'=>'required')).'<br>'.form_dropdown('anterior', $aldeas, '', 'id="aldea_anterior"'); ?></li>
 		</ul>
 		<ul>
-			<li style=" width:100%"><?php echo form_label('Comentarios:', 'comentarios').'<br>'.form_textarea('comentarios'); ?></li>
+			<li style=" width:100%"><?php echo form_label('Comentarios:', 'comentarios').'<br>'.form_textarea(array('name'=>'comentarios', 'cols'=>100, 'rows'=>3)); ?></li>
 		</ul>
 		<input type="submit" value="Solicitar" class="btn btn-default">
 	</div>
