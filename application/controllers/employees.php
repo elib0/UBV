@@ -63,6 +63,12 @@ class Employees extends Secure_Area {
 		echo json_encode($response);
 	}
 
+	public function delete($person_id=''){
+		$response = $this->Employee->delete($person_id);
+
+		die(json_encode(array('status'=> $response)));
+	}
+
 	public function suggest(){
 		$employees = $this->Employee->search($this->input->get('term'));
 		$result = array();

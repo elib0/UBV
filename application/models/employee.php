@@ -87,18 +87,18 @@ class Employee extends Person {
 	function get_all_info(){
 		$this->db->select('empleado.*, persona.*, nivel.nombre AS nivel');
 		$this->db->from('empleado');
-		$this->con->join('persona', 'persona.cedula = empleado.cedula');
-		$this->con->join('nivel', 'empleado.cod_nivel = nivel.cod_nivel');
+		$this->db->join('persona', 'persona.cedula = empleado.cedula');
+		$this->db->join('nivel', 'empleado.cod_nivel = nivel.cod_nivel');
 		$this->db->where('eliminado', 0);
 		return $this->db->get();
 	}
 
 	function get_info($employee_id)
 	{
-		$this->con->from('empleado');
-		$this->con->join('persona', 'persona.cedula = empleado.cedula');
-		$this->con->where('empleado.cedula',$employee_id);
-		$query = $this->con->get();
+		$this->db->from('empleado');
+		$this->db->join('persona', 'persona.cedula = empleado.cedula');
+		$this->db->where('empleado.cedula',$employee_id);
+		$query = $this->db->get();
 
 		if($query->num_rows()==1)
 		{
@@ -110,7 +110,7 @@ class Employee extends Person {
 			$person_obj=parent::get_info(-1);
 
 			//Get all the fields from employee table
-			$fields = $this->con->list_fields('empleado');
+			$fields = $this->db->list_fields('empleado');
 
 			//append those fields to base parent object, we we have a complete empty object
 			foreach ($fields as $field)
@@ -165,29 +165,25 @@ class Employee extends Person {
 		return $success;
 	}
 
-	function delete($employee_id)
+	function delete($person_id)
 	{
 		$success=false;
 
-		//Don't let employee delete their self
-		if($employee_id==$this->get_logged_in_employee_info()->person_id)
-			return false;
-
 		//Run these queries as a transaction, we want to make sure we do all or nothing
-		$this->con->trans_start();
+		$this->db->trans_start();
 
-		$this->con->where('cod_empleado', $employee_id);
-		$success = $this->con->update('empleado', array('eliminado' => 1));
+		$this->db->where('cedula', $person_id);
+		$success = $this->db->update('empleado', array('eliminado' => 1));
 
-		$this->con->trans_complete();
+		$this->db->trans_complete();
 		return $success;
 	}
 
 	function search($cedula){
 		$this->db->select('empleado.*, persona.*, nivel.nombre AS nivel');
 		$this->db->from('empleado');
-		$this->con->join('persona', 'persona.cedula = empleado.cedula');
-		$this->con->join('nivel', 'empleado.cod_nivel = nivel.cod_nivel');
+		$this->db->join('persona', 'persona.cedula = empleado.cedula');
+		$this->db->join('nivel', 'empleado.cod_nivel = nivel.cod_nivel');
 		$this->db->like("CONCAT(empleado.cedula, ' ', persona.nombre, ' ', persona.apellido)", $cedula);
 		$result = $this->db->get();
 

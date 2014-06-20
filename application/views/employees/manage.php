@@ -28,7 +28,7 @@
 				<td><?php echo $value->nivel ?></td>
 				<td>
 					<?php echo anchor('employees/view/'.$value->cedula.'?height=550&width=800', 'Editar', 'title="Editar Usuario" class="thickbox btn btn-info btn-sm"'); ?>
-					<?php echo anchor('employees/delete/'.$value->cedula, 'Deshabilitar', 'title="Deshabilitar Usuario" class="btn btn-danger btn-sm"'); ?>
+					<?php echo anchor('employees/delete/'.$value->cedula, 'Deshabilitar', 'title="Deshabilitar Usuario" class="delete-user btn btn-danger btn-sm"'); ?>
 				</td>
 			</tr>
 		<?php endforeach ?>
@@ -46,6 +46,25 @@
 		$("#table-sorter").tablesorter({
 			headers: {4:{sorter: false}},
 			sortList: [[1,0],[2,0]]
+		});
+
+		$('.delete-user').click(function(event) {
+			var that = this;
+			if (window.confirm('¿Realmente desea desabilitar este usuario?')) {
+				$.ajax({
+					url: that.href,
+					type: 'POST',
+					dataType: 'json',
+					success: function(response){
+						if (response.status) {
+							$(that).parents('tr').fadeOut('slow', function() {
+								$(this).remove();
+							});
+						}
+					}
+				});
+			}
+		    return false;
 		});
 
 		$('#search-student').select2({

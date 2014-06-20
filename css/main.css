@@ -1,34 +1,3 @@
-header > div,
-header > nav,
-#wrapper,
-#wrapper section.login-form,
-#wrapper section.main li,
-#wrapper.center {
-  *zoom: 1;
-}
-header > div:before,
-header > nav:before,
-#wrapper:before,
-#wrapper section.login-form:before,
-#wrapper section.main li:before,
-#wrapper.center:before,
-header > div:after,
-header > nav:after,
-#wrapper:after,
-#wrapper section.login-form:after,
-#wrapper section.main li:after,
-#wrapper.center:after {
-  content: '';
-  display: table;
-}
-header > div:after,
-header > nav:after,
-#wrapper:after,
-#wrapper section.login-form:after,
-#wrapper section.main li:after,
-#wrapper.center:after {
-  clear: both;
-}
 /*tooltip*/
 .tooltip {
   display: none;
@@ -89,15 +58,27 @@ header {
 }
 header > div,
 header > nav {
+  *zoom: 1;
   float: left;
   display: inline;
   clear: none;
   text-align: inherit;
   padding-left: 0;
   padding-right: 0;
-  width: 31.33333333333333%;
+  width: 31.3333333333333%;
   margin-left: 0%;
   margin-right: 3%;
+}
+header > div:before,
+header > nav:before,
+header > div:after,
+header > nav:after {
+  content: '';
+  display: table;
+}
+header > div:after,
+header > nav:after {
+  clear: both;
 }
 header > div:last-child,
 header > nav:last-child {
@@ -117,6 +98,37 @@ header #clock {
   top: 1.5em;
   right: 20px;
   text-align: right;
+}
+nav.user-menu ul {
+  list-style: none;
+}
+nav.user-menu ul li {
+  float: left;
+  border-right: 1px solid #515152;
+  padding: 1em 10px 1em 32px;
+  margin: 8px;
+  color: #515152;
+}
+nav.user-menu ul li a,
+nav.user-menu ul li a:hover,
+nav.user-menu ul li a:active,
+nav.user-menu ul li a:visited {
+  color: #515152;
+}
+nav.user-menu ul li h5 {
+  padding: 0;
+  margin: 0;
+}
+nav.user-menu ul li.session-user {
+  background: url("../images/menubar/empleado.png") no-repeat;
+  background-size: 26px;
+}
+nav.user-menu ul li.logout {
+  background: url("../images/menubar/salir.png") no-repeat;
+  background-size: 26px;
+}
+nav.user-menu ul li:last-child {
+  border-right: none;
 }
 nav.main-menu {
   position: fixed;
@@ -185,6 +197,7 @@ nav.main-menu > ul > li > ul > li:first-child {
   width: 54px;
 }
 #wrapper {
+  *zoom: 1;
   width: auto;
   max-width: 1060px;
   float: none;
@@ -196,6 +209,14 @@ nav.main-menu > ul > li > ul > li:first-child {
   margin-top: 58px;
   margin-right: 58px;
   margin-left: 235px;
+}
+#wrapper:before,
+#wrapper:after {
+  content: '';
+  display: table;
+}
+#wrapper:after {
+  clear: both;
 }
 #wrapper section {
   margin-top: 1em;
@@ -209,6 +230,7 @@ nav.main-menu > ul > li > ul > li:first-child {
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 #wrapper section.login-form {
+  *zoom: 1;
   width: auto;
   max-width: 350px;
   float: none;
@@ -219,6 +241,14 @@ nav.main-menu > ul > li > ul > li:first-child {
   padding-right: 0;
   text-align: center;
   background-color: transparent;
+}
+#wrapper section.login-form:before,
+#wrapper section.login-form:after {
+  content: '';
+  display: table;
+}
+#wrapper section.login-form:after {
+  clear: both;
 }
 #wrapper section.login-form .box-login {
   margin: 20px auto 0 auto;
@@ -285,13 +315,14 @@ nav.main-menu > ul > li > ul > li:first-child {
   clear: both;
 }
 #wrapper section.main li {
+  *zoom: 1;
   float: left;
   display: inline;
   clear: none;
   text-align: inherit;
   padding-left: 0;
   padding-right: 0;
-  width: 31.33333333333333%;
+  width: 31.3333333333333%;
   margin-left: 0%;
   margin-right: 3%;
   height: 200px;
@@ -300,9 +331,20 @@ nav.main-menu > ul > li > ul > li:first-child {
   text-align: center;
   font-size: 2em;
 }
+#wrapper section.main li:before,
+#wrapper section.main li:after {
+  content: '';
+  display: table;
+}
+#wrapper section.main li:after {
+  clear: both;
+}
 #wrapper section.main li:nth-child(3n) {
   margin-right: 0%;
   float: right;
+}
+#wrapper section.main li:nth-child(3n + 1) {
+  clear: both;
 }
 #wrapper section.main li span {
   font-size: 3em;
@@ -311,6 +353,7 @@ nav.main-menu > ul > li > ul > li:first-child {
   background-color: #47a447;
 }
 #wrapper.center {
+  *zoom: 1;
   width: auto;
   max-width: 1060px;
   float: none;
@@ -323,6 +366,14 @@ nav.main-menu > ul > li > ul > li:first-child {
   margin-right: auto;
   margin-left: auto;
 }
+#wrapper.center:before,
+#wrapper.center:after {
+  content: '';
+  display: table;
+}
+#wrapper.center:after {
+  clear: both;
+}
 footer {
   width: 100%;
   position: fixed;
@@ -334,7 +385,7 @@ footer {
   text-align: center;
   font-size: 12px;
 }
-@media screen and (max-width:1100px) {
+@media screen and (max-width: 1100px) {
   #wrapper {
     margin-left: 155px;
     margin-right: 38px;

@@ -63,6 +63,30 @@ header
         right: 20px;
         text-align: right;
 
+//Menu Usuario
+nav.user-menu
+    ul
+        list-style none
+        li
+            a, a:hover, a:active, a:visited
+                color hsl(240,1%,32%)
+            float left
+            border-right 1px solid hsl(240,1%,32%)
+            padding 1em 10px 1em 32px
+            margin 8px
+            color hsl(240,1%,32%)
+            h5
+                padding 0
+                margin 0
+            &.session-user
+                background url("../images/menubar/empleado.png") no-repeat
+                background-size 26px
+            &.logout
+                background url("../images/menubar/salir.png") no-repeat
+                background-size 26px
+            &:last-child
+                border-right none
+
 //Menu Principal
 nav.main-menu
     position:fixed;

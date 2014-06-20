@@ -32,11 +32,23 @@ $(function() {
 
 
 //Funciones
-function set_feedback(type, title, text, messageType, closeTb, reload)
+function set_feedback(type, title, text, messageType, closeTb, reload, myButtons)
 {
+	var that = this;
+	myButtons = myButtons || new Array();
 	closeTb = closeTb || false;
 	reload = reload || closeTb;
+
 	if (closeTb) { tb_remove();} //Cierra el ThinckBox
+	//Agrega boton por defecto de cerrar(Aceptar)
+	myButtons.push(
+		{
+	        label: 'Aceptar',
+	        action: function(dialogItself){
+	            dialogItself.close();
+	        }
+	    }
+	);
 
 	var types = new Array();
  	types['default'] = BootstrapDialog.TYPE_DEFAULT;
@@ -56,15 +68,12 @@ function set_feedback(type, title, text, messageType, closeTb, reload)
         onhide: function(dialogRef){
         	if (reload) { location.reload(); } //Recarga si se cierra el alert
         },
-        buttons: [{
-	        label: 'Aceptar',
-	        action: function(dialogItself){
-	            dialogItself.close();
-	        }
-        }]
+        buttons: myButtons
 	};
 	if (type=='alert'){
 		BootstrapDialog.alert(options);
+	}else if(type=='confirm'){
+		BootstrapDialog.confirm(options.title, function(result){return result;});
 	}else{
 		BootstrapDialog.show(options);
 	}
