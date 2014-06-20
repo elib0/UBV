@@ -18,10 +18,12 @@ class Home extends Secure_Area {
 	{
 		$data['notifications']['students']['title'] = 'Bachilleres registardos';
 		$data['notifications']['students']['count'] = $this->Student->get_all_info()->num_rows();
+		$data['notifications']['students']['description'] = 'Cantidad de estudiantes registrados en el sistema(Click para ver mas detalles).';
 		$data['notifications']['students']['url'] = 'students';
 
 		$data['notifications']['requests']['title'] = 'Solicitudes no procesadas';
 		$data['notifications']['requests']['count'] = $this->Request->get_all()->num_rows();
+		$data['notifications']['requests']['description'] = 'Procesar Solicitudes pendientes o reimprimir solicitud(Notas, Traslados, Constancias de Culminacion, Consignacion de Recaudos).';
 		$data['notifications']['requests']['url'] = 'requests';
 		$this->load->view('home', $data);
 	}

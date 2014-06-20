@@ -314,7 +314,7 @@ nav.main-menu > ul > li > ul > li:first-child {
 #wrapper section.main ul:after {
   clear: both;
 }
-#wrapper section.main li {
+#wrapper section.main ul li {
   *zoom: 1;
   float: left;
   display: inline;
@@ -322,7 +322,7 @@ nav.main-menu > ul > li > ul > li:first-child {
   text-align: inherit;
   padding-left: 0;
   padding-right: 0;
-  width: 31.3333333333333%;
+  width: 48.5%;
   margin-left: 0%;
   margin-right: 3%;
   height: 200px;
@@ -331,23 +331,27 @@ nav.main-menu > ul > li > ul > li:first-child {
   text-align: center;
   font-size: 2em;
 }
-#wrapper section.main li:before,
-#wrapper section.main li:after {
+#wrapper section.main ul li:before,
+#wrapper section.main ul li:after {
   content: '';
   display: table;
 }
-#wrapper section.main li:after {
+#wrapper section.main ul li:after {
   clear: both;
 }
-#wrapper section.main li:nth-child(3n) {
+#wrapper section.main ul li:nth-child(2n) {
   margin-right: 0%;
   float: right;
 }
-#wrapper section.main li:nth-child(3n + 1) {
+#wrapper section.main ul li:nth-child(2n + 1) {
   clear: both;
 }
-#wrapper section.main li span {
+#wrapper section.main ul li span {
   font-size: 3em;
+}
+#wrapper section.main ul li p {
+  text-align: center;
+  font-size: 14px;
 }
 #wrapper section.request #stundet-info {
   background-color: #47a447;
