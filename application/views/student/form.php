@@ -25,8 +25,7 @@
 	<br>
 	<h3>Datos del Estudiante</h3>
 	<ul>
-		<!-- <li><?php echo form_label('Aldea', 'aldea').'<br><span>Prueba</span>'?></li> -->
-		<li><?php echo form_label('Pfg', 'pfg', array('class'=>'required')).'<br>'.form_dropdown('pfg', $pfg); ?></li>
+		<li><?php echo form_label('PFG:', 'pfg', array('class'=>'required')).'<br>'.form_input('pfg', $student->cod_pfg, 'id="search-pfg"'); ?></li>
 	</ul>
 	<br><br><br>
 	<input type="submit" value="Guardar" class="btn btn-default">
@@ -34,6 +33,36 @@
 <?php echo form_close(); ?>
 <script type="text/javascript">
 	$(function() {
+		$('#search-pfg').select2({
+			placeholder: 'Nombre del pfg o Aldea',
+			minimumInputLength: 5,
+			maximumInputLength: 20,
+			allowClear: true,
+			formatSelection: function (item) { return item.text; },
+			ajax:{
+				url: 'index.php/universities/suggest_pfg',
+				dataType: 'json',
+				quietMillis: 100,
+				data: function (term, page) {
+	                return {
+	                    term: term,
+	                };
+	            },
+	            results: function (data, page) {
+	                return { results: data };
+	            }
+			},
+			initSelection: function(element, callback){
+				var id=$(element).val();
+		        if (id!=="") {
+		            $.ajax('index.php/universities/suggest_pfg', {
+		            	dataType: "json",
+		                data: {term: id}
+		            }).done(function(data) { console.log(data);callback(data[0]); });
+		        }
+			}
+		});
+
 		$('#form-student').ajaxForm({
 			dataType: 'json',
 			success: function(response){

@@ -35,6 +35,19 @@ class Universities extends Secure_Area {
 		die(json_encode($result));
 	}
 
+	public function suggest_pfg(){
+		$pfgs = $this->University->search_pfg($this->input->get('term'));
+		$result = array();
+
+		if ($pfgs) {
+			foreach ($pfgs->result() as $row) {
+				$result[] = array('id'=>$row->cod_pfg, 'text'=>$row->nombre, 'aldea'=>$row->nombre_aldea);
+			}
+		}
+
+		die(json_encode($result));
+	}
+
 	public function save($type='aldea'){
 		$response = array('status'=>FALSE,'messagge' => 'Imposible guardar los datos! Por favor inténtalo de nuevo');
 
