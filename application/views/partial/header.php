@@ -56,8 +56,8 @@
       <div class="logo"><a href="index.php"><img src="images/logo.png" alt="" width="78px"></a></div>
       <nav class="user-menu">
         <ul>
-          <li class="session-user"><h5>Usuario: <?php echo anchor('employees/view/'.$user_info->cedula.'?height=550&width=800', $user_info->nombre.' '.$user_info->apellido, 'class="thickbox"'); ?></h5></li>
-          <li class="logout"><?php echo anchor('logout','Salir del Sistema'); ?></li>
+          <li class="session-user"><h5>Usuario: <?php echo anchor('employees/view/'.$user_info->cedula.'?height=550&width=800', $user_info->nombre.' '.$user_info->apellido, 'title="Perfil de Usuario" class="thickbox"'); ?></h5></li>
+          <li class="logout"><?php echo anchor('logout','Salir', 'title="Salir del Sistema"'); ?></li>
         </ul>
       </nav>
       <div id="clock">

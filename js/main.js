@@ -1,7 +1,7 @@
 $(function() {
 	//All Title attributes (tooltips)
 	var aux = '';
-	$('#wrapper').on('mouseenter','[title]',function(e){
+	$('#wrapper, nav.user-menu').on('mouseenter','[title]',function(e){
 		//mouse over (hover)
 		var title=this.title||$(this).data('title');
 		if(!title) return;
