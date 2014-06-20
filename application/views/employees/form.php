@@ -24,6 +24,7 @@
 	</ul>
 	<br>
 	<h3>Datos de Empleado</h3>
+	<div><?php echo form_label('Estado:', 'estado').form_checkbox('estado', '0', !(boolean)$employee->eliminado); ?></div>
 	<ul>
 		<li><?php echo form_label('Apodo', 'apodo').'<br>'.form_input('apodo', $employee->apodo); ?></li>
 		<li>

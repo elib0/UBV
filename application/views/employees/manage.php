@@ -15,6 +15,7 @@
 				<th>Nombre</th>
 				<th>Apellido</th>
 				<th>Tipo de empleado</th>
+				<th>Estado</th>
 				<th>Acciones</th>
 			</tr>
 		</thead>
@@ -26,6 +27,7 @@
 				<td><?php echo $value->nombre ?></td>
 				<td><?php echo $value->apellido ?></td>
 				<td><?php echo $value->nivel ?></td>
+				<td><?php echo (!$value->eliminado) ? 'Activo' : 'Eliminado' ; ?></td>
 				<td>
 					<?php echo anchor('employees/view/'.$value->cedula.'?height=550&width=800', 'Editar', 'title="Editar Usuario" class="thickbox btn btn-info btn-sm"'); ?>
 					<?php echo anchor('employees/delete/'.$value->cedula, 'Deshabilitar', 'title="Deshabilitar Usuario" class="delete-user btn btn-danger btn-sm"'); ?>
@@ -50,7 +52,7 @@
 
 		$('.delete-user').click(function(event) {
 			var that = this;
-			if (window.confirm('¿Realmente desea desabilitar este usuario?')) {
+			if (window.confirm('¿Realmente desea deshabilitar este usuario?')) {
 				$.ajax({
 					url: that.href,
 					type: 'POST',

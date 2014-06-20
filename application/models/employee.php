@@ -14,6 +14,7 @@ class Employee extends Person {
 		$this->db->join('persona', 'empleado.cedula = persona.cedula');
 		$this->db->where('apodo', $username);
 		$this->db->where('contrasena', md5($password));
+		$this->db->where('eliminado', 0);
 
 		$query = $this->db->get();
 		if ($query->num_rows == 1) {
@@ -54,6 +55,7 @@ class Employee extends Person {
 		$this->db->from('nivel');
 		$this->db->join('empleado', 'empleado.cod_nivel = nivel.cod_nivel');
 		$this->db->where('empleado.cod_empleado',$employee_cod);
+		$this->db->where('empleado.eliminado', 0);
 
 		$query = $this->db->get();
 
@@ -70,6 +72,7 @@ class Employee extends Person {
 		$this->db->from('nivel');
 		$this->db->join('empleado', 'empleado.cod_nivel = nivel.cod_nivel');
 		$this->db->where('empleado.cod_empleado',$employee_cod);
+		$this->db->where('empleado.eliminado', 0);
 
 		$query = $this->db->get();
 
@@ -173,6 +176,7 @@ class Employee extends Person {
 		$this->db->trans_start();
 
 		$this->db->where('cedula', $person_id);
+		$this->db->where('empleado.eliminado', 0);
 		$success = $this->db->update('empleado', array('eliminado' => 1));
 
 		$this->db->trans_complete();

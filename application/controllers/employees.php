@@ -49,6 +49,7 @@ class Employees extends Secure_Area {
 		$employee_data['contrasena'] = md5($this->input->post('contrasena'));
 		$employee_data['cod_nivel'] = $this->input->post('nivel');
 		$employee_data['cedula'] = $person_data['cedula'];
+		$employee_data['eliminado'] = ( $this->input->post('estado') ) ? '0' : '1';
 
 		if (@$result = $this->Employee->save($person_data, $employee_data,$person_id)) {
 			if (is_bool($result)) {
@@ -64,9 +65,9 @@ class Employees extends Secure_Area {
 	}
 
 	public function delete($person_id=''){
-		$response = array('status'=>false, 'messagge'=>'Imposible eliminar al usuario. Contacte al administrador del sistema!');
+		$response = array('status'=>false, 'messagge'=>'Imposible deshabilitar al usuario. Contacte al administrador del sistema!');
 		if ($response['status'] = $this->Employee->delete($person_id)) {
-			$response['messagge'] = 'Se a eliminado el usuario correctanmente!';
+			$response['messagge'] = 'Se a deshabilitado el usuario correctamente!';
 		}
 
 		die(json_encode( $response ));
