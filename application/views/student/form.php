@@ -25,7 +25,7 @@
 	<br>
 	<h3>Datos del Estudiante</h3>
 	<ul>
-		<li><?php echo form_label('PFG:', 'pfg', array('class'=>'required')).'<br>'.form_input('pfg', $student->cod_pfg, 'id="search-pfg"'); ?></li>
+		<li><?php echo form_label('Seleccionar PFG:', 'pfg', array('class'=>'required')).'<br>'.form_input('pfg', $student->cod_pfg, 'id="search-pfg"'); ?></li>
 		<li id="aldea"></li>
 	</ul>
 	<br><br><br>
@@ -36,10 +36,9 @@
 	$(function() {
 		$('#aldea').hide();
 		$('#search-pfg').select2({
-			placeholder: 'Nombre del pfg o Aldea',
+			placeholder: 'Buscar pfg por aldea...',
 			minimumInputLength: 5,
 			maximumInputLength: 20,
-			allowClear: true,
 			formatSelection: function (item) { return item.text; },
 			ajax:{
 				url: 'index.php/universities/suggest_pfg',

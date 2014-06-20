@@ -83,7 +83,7 @@ class University extends CI_Model {
 		$this->db->select('pfg.*, aldea.nombre AS nombre_aldea');
 		$this->db->from('pfg');
 		$this->con->join('aldea', 'aldea.cod_aldea = pfg.cod_aldea');
-		$this->db->like("CONCAT('aldea', aldea.nombre, ' ')", $seacrh);
+		$this->db->like("CONCAT('aldea', aldea.nombre, ' ', pfg.cod_pfg)", $seacrh);
 		$result = $this->db->get();
 
 		if ($result->num_rows()>0) {
