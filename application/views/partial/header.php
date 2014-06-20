@@ -53,7 +53,7 @@
       </ul>
     </nav>
     <header>
-      <div class="logo"><a href="index.php"><img src="images/logo.png" alt="" width="78px"></a></div>
+      <div class="logo"><a href="index.php"><img src="images/logo.png" title="Ir al inicio" alt="" width="78px"></a></div>
       <nav class="user-menu">
         <ul>
           <li class="session-user"><h5>Usuario: <?php echo anchor('employees/view/'.$user_info->cedula.'?height=550&width=800', $user_info->nombre.' '.$user_info->apellido, 'title="Perfil de Usuario" class="thickbox"'); ?></h5></li>
