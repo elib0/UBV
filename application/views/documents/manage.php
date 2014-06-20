@@ -1,33 +1,37 @@
 <?php $this->load->view('partial/header'); ?>
 <section class="manage-documents">
 	<h1>Consignación de Recaudos</h1>
+	<hr>
 	<div class="table-options">
+		<h6>Buscar Estudiante:</h6>
 		<?php echo form_open('documents/view', 'id="form-documents"'); ?>
-		<?php echo form_label('Buscar Estudiante', 'buscar', array('class'=>'required')).form_input('cedula', '', 'id="search-student"'); ?>
+		<?php echo form_label('Por siguientes criterios: ', 'buscar', array('class'=>'required')).form_input('cedula', '', 'id="search-student"'); ?>
 		</form>
 	</div>
 	<div class="documents-data">
 		<?php echo form_open('documents/save'); ?>
-		<table id="table-sorter" width="100%">
-			<thead>
-				<tr>
-					<th colspan="2">Documentos Consignados</th>
-					<th>Entregado</th>
-				</tr>
-			</thead>
-			<tbody>
-			<?php foreach ($documents as $key => $document): ?>
-				<tr>
-				<?php 
-				echo '<td>'.($key+1).'</td>';
-				echo "<td>$document</td>";
-				echo '<td><input type="checkbox" value="'.$key.'"></td>';
-				?>
-				</tr>
-			<?php endforeach ?>
-			</tbody>
-		</table>
-		<input type="submit" value="Guardar" class="btn btn-default">
+		<div class="form-content">
+			<table class="tablesorter" width="100%">
+				<thead>
+					<tr>
+						<th colspan="2">Documentos Consignados</th>
+						<th>Entregado</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php foreach ($documents as $key => $document): ?>
+					<tr>
+					<?php 
+					echo '<td class="number-format">'.($key+1).'</td>';
+					echo "<td>$document</td>";
+					echo '<td class="number-format"><input type="checkbox" value="'.$key.'"></td>';
+					?>
+					</tr>
+				<?php endforeach ?>
+				</tbody>
+			</table>
+			<input type="submit" value="Guardar" class="btn btn-default">
+		</div>
 		<?php echo form_close(); ?>
 	</div>
 </section>

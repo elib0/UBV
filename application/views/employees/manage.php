@@ -3,12 +3,13 @@
 	<h1>Usuarios del Sistema</h1>
 	<?php echo anchor('employees/view?height=550&width=800', 'Registrar Empleado', 'title="Registrar Empleado" class="thickbox btn btn-primary"'); ?>
 	<div class="table-options">
+		<h6>Opciones de busqueda:</h6>
 		<?php echo form_open('employees', 'id="search-form"'); ?>
 		<?php echo form_label('Buscar Empleado', 'buscar', array('class'=>'required')).form_input('cedula', '', 'id="search-student"'); ?>
 		<?php echo anchor('employees', 'Reiniciar', 'class="btn btn-default btn-sm" title="Reiniciar Busqueda"'); ?>
 		</form>
 	</div>
-	<table id="table-sorter" class="tablesorter" width="100%">
+	<table id="table-sorter" class="tablesorter">
 		<thead>
 			<tr>
 				<th>Cédula</th>

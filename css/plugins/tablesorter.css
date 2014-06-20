@@ -2,10 +2,17 @@
 table.tablesorter {
 	font-family:arial;
 	background-color: #CDCDCD;
-	margin:10px 0pt 15px;
+	margin:0 auto;
 	font-size: 8pt;
-	width: 100%;
+	width: 90%;
 	text-align: left;
+	border-left: 1px solid #CCC;
+	border-right: 1px solid #CCC;
+	border-bottom: 1px solid #CCC;
+}
+table.tablesorter thead{
+	border-left: 1px solid #CCC;
+	border-right: 1px solid #CCC;
 }
 table.tablesorter thead tr th, table.tablesorter tfoot tr th {
 	background-color: #428bca;
@@ -19,11 +26,23 @@ table.tablesorter thead tr .header {
 	background-position: center right;
 	cursor: pointer;
 }
+
+table.tablesorter tbody tr:hover td{
+	background-color: #CCC;
+}
 table.tablesorter tbody td {
 	color: #3D3D3D;
 	padding: 4px;
 	background-color: #FFF;
 	vertical-align: top;
+	border-bottom: 1px solid #ccc;
+
+	-webkit-transition: 1s ease all;
+	-o-transition: 1s ease all;
+	transition: 1s ease all;
+}
+table.tablesorter tbody td.number-format{
+	text-align: right;
 }
 table.tablesorter tbody tr.odd td {
 	background-color:#F0F0F6;

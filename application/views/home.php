@@ -1,6 +1,7 @@
 <?php $this->load->view('partial/header'); ?>
 <section class="main">
 	<h1>General</h1>
+	<hr>
 	<ul>
 		<?php foreach ($notifications as $name => $notification): ?>
 			<li class="notification-<?php echo $name ?>">

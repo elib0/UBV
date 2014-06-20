@@ -4,13 +4,14 @@
 	<hr>
 	<?php echo anchor('students/view?height=500&width=800', 'Agregar Estudiante', 'title="Agregar Estudiante" class="thickbox btn btn-primary"'); ?>
 	<div class="table-options">
+		<h6>Opciones de busqueda:</h6>
 		<?php echo form_open('students', 'id="search-form"'); ?>
 		<?php echo form_label('Buscar Estudiante', 'buscar', array('class'=>'required')).form_input('cedula', '', 'id="search-student"'); ?>
 		<?php echo form_checkbox('request', 'true').form_label('Solicitudes pendiente', 'buscar', array('class'=>'required')); ?>
 		<?php echo anchor('students', 'Reiniciar', 'class="btn btn-default btn-sm" title="Reiniciar Busqueda"'); ?>
 		</form>
 	</div>
-	<table id="table-sorter" class="tablesorter" width="100%">
+	<table id="table-sorter" class="tablesorter">
 		<thead>
 			<tr>
 				<th>Cédula</th>
