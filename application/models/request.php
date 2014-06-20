@@ -24,14 +24,12 @@ class Request extends CI_Model {
 
 		if ( !$request_id || !$this->exists($request_id) )
 		{
-			if( $idaux = $this->db->insert('solicitud',$request_data) ) {
-				$success = $idaux;
+			if( $this->db->insert('solicitud',$request_data) ) {
+				$success = $this->db->insert_id();
 			}
 		}else{
 			$this->db->where('id', $request_id);
-			if ($this->db->update('solicitud',$request_data)) {
-				$success = TRUE;
-			}
+			$success = $this->db->update('solicitud',$request_data);
 		}
 
 		return $success;

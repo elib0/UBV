@@ -34,7 +34,6 @@ $(function() {
 //Funciones
 function set_feedback(type, title, text, messageType, closeTb, reload, myButtons)
 {
-	var that = this;
 	myButtons = myButtons || new Array();
 	closeTb = closeTb || false;
 	reload = reload || closeTb;

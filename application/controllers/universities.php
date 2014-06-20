@@ -14,18 +14,25 @@ class Universities extends Secure_Area {
 	public function index()
 	{
 		$data['municipios'] = array();
-		$data['aldeas'] = array();
 		if ($query = $this->University->get_all_municipios()) {
 			foreach ($query->result() as $municipio) {
 				$data['municipios'][$municipio->cod_municipio] = $municipio->nombre_municipio;
 			}
 		}
-		if ($query = $this->University->get_all_aldeas()) {
-			foreach ($query->result() as $aldea) {
-				$data['aldeas'][$aldea->cod_aldea] = $aldea->nombre;
+		$this->load->view('universities/manage', $data);
+	}
+
+	public function suggest(){
+		$universities = $this->University->search($this->input->get('term'));
+		$result = array();
+
+		if ($universities) {
+			foreach ($universities->result() as $row) {
+				$result[] = array('id'=>$row->cod_aldea, 'text'=>'Municipio:'.$row->nombre_municipio.':'.$row->nombre, 'aldea'=>$row->nombre);
 			}
 		}
-		$this->load->view('universities/manage', $data);
+
+		die(json_encode($result));
 	}
 
 	public function save($type='aldea'){

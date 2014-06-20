@@ -65,6 +65,20 @@ class University extends CI_Model {
 		}
 	}
 
+	public function search($seacrh = ''){
+		$this->db->select('aldea.*, municipio.nombre AS nombre_municipio');
+		$this->db->from('aldea');
+		$this->con->join('municipio', 'aldea.cod_municipio = municipio.cod_municipio');
+		$this->db->like("CONCAT(aldea.nombre, ' ', municipio.nombre)", $seacrh);
+		$result = $this->db->get();
+
+		if ($result->num_rows()>0) {
+			return $result;
+		}
+
+		return FALSE;
+	}
+
 	public function get_all_pfg(){
 		$this->con->select('pfg.cod_pfg,
 						   pfg.nombre AS nombre_pfg,

@@ -2,7 +2,6 @@
 require_once ("secure_area.php");
 class Requests extends Secure_Area {
 
-	private $aldeas = array();
 	private $default_title = 'Solicitud de ';
 
 	public function __construct()
@@ -11,7 +10,6 @@ class Requests extends Secure_Area {
 		$this->load->model('Request');
 		$this->load->model('Student');
 		$this->load->model('University');
-		$this->aldeas = $this->University->get_all_aldeas();
 	}
 
 	// public function index($type='notes')
@@ -24,22 +22,14 @@ class Requests extends Secure_Area {
 	}
 
 	public function notes(){
-		if ($this->aldeas) {
-			foreach ($this->aldeas->result() as $aldea) {
-				$data['aldeas'][$aldea->cod_aldea] = $aldea->nombre;
-			}
-		}
 		$data['title'] = $this->default_title.'Notas';
+		$data['type'] = 'notas';
 		$this->load->view('requests/form',$data);
 	}
 
 	public function transfer(){
-		if ($this->aldeas) {
-			foreach ($this->aldeas->result() as $aldea) {
-				$data['aldeas'][$aldea->cod_aldea] = $aldea->nombre;
-			}
-		}
 		$data['title'] = $this->default_title.'Traslado';
+		$data['type'] = 'traslado';
 		$this->load->view('requests/form', $data);
 	}
 
@@ -50,12 +40,12 @@ class Requests extends Secure_Area {
 		$request_data['matricula'] = $this->Student->get_info($this->input->post('cedula'))->matricula;
 		$request_data['fecha_solicitud'] = date('Y-m-d H:i:s');
 		$request_data['semestre_solicitado'] = $this->input->post('semestre');
-		// $request_data['anterior'] = $this->input->post('anterior');
+		$request_data['aldea_nueva'] = $this->input->post('aldea_nueva');
 		$request_data['comentarios'] = $this->input->post('comentarios');
-		if ($result = $this->Request->save($request_data,$request_id)) {
+		if (@$result = $this->Request->save($request_data,$request_id)) {
 			if (is_bool($result)) {
 				if ($result) {
-					$response = array('status'=>true, 'messagge'=>'Se han actualizado los datos del empleado satisfactoriamente!');
+					$response = array('status'=>true, 'messagge'=>'Se ha actualizado la solicitud!');
 				}
 			}elseif ($result > 0) {
 				$response = array('status'=>true, 'messagge'=>'Su solicitud a sido procesada satisfactoriamente!');
