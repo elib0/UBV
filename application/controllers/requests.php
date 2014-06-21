@@ -3,6 +3,7 @@ require_once ("secure_area.php");
 class Requests extends Secure_Area {
 
 	private $default_title = 'Solicitud de ';
+	private $request_types = array('nota', 'traslado', 'constancia');
 
 	public function __construct()
 	{
@@ -13,18 +14,17 @@ class Requests extends Secure_Area {
 	}
 
 	public function index(){
-		$data['nota'] = array();
-		$data['traslado'] = array();
-		$data['constancia'] = array();
+		//Inicializacion de Arreglos por tipo de solicitud
+		foreach ($this->request_types as $value) {
+			$data[$value] = array();
+		}
 
 		$data['title'] = 'Procesar Solicitudes';
 		$solicitudes = $this->Request->get_all();
+		$data['num_solicitudes'] = $solicitudes->num_rows();
 		foreach ($solicitudes->result() as $solicitud) {
 			$data[$solicitud->tipo][] = $solicitud;
 		}
-		// echo "<pre>";
-		// var_dump($solicitudes);
-		// echo "</pre>";
 		$this->load->view('requests/manage', $data);
 	}
 	
@@ -34,20 +34,33 @@ class Requests extends Secure_Area {
 
 	public function notes(){
 		$data['title'] = $this->default_title.'Notas';
-		$data['type'] = 'notas';
+		$data['type'] = $this->request_types[0];
 		$this->load->view('requests/form',$data);
 	}
 
 	public function transfer(){
-		$data['title'] = $this->default_title.'Traslado';
-		$data['type'] = 'traslado';
+		$data['title'] = $this->default_title.ucwords($this->request_types[1]);
+		$data['type'] = $this->request_types[1];
 		$this->load->view('requests/form', $data);
 	}
 
 	public function constancy(){
-		$data['title'] = $this->default_title.'Constancia de Culminación';
-		$data['type'] = 'constancia';
+		$data['title'] = $this->default_title.ucwords($this->request_types[2]).' de Culminación';
+		$data['type'] = $this->request_types[2];
 		$this->load->view('requests/form', $data);
+	}
+
+	public function view($request_id = 0){
+		$this->load->helper('date');
+		$data['service'] = $this->Request->get_info($request_id);
+		$this->load->view('requests/detail', $data);
+	}
+
+	public function process($request_id = 0){
+		$response = array('status'=>false, 'messagge'=>'Imposible procesar la solicitud!', 'row'=>'');
+		
+
+		die(json_encode($response));
 	}
 
 	public function save($request_id = false){

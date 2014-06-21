@@ -1,7 +1,7 @@
 <?php $this->load->view('partial/header'); ?>
 <section class="manage-employees">
 	<h1>Usuarios del Sistema</h1>
-	<?php echo anchor('employees/view?height=550&width=800', 'Registrar Empleado', 'title="Registrar Empleado" class="thickbox btn btn-primary"'); ?>
+	<?php echo anchor('employees/view?height=480&width=600', 'Registrar Empleado', 'title="Registrar Empleado" class="thickbox btn btn-primary"'); ?>
 	<div class="table-options">
 		<h6>Opciones de busqueda:</h6>
 		<?php echo form_open('employees', 'id="search-form"'); ?>
@@ -24,13 +24,13 @@
 		<?php if ($employees->num_rows() > 0): ?>
 		<?php foreach ($employees->result() as $value): ?>
 			<tr>
-				<td><?php echo $value->cedula ?></td>
+				<td class="number-format"><?php echo $value->cedula ?></td>
 				<td><?php echo $value->nombre ?></td>
 				<td><?php echo $value->apellido ?></td>
 				<td><?php echo $value->nivel ?></td>
 				<td><?php echo (!$value->eliminado) ? 'Activo' : 'Eliminado' ; ?></td>
-				<td>
-					<?php echo anchor('employees/view/'.$value->cedula.'?height=550&width=800', 'Editar', 'title="Editar Usuario" class="thickbox btn btn-info btn-sm"'); ?>
+				<td class="number-format">
+					<?php echo anchor('employees/view/'.$value->cedula.'?height=480&width=600', 'Editar', 'title="Editar Usuario" class="thickbox btn btn-info btn-sm"'); ?>
 					<?php echo anchor('employees/delete/'.$value->cedula, 'Deshabilitar', 'title="Deshabilitar Usuario" class="delete-user btn btn-danger btn-sm"'); ?>
 				</td>
 			</tr>

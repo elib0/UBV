@@ -10,7 +10,7 @@
 			<h3>Datos de el estudiante</h3>
 			<li>
 				<?php echo form_label('Cedula Estudiante', 'buscar', array('class'=>'required')).'<br>'.form_input('cedula', '', 'id="search-student"'); ?>
-				<?php echo anchor('students/view?height=500&width=800', '+', 'title="Agregar Estudiante" class="thickbox btn btn-success btn-sm"'); ?><br>
+				<?php echo anchor('students/view?height=480&width=600', '+', 'title="Agregar Estudiante" class="thickbox btn btn-success btn-sm"'); ?><br>
 			</li>
 			<li id="stundet-info">
 				Matricula #:<span id="student-matricula"></span><br>
@@ -26,7 +26,7 @@
 			<?php if ($type == 'traslado'): ?>
 			<li><?php echo form_label('Nueva Aldea:', 'aldea_nueva', array('class'=>'required')).'<br>'.form_input('aldea_nueva', '', 'id="search-aldea"'); ?></li>
 			<li>
-			<?php elseif($type == 'notas'): ?>
+			<?php elseif($type == 'nota'): ?>
 				<label for="semestre">Semestre Solicitado</label>
 				<input type="number" name="semestre" value="1" min="1" max="12">
 			</li>
@@ -35,6 +35,9 @@
 		<ul>
 			<li style=" width:100%"><?php echo form_label('Comentarios:', 'comentarios').'<br>'.form_textarea(array('name'=>'comentarios', 'cols'=>100, 'rows'=>3)); ?></li>
 		</ul>
+		<p class="align-center">
+			Esta solicitud no es reversible, ni modificable una vez emitida.
+		</p>
 		<input type="submit" value="Solicitar" class="btn btn-default">
 	</div>
 	<?php echo form_close(); ?>

@@ -6,6 +6,9 @@
 	echo form_open('request/search', '');
 	echo form_label('Buscar estudiante:', 'buscar', array('class'=>'required')).form_input('cedula', '', 'id="search-student"');
 	?>
+	<div class="align-right">
+		Total Solicitudes: <span id="num-request"><?php echo $num_solicitudes ?></span>
+	</div>
 	</form>
 	<div id="stundet-info">
 		Matricula #:<span id="student-matricula"></span><br>
@@ -27,15 +30,15 @@
 			<tbody>
 			<?php if ($nota): ?>
 				<?php foreach ($nota as $key => $value): ?>
-				<tr>
-					<td><?php echo $value->id ?></td>
+				<tr data-title="<?php echo $value->comentarios ?>">
+					<td class="number-format"><?php echo $value->id ?></td>
 					<td><?php echo $value->nombre ?></td>
-					<td><?php echo $value->fecha_solicitud ?></td>
-					<td><?php echo $value->status ?></td>
-					<td>
-					<?php echo anchor('request/view/'.$value->id, 'Detalles', 'class="thickbox btn btn-info btn-xs"'); ?>
-					<?php echo anchor_popup('request/printing/'.$value->id, 'Imprimir', array('class'=>'btn btn-warning btn-xs')) ?>
-					<?php echo anchor('resquest/process/'.$value->id, 'Procesar', 'class="btn btn-success btn-xs"'); ?>
+					<td class="number-format"><?php echo $value->fecha_solicitud ?></td>
+					<td class="number-format"><?php echo $value->status ?></td>
+					<td class="number-format">
+					<?php echo anchor('requests/view/'.$value->id.'?height=320&width=530', 'Detalles', 'class="thickbox btn btn-info btn-xs"'); ?>
+					<?php echo anchor_popup('requests/printing/'.$value->id, 'Imprimir', array('class'=>'btn btn-warning btn-xs')) ?>
+					<?php echo anchor('requests/process/'.$value->id, 'Procesar', 'class="btn btn-success btn-xs"'); ?>
 					</td>
 				</tr>
 				<?php endforeach ?>
@@ -64,17 +67,17 @@
 			<tbody>
 			<?php if ($traslado): ?>
 				<?php foreach ($traslado as $key => $value): ?>
-				<tr>
-					<td><?php echo $value->id ?></td>
+				<tr data-title="<?php echo $value->comentarios ?>">
+					<td class="number-format"><?php echo $value->id ?></td>
 					<td><?php echo $value->nombre ?></td>
-					<td><?php echo $value->fecha_solicitud ?></td>
+					<td class="number-format"><?php echo $value->fecha_solicitud ?></td>
 					<td><?php echo $value->aldea_anterior ?></td>
 					<td><?php echo $value->aldea_nueva ?></td>
-					<td><?php echo $value->status ?></td>
-					<td>
-					<?php echo anchor('request/view/'.$value->id, 'Detalles', 'class="thickbox btn btn-info btn-xs"'); ?>
-					<?php echo anchor_popup('request/printing/'.$value->id, 'Imprimir', array('class'=>'btn btn-warning btn-xs')) ?>
-					<?php echo anchor('resquest/process/'.$value->id, 'Procesar', 'class="btn btn-success btn-xs"'); ?>
+					<td class="number-format"><?php echo $value->status ?></td>
+					<td class="number-format">
+					<?php echo anchor('requests/view/'.$value->id.'?height=320&width=530', 'Detalles', 'class="thickbox btn btn-info btn-xs"'); ?>
+					<?php echo anchor_popup('requests/printing/'.$value->id, 'Imprimir', array('class'=>'btn btn-warning btn-xs')) ?>
+					<?php echo anchor('requests/process/'.$value->id, 'Procesar', 'class="btn btn-success btn-xs"'); ?>
 					</td>
 				</tr>
 				<?php endforeach ?>
@@ -101,15 +104,15 @@
 			<tbody>
 			<?php if ($constancia): ?>
 				<?php foreach ($constancia as $key => $value): ?>
-				<tr>
-					<td><?php echo $value->id ?></td>
+				<tr data-title="<?php echo $value->comentarios ?>">
+					<td class="number-format"><?php echo $value->id ?></td>
 					<td><?php echo $value->nombre ?></td>
-					<td><?php echo $value->fecha_solicitud ?></td>
-					<td><?php echo $value->status ?></td>
-					<td>
-					<?php echo anchor('request/view/'.$value->id, 'Detalles', 'class="thickbox btn btn-info btn-xs"'); ?>
-					<?php echo anchor_popup('request/printing/'.$value->id, 'Imprimir', array('class'=>'btn btn-warning btn-xs')) ?>
-					<?php echo anchor('resquest/process/'.$value->id, 'Procesar', 'class="btn btn-success btn-xs"'); ?>
+					<td class="number-format"><?php echo $value->fecha_solicitud ?></td>
+					<td class="number-format"><?php echo $value->status ?></td>
+					<td class="number-format">
+					<?php echo anchor('requests/view/'.$value->id.'?height=320&width=530', 'Detalles', 'class="thickbox btn btn-info btn-xs"'); ?>
+					<?php echo anchor_popup('requests/printing/'.$value->id, 'Imprimir', array('class'=>'btn btn-warning btn-xs')) ?>
+					<?php echo anchor('requests/process/'.$value->id, 'Procesar', 'class="btn btn-success btn-xs"'); ?>
 					</td>
 				</tr>
 				<?php endforeach ?>
@@ -167,5 +170,33 @@
 				$('footer').fadeOut('400');
 			});
 		}
+	});
+
+	$('.process-requests').on('click', '.btn-success', function(event) {
+		return window.confirm('La solicitud pasara a estado "ENTREGADA", ¿Desea continuar?');
+	});
+
+	$('.process-request > table').on('mouseenter','tr',function(e){
+		//mouse over (hover)
+		var title=this.dataset.title;
+		if(!title) return;
+		$(this).data('title',title);
+		var $tooltip=$('<p class="tooltip"></p>');
+		$(this).data('tooltip',$tooltip);
+		$tooltip.text('Comentarios: '+title).appendTo('body').fadeIn('fast');
+	}).on('mousemove','tr',function(e){
+		var $tooltip=$(this).data('tooltip');
+		if(!$tooltip) return;
+		var mousex=e.pageX+20;//Get X coordinates
+		var mousey=e.pageY+10;//Get Y coordinates
+		if($tooltip.outerWidth()+mousex>=$(window).width()-5) mousex=e.pageX-10-$tooltip.outerWidth();
+		if($tooltip.outerHeight()+mousey>=$(window).height()-5) mousey=e.pageY-$tooltip.outerHeight();
+		$tooltip.css({top:mousey,left:mousex});
+	}).on('mouseleave','tr',function(){
+		//mouse out
+		var $tooltip=$(this).data('tooltip');
+		if(!$tooltip) return;
+		$(this).data('tooltip',null);
+		$tooltip.remove();
 	});
 </script>

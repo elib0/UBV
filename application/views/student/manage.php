@@ -2,7 +2,7 @@
 <section class="manage-students">
 	<h1>Administracion de Estudiantes</h1>
 	<hr>
-	<?php echo anchor('students/view?height=500&width=800', 'Agregar Estudiante', 'title="Agregar Estudiante" class="thickbox btn btn-primary"'); ?>
+	<?php echo anchor('students/view?height=480&width=600', 'Agregar Estudiante', 'title="Agregar Estudiante" class="thickbox btn btn-primary"'); ?>
 	<div class="table-options">
 		<h6>Opciones de busqueda:</h6>
 		<?php echo form_open('students', 'id="search-form"'); ?>
@@ -26,13 +26,13 @@
 		<?php if ($students->num_rows() > 0): ?>
 		<?php foreach ($students->result() as $value): ?>
 			<tr>
-				<td><?php echo $value->cedula ?></td>
+				<td class="number-format"><?php echo $value->cedula ?></td>
 				<td><?php echo $value->nombre ?></td>
 				<td><?php echo $value->apellido ?></td>
 				<td><?php echo $value->cod_pfg ?></td>
-				<td><?php echo $this->Student->get_student_requests($value->cedula)->num_rows() ?></td>
-				<td>
-					<?php echo anchor('students/view/'.$value->cedula.'?height=500&width=800', 'Editar', 'title="Editar Estudiante" class="thickbox btn btn-danger btn-sm"'); ?>
+				<td class="number-format"><?php echo $this->Student->get_student_requests($value->cedula)->num_rows() ?></td>
+				<td class="number-format">
+					<?php echo anchor('students/view/'.$value->cedula.'?height=480&width=600', 'Editar', 'title="Editar Estudiante" class="thickbox btn btn-danger btn-sm"'); ?>
 				</td>
 			</tr>
 		<?php endforeach ?>
@@ -49,7 +49,7 @@
 	$(function() {
 		$("#table-sorter").tablesorter({
 			headers: {5:{sorter: false},3:{sorter:false}},
-			sortList: [[1,0],[2,0]]
+			sortList: [[0,0],[2,0]]
 		});
 
 		$('#search-student').select2({

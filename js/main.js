@@ -1,11 +1,9 @@
 $(function() {
 	//All Title attributes (tooltips)
-	var aux = '';
 	$('#wrapper, nav.user-menu, .logo > a').on('mouseenter','[title]',function(e){
 		//mouse over (hover)
 		var title=this.title||$(this).data('title');
 		if(!title) return;
-		aux = this.title;
 		this.title='';
 		$(this).data('title',title);
 		var $tooltip=$('<p class="tooltip"></p>');

@@ -36,15 +36,31 @@ class Request extends CI_Model {
 	}
 
 	public function get_all($limit = 30){
-		$this->db->select("solicitud.*, CONCAT(nombre, apellido ) AS nombre");
+		$this->db->select("solicitud.*, CONCAT(nombre, ' ', apellido ) AS nombre", FALSE);
 		$this->db->from('solicitud');
 		$this->db->join('estudiante', 'solicitud.matricula = estudiante.matricula');
 		$this->db->join('persona', 'persona.cedula = estudiante.cedula');
 		$this->db->where('fecha_retiro', null);
 		$this->db->where('status <=', 0);
-		$this->db->order_by('fecha_solicitud', 'asc');
+		$this->db->order_by('fecha_solicitud', 'desc');
 		$this->db->limit($limit);
 		return $this->db->get();
+	}
+
+	public function get_info($request_id = 0){
+		$this->db->select("solicitud.*,estudiante.*, CONCAT(nombre, ' ', apellido ) AS nombre, telefono, email", FALSE);
+		$this->db->from('solicitud');
+		$this->db->join('estudiante', 'solicitud.matricula = estudiante.matricula');
+		$this->db->join('persona', 'persona.cedula = estudiante.cedula');
+		$this->db->where('solicitud.id', $request_id);
+		$this->db->limit(1);
+		$query = $this->db->get();
+
+		if ($query->num_rows() == 1) {
+			return $query->row();
+		}
+
+		return false;
 	}
 
 }
