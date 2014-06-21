@@ -67,7 +67,7 @@ class Requests extends Secure_Area {
 
 	public function printing($request_id = 0){
 		$view_to_load = '';
-		$data['service'] = $this->Request->get_info($request_id);
+		$data['solicitud'] = $this->Request->get_info($request_id, TRUE);
 		switch ($data['service']->tipo) {
 			case 'note':case 'traslado':
 				$view_to_load = 'request';
@@ -80,7 +80,7 @@ class Requests extends Secure_Area {
 	}
 
 	public function save(){
-		$response = array('status'=>false, 'messagge'=>'Hubo un problema con la solicitud, Porfavor Inténtelo de nuevo!');
+		$response = array('status'=>FALSE, 'messagge'=>'Hubo un problema con la solicitud, Porfavor Inténtelo de nuevo!');
 
 		$request_data['tipo'] = $this->input->post('tipo');
 		$request_data['matricula'] = $this->Student->get_info($this->input->post('cedula'))->matricula;
@@ -91,10 +91,10 @@ class Requests extends Secure_Area {
 		if (@$result = $this->Request->save($request_data,$request_id)) {
 			if (is_bool($result)) {
 				if ($result) {
-					$response = array('status'=>true, 'messagge'=>'Se ha actualizado la solicitud!');
+					$response = array('status'=>TRUE, 'messagge'=>'Se ha actualizado la solicitud!');
 				}
 			}elseif ($result > 0) {
-				$response = array('status'=>true, 'messagge'=>'Su solicitud a sido procesada satisfactoriamente!');
+				$response = array('status'=>TRUE, 'messagge'=>'Su solicitud a sido procesada satisfactoriamente!');
 			}
 		}
 

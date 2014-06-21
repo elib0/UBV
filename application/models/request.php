@@ -47,20 +47,24 @@ class Request extends CI_Model {
 		return $this->db->get();
 	}
 
-	public function get_info($request_id = 0){
-		$this->db->select("solicitud.*,estudiante.*, CONCAT(nombre, ' ', apellido ) AS nombre, telefono, email", FALSE);
+	public function get_info($request_id = 0, $extend_data=FALSE){
+		$select = ($extend_data) ? ',pfg.nombre AS nombre_pfg' : '' ;
+		$this->db->select("solicitud.*,estudiante.*, CONCAT(nombre, ' ', apellido ) AS nombre, telefono, email".$select, FALSE);
 		$this->db->from('solicitud');
 		$this->db->join('estudiante', 'solicitud.matricula = estudiante.matricula');
 		$this->db->join('persona', 'persona.cedula = estudiante.cedula');
-		$this->db->where('solicitud.id', $request_id);
-		$this->db->limit(1);
+		if ($extend_data) {
+			$this->db->join('pfg', 'pfg.cod_pfg = estudiante.cod_pfg');
+			$this->db->join('aldea', 'pfg.cod_aldea = aldea.cod_aldea');
+		}
+		$this->db->where('solicitud.id', $request_id)->limit(1);
 		$query = $this->db->get();
 
 		if ($query->num_rows() == 1) {
 			return $query->row();
 		}
 
-		return false;
+		return FALSE;
 	}
 
 }
