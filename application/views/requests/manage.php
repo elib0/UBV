@@ -34,7 +34,7 @@
 					<td class="number-format"><?php echo $value->id ?></td>
 					<td><?php echo $value->nombre ?></td>
 					<td class="number-format"><?php echo $value->fecha_solicitud ?></td>
-					<td class="number-format"><?php echo $value->status ?></td>
+					<td class="status number-format"><?php echo $value->status ?></td>
 					<td class="number-format">
 					<?php echo anchor('requests/view/'.$value->id.'?height=320&width=530', 'Detalles', 'class="thickbox btn btn-info btn-xs"'); ?>
 					<?php echo anchor_popup('requests/printing/'.$value->id, 'Imprimir', array('class'=>'btn btn-warning btn-xs')) ?>
@@ -73,7 +73,7 @@
 					<td class="number-format"><?php echo $value->fecha_solicitud ?></td>
 					<td><?php echo $value->aldea_anterior ?></td>
 					<td><?php echo $value->aldea_nueva ?></td>
-					<td class="number-format"><?php echo $value->status ?></td>
+					<td class="status number-format"><?php echo $value->status ?></td>
 					<td class="number-format">
 					<?php echo anchor('requests/view/'.$value->id.'?height=320&width=530', 'Detalles', 'class="thickbox btn btn-info btn-xs"'); ?>
 					<?php echo anchor_popup('requests/printing/'.$value->id, 'Imprimir', array('class'=>'btn btn-warning btn-xs')) ?>
@@ -108,7 +108,7 @@
 					<td class="number-format"><?php echo $value->id ?></td>
 					<td><?php echo $value->nombre ?></td>
 					<td class="number-format"><?php echo $value->fecha_solicitud ?></td>
-					<td class="number-format"><?php echo $value->status ?></td>
+					<td class="status number-format"><?php echo $value->status ?></td>
 					<td class="number-format">
 					<?php echo anchor('requests/view/'.$value->id.'?height=320&width=530', 'Detalles', 'class="thickbox btn btn-info btn-xs"'); ?>
 					<?php echo anchor_popup('requests/printing/'.$value->id, 'Imprimir', array('class'=>'btn btn-warning btn-xs')) ?>
@@ -173,7 +173,27 @@
 	});
 
 	$('.process-requests').on('click', '.btn-success', function(event) {
-		return window.confirm('La solicitud pasara a estado "ENTREGADA", ¿Desea continuar?');
+		var that = this;
+		if (window.confirm('La solicitud pasara a estado "ENTREGADA", ¿Desea continuar?')) {
+			$.ajax({
+				url: this.href,
+				type: 'GET',
+				dataType: 'json',
+				success: function(response){
+					var title = 'Error General';
+					var messaggeType = 'dager';
+			
+					if (response.status) {
+						$(that).parents('tr').find('.status ').text('1');
+						title = '';
+						messaggeType = 'success';
+					}
+					set_feedback('alert', title, response.messagge, messaggeType, false, false);
+				}
+			});
+			
+		}
+		return false;
 	});
 
 	$('.process-request > table').on('mouseenter','tr',function(e){

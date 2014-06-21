@@ -57,13 +57,19 @@ class Requests extends Secure_Area {
 	}
 
 	public function process($request_id = 0){
-		$response = array('status'=>false, 'messagge'=>'Imposible procesar la solicitud!', 'row'=>'');
-		
+		$response = array('status'=>false, 'messagge'=>'Imposible procesar la solicitud!');
 
-		die(json_encode($response));
+		if ($this->input->is_ajax_request()) {
+			$request_data = array('status'=>1, 'fecha_retiro'=>date('Y-m-d H:i:s'));
+			if ($result = $this->Request->save($request_data,$request_id)) {
+				$response = array('status'=>true, 'messagge'=>'Su solicitud fue procesada!');
+			}
+		}
+
+		echo json_encode($response);
 	}
 
-	public function save($request_id = false){
+	public function save(){
 		$response = array('status'=>false, 'messagge'=>'Hubo un problema con la solicitud, Porfavor Inténtelo de nuevo!');
 
 		$request_data['tipo'] = $this->input->post('tipo');

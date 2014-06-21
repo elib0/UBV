@@ -12,6 +12,10 @@
 		<h3>Datos de la Solicitud</h3>
 		Requerimiento: <?php echo ucwords($service->tipo) ?><br>
 		Fecha de Solicitud: <?php echo date('d F \d\e\l Y.', mysql_to_unix($service->fecha_solicitud)) ?><br>
+		Fecha de Entrega:
+		<?php 
+		echo ($service->fecha_retiro) ? date('d F \d\e\l Y.', mysql_to_unix($service->fecha_retiro)) : 'Sin entregar'; 
+		?><br>
 		<?php if ($service->tipo == 'traslado'): ?>
 		Traslado de: <?php echo $service->aldea_anterior ?>
 		a: <?php echo $service->aldea_nueva ?>
