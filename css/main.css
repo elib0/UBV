@@ -376,6 +376,29 @@ nav.main-menu > ul > li > ul > li:first-child {
   text-align: center;
   font-size: 14px;
 }
+#wrapper section.process-requests .process-request {
+  border: 1px solid #ccc;
+  margin: 3em 0;
+}
+#wrapper section.process-requests .process-request h6 {
+  font-size: 0.8em;
+  font-weight: bold;
+  position: relative;
+  top: -18px;
+  left: 1em;
+  background-color: #fff;
+  display: inline;
+  border: 1px solid #ccc;
+  padding: 3px;
+}
+#wrapper section.process-requests .process-request table.tablesorter {
+  width: 100%;
+  border: none;
+  margin-bottom: 2em;
+}
+#wrapper section.manage-documents .table-options {
+  border-bottom: 1px solid #ccc;
+}
 #wrapper section.request #stundet-info {
   background-color: #47a447;
 }

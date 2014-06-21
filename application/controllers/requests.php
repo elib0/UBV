@@ -13,7 +13,18 @@ class Requests extends Secure_Area {
 	}
 
 	public function index(){
+		$data['nota'] = array();
+		$data['traslado'] = array();
+		$data['constancia'] = array();
+
 		$data['title'] = 'Procesar Solicitudes';
+		$solicitudes = $this->Request->get_all();
+		foreach ($solicitudes->result() as $solicitud) {
+			$data[$solicitud->tipo][] = $solicitud;
+		}
+		// echo "<pre>";
+		// var_dump($solicitudes);
+		// echo "</pre>";
 		$this->load->view('requests/manage', $data);
 	}
 	

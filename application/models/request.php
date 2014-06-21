@@ -35,10 +35,15 @@ class Request extends CI_Model {
 		return $success;
 	}
 
-	public function get_all(){
+	public function get_all($limit = 30){
+		$this->db->select("solicitud.*, CONCAT(nombre, apellido ) AS nombre");
 		$this->db->from('solicitud');
+		$this->db->join('estudiante', 'solicitud.matricula = estudiante.matricula');
+		$this->db->join('persona', 'persona.cedula = estudiante.cedula');
 		$this->db->where('fecha_retiro', null);
 		$this->db->where('status <=', 0);
+		$this->db->order_by('fecha_solicitud', 'asc');
+		$this->db->limit($limit);
 		return $this->db->get();
 	}
 
