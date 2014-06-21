@@ -27,10 +27,6 @@ class Requests extends Secure_Area {
 		}
 		$this->load->view('requests/manage', $data);
 	}
-	
-	public function printing(){
-		$this->load->view('prints/request');
-	}
 
 	public function notes(){
 		$data['title'] = $this->default_title.'Notas';
@@ -67,6 +63,20 @@ class Requests extends Secure_Area {
 		}
 
 		echo json_encode($response);
+	}
+
+	public function printing($request_id = 0){
+		$view_to_load = '';
+		$data['service'] = $this->Request->get_info($request_id);
+		switch ($data['service']->tipo) {
+			case 'note':case 'traslado':
+				$view_to_load = 'request';
+			case 'constancia':
+				$view_to_load = 'constancy';
+				break;
+		}
+
+		$this->load->view('prints/'.$view_to_load, $data);
 	}
 
 	public function save(){

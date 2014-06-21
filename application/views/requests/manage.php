@@ -38,7 +38,7 @@
 					<td class="number-format">
 					<?php echo anchor('requests/view/'.$value->id.'?height=320&width=530', 'Detalles', 'class="thickbox btn btn-info btn-xs"'); ?>
 					<?php echo anchor_popup('requests/printing/'.$value->id, 'Imprimir', array('class'=>'btn btn-warning btn-xs')) ?>
-					<?php echo anchor('requests/process/'.$value->id, 'Procesar', 'class="btn btn-success btn-xs"'); ?>
+					<?php echo anchor('requests/process/'.$value->id, 'Procesar', 'id="btn-process-request" class="btn btn-success btn-xs"'); ?>
 					</td>
 				</tr>
 				<?php endforeach ?>
@@ -77,7 +77,7 @@
 					<td class="number-format">
 					<?php echo anchor('requests/view/'.$value->id.'?height=320&width=530', 'Detalles', 'class="thickbox btn btn-info btn-xs"'); ?>
 					<?php echo anchor_popup('requests/printing/'.$value->id, 'Imprimir', array('class'=>'btn btn-warning btn-xs')) ?>
-					<?php echo anchor('requests/process/'.$value->id, 'Procesar', 'class="btn btn-success btn-xs"'); ?>
+					<?php echo anchor('requests/process/'.$value->id, 'Procesar', 'id="btn-process-request" class="btn btn-success btn-xs"'); ?>
 					</td>
 				</tr>
 				<?php endforeach ?>
@@ -112,7 +112,7 @@
 					<td class="number-format">
 					<?php echo anchor('requests/view/'.$value->id.'?height=320&width=530', 'Detalles', 'class="thickbox btn btn-info btn-xs"'); ?>
 					<?php echo anchor_popup('requests/printing/'.$value->id, 'Imprimir', array('class'=>'btn btn-warning btn-xs')) ?>
-					<?php echo anchor('requests/process/'.$value->id, 'Procesar', 'id="btn-process-request" class="btn btn-success btn-xs"'); ?>
+					<?php echo anchor('requests/process/'.$value->id, 'Procesar', 'id="btn-process-request" id="btn-process-request" class="btn btn-success btn-xs"'); ?>
 					</td>
 				</tr>
 				<?php endforeach ?>
@@ -173,6 +173,7 @@
 	});
 
 	$('body').on('click', '#btn-process-request', function() {
+		var that = this;
 		if (window.confirm('La solicitud pasara a estado "ENTREGADA", ¿Desea continuar?')) {
 			$.ajax({
 				url: this.href,
@@ -183,7 +184,10 @@
 					var messaggeType = 'dager';
 			
 					if (response.status) {
-						$('#td-'+response.id).text('1');
+						var num_request = $('#num-request').text();
+						$('#num-request').text(num_request-1);  		//Actializa numero total
+						$(that).addClass('disabled').text('Procesada'); //Deshabilita boton
+						$('#td-'+response.id).text('1');	   	 		//Cambia Status en la fila
 						title = '';
 						messaggeType = 'success';
 					}

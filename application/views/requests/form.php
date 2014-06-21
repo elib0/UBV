@@ -33,7 +33,7 @@
 			<?php endif ?>
 		</ul>
 		<ul>
-			<li style=" width:100%"><?php echo form_label('Comentarios:', 'comentarios').'<br>'.form_textarea(array('name'=>'comentarios', 'cols'=>100, 'rows'=>3)); ?></li>
+			<li style=" width:100%"><?php echo form_label('Comentarios:', 'comentarios').'<br>'.form_textarea(array('name'=>'comentarios', 'cols'=>80, 'rows'=>3)); ?></li>
 		</ul>
 		<p class="align-center">
 			Esta solicitud no es reversible, ni modificable una vez emitida.
