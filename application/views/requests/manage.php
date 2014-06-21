@@ -25,6 +25,7 @@
 				</tr>
 			</thead>
 			<tbody>
+			<?php if ($nota): ?>
 				<?php foreach ($nota as $key => $value): ?>
 				<tr>
 					<td><?php echo $value->id ?></td>
@@ -34,6 +35,11 @@
 					<td>Botones</td>
 				</tr>
 				<?php endforeach ?>
+			<?php else: ?>
+				<tr>
+					<td colspan="5">No hay solicitudes de traslados en estos momentos...</td>
+				</tr>
+			<?php endif ?>
 			</tbody>
 		</table>
 	</div>
@@ -52,6 +58,7 @@
 				</tr>
 			</thead>
 			<tbody>
+			<?php if ($traslado): ?>
 				<?php foreach ($traslado as $key => $value): ?>
 				<tr>
 					<td><?php echo $value->id ?></td>
@@ -63,6 +70,11 @@
 					<td>Botones</td>
 				</tr>
 				<?php endforeach ?>
+			<?php else: ?>
+				<tr>
+					<td colspan="5">No hay solicitudes de traslados en estos momentos...</td>
+				</tr>
+			<?php endif ?>
 			</tbody>
 		</table>
 	</div>
@@ -79,6 +91,7 @@
 				</tr>
 			</thead>
 			<tbody>
+			<?php if ($constancia): ?>
 				<?php foreach ($constancia as $key => $value): ?>
 				<tr>
 					<td><?php echo $value->id ?></td>
@@ -88,6 +101,11 @@
 					<td>Botones</td>
 				</tr>
 				<?php endforeach ?>
+			<?php else: ?>
+				<tr>
+					<td colspan="5">No hay solicitudes de constancias en estos momentos...</td>
+				</tr>
+			<?php endif ?>
 			</tbody>
 		</table>
 	</div>
