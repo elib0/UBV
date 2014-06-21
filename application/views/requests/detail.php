@@ -27,5 +27,5 @@
 	</div>
 	<?php echo anchor('#', 'Cerrar', 'class="align-right btn btn-default"'); ?>
 	<?php echo anchor_popup('requests/printing/'.$service->id, 'Imprimir', array('class'=>'align-right btn btn-warning')) ?>
-	<?php echo anchor('requests/process/'.$service->id, 'Procesar', 'class="btn btn-success"'); ?>
+	<?php echo anchor('requests/process/'.$service->id, 'Procesar', 'id="btn-process-request" class="btn btn-success"'); ?>
 </section>

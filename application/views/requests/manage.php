@@ -34,7 +34,7 @@
 					<td class="number-format"><?php echo $value->id ?></td>
 					<td><?php echo $value->nombre ?></td>
 					<td class="number-format"><?php echo $value->fecha_solicitud ?></td>
-					<td class="status number-format"><?php echo $value->status ?></td>
+					<td id="<?php echo 'td-'.$value->id ?>" class="number-format"><?php echo $value->status ?></td>
 					<td class="number-format">
 					<?php echo anchor('requests/view/'.$value->id.'?height=320&width=530', 'Detalles', 'class="thickbox btn btn-info btn-xs"'); ?>
 					<?php echo anchor_popup('requests/printing/'.$value->id, 'Imprimir', array('class'=>'btn btn-warning btn-xs')) ?>
@@ -73,7 +73,7 @@
 					<td class="number-format"><?php echo $value->fecha_solicitud ?></td>
 					<td><?php echo $value->aldea_anterior ?></td>
 					<td><?php echo $value->aldea_nueva ?></td>
-					<td class="status number-format"><?php echo $value->status ?></td>
+					<td id="<?php echo 'td-'.$value->id ?>" class="number-format"><?php echo $value->status ?></td>
 					<td class="number-format">
 					<?php echo anchor('requests/view/'.$value->id.'?height=320&width=530', 'Detalles', 'class="thickbox btn btn-info btn-xs"'); ?>
 					<?php echo anchor_popup('requests/printing/'.$value->id, 'Imprimir', array('class'=>'btn btn-warning btn-xs')) ?>
@@ -108,11 +108,11 @@
 					<td class="number-format"><?php echo $value->id ?></td>
 					<td><?php echo $value->nombre ?></td>
 					<td class="number-format"><?php echo $value->fecha_solicitud ?></td>
-					<td class="status number-format"><?php echo $value->status ?></td>
+					<td id="<?php echo 'td-'.$value->id ?>" class="number-format"><?php echo $value->status ?></td>
 					<td class="number-format">
 					<?php echo anchor('requests/view/'.$value->id.'?height=320&width=530', 'Detalles', 'class="thickbox btn btn-info btn-xs"'); ?>
 					<?php echo anchor_popup('requests/printing/'.$value->id, 'Imprimir', array('class'=>'btn btn-warning btn-xs')) ?>
-					<?php echo anchor('requests/process/'.$value->id, 'Procesar', 'class="btn btn-success btn-xs"'); ?>
+					<?php echo anchor('requests/process/'.$value->id, 'Procesar', 'id="btn-process-request" class="btn btn-success btn-xs"'); ?>
 					</td>
 				</tr>
 				<?php endforeach ?>
@@ -172,8 +172,7 @@
 		}
 	});
 
-	$('.process-requests').on('click', '.btn-success', function(event) {
-		var that = this;
+	$('body').on('click', '#btn-process-request', function() {
 		if (window.confirm('La solicitud pasara a estado "ENTREGADA", ¿Desea continuar?')) {
 			$.ajax({
 				url: this.href,
@@ -184,11 +183,11 @@
 					var messaggeType = 'dager';
 			
 					if (response.status) {
-						$(that).parents('tr').find('.status ').text('1');
+						$('#td-'+response.id).text('1');
 						title = '';
 						messaggeType = 'success';
 					}
-					set_feedback('alert', title, response.messagge, messaggeType, false, false);
+					set_feedback('alert', title, response.messagge, messaggeType, true, false);
 				}
 			});
 			

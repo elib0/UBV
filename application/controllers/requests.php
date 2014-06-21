@@ -62,7 +62,7 @@ class Requests extends Secure_Area {
 		if ($this->input->is_ajax_request()) {
 			$request_data = array('status'=>1, 'fecha_retiro'=>date('Y-m-d H:i:s'));
 			if ($result = $this->Request->save($request_data,$request_id)) {
-				$response = array('status'=>true, 'messagge'=>'Su solicitud fue procesada!');
+				$response = array('status'=>true, 'messagge'=>'Su solicitud fue procesada!', 'id'=>$request_id);
 			}
 		}
 
