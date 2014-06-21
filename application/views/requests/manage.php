@@ -32,7 +32,11 @@
 					<td><?php echo $value->nombre ?></td>
 					<td><?php echo $value->fecha_solicitud ?></td>
 					<td><?php echo $value->status ?></td>
-					<td>Botones</td>
+					<td>
+					<?php echo anchor('request/view/'.$value->id, 'Detalles', 'class="thickbox btn btn-info btn-xs"'); ?>
+					<?php echo anchor_popup('request/printing/'.$value->id, 'Imprimir', array('class'=>'btn btn-warning btn-xs')) ?>
+					<?php echo anchor('resquest/process/'.$value->id, 'Procesar', 'class="btn btn-success btn-xs"'); ?>
+					</td>
 				</tr>
 				<?php endforeach ?>
 			<?php else: ?>
@@ -67,7 +71,11 @@
 					<td><?php echo $value->aldea_anterior ?></td>
 					<td><?php echo $value->aldea_nueva ?></td>
 					<td><?php echo $value->status ?></td>
-					<td>Botones</td>
+					<td>
+					<?php echo anchor('request/view/'.$value->id, 'Detalles', 'class="thickbox btn btn-info btn-xs"'); ?>
+					<?php echo anchor_popup('request/printing/'.$value->id, 'Imprimir', array('class'=>'btn btn-warning btn-xs')) ?>
+					<?php echo anchor('resquest/process/'.$value->id, 'Procesar', 'class="btn btn-success btn-xs"'); ?>
+					</td>
 				</tr>
 				<?php endforeach ?>
 			<?php else: ?>
@@ -98,7 +106,11 @@
 					<td><?php echo $value->nombre ?></td>
 					<td><?php echo $value->fecha_solicitud ?></td>
 					<td><?php echo $value->status ?></td>
-					<td>Botones</td>
+					<td>
+					<?php echo anchor('request/view/'.$value->id, 'Detalles', 'class="thickbox btn btn-info btn-xs"'); ?>
+					<?php echo anchor_popup('request/printing/'.$value->id, 'Imprimir', array('class'=>'btn btn-warning btn-xs')) ?>
+					<?php echo anchor('resquest/process/'.$value->id, 'Procesar', 'class="btn btn-success btn-xs"'); ?>
+					</td>
 				</tr>
 				<?php endforeach ?>
 			<?php else: ?>
