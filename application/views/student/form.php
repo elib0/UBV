@@ -1,7 +1,7 @@
 <?php echo form_open('students/save/', 'id="form-student"'); ?>
 <div class="form-content">
 	<h3>Datos personales</h3>
-	<h5 class="required">Campos en rojo son obligatorios</h5>
+	<h5 class="required align-right">Campos en rojo son obligatorios</h5>
 	<?php if (!$student->cedula): ?>
 		<ul>
 			<li><?php echo form_label('Cédula de identidad', 'cedula', array('class'=>'required')).'<br>'.form_input('cedula', $student->cedula); ?></li>

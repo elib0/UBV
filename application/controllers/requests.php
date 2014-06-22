@@ -48,7 +48,7 @@ class Requests extends Secure_Area {
 
 	public function view($request_id = 0){
 		$this->load->helper('date');
-		$data['service'] = $this->Request->get_info($request_id);
+		$data['request'] = $this->Request->get_info($request_id);
 		$this->load->view('requests/detail', $data);
 	}
 
@@ -66,11 +66,13 @@ class Requests extends Secure_Area {
 	}
 
 	public function printing($request_id = 0){
+		$this->load->helper('date');
 		$view_to_load = '';
-		$data['solicitud'] = $this->Request->get_info($request_id, TRUE);
-		switch ($data['service']->tipo) {
-			case 'note':case 'traslado':
+		$data['request'] = $this->Request->get_info($request_id, TRUE);
+		switch ($data['request']->tipo) {
+			case 'nota':case 'traslado':
 				$view_to_load = 'request';
+				break;
 			case 'constancia':
 				$view_to_load = 'constancy';
 				break;

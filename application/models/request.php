@@ -48,8 +48,8 @@ class Request extends CI_Model {
 	}
 
 	public function get_info($request_id = 0, $extend_data=FALSE){
-		$select = ($extend_data) ? ',pfg.nombre AS nombre_pfg' : '' ;
-		$this->db->select("solicitud.*,estudiante.*, CONCAT(nombre, ' ', apellido ) AS nombre, telefono, email".$select, FALSE);
+		$select = ($extend_data) ? ',pfg.nombre AS nombre_pfg, aldea.nombre AS nombre_aldea' : '' ;
+		$this->db->select("solicitud.*,estudiante.*, CONCAT(persona.nombre, ' ', persona.apellido ) AS nombre_estudiante, telefono, email".$select, FALSE);
 		$this->db->from('solicitud');
 		$this->db->join('estudiante', 'solicitud.matricula = estudiante.matricula');
 		$this->db->join('persona', 'persona.cedula = estudiante.cedula');

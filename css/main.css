@@ -396,7 +396,6 @@ nav.main-menu > ul > li > ul > li:first-child {
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
   border-radius: 50%;
-  animation: banderitor 10s infinite ease;
 }
 #wrapper section.process-requests .process-request {
   border: 1px solid #ccc;

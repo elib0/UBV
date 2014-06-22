@@ -1,7 +1,7 @@
 <?php echo form_open('employees/save/'.$employee->cedula, 'id="form-employee"'); ?>
 <div class="form-content">
 	<h3>Datos personales</h3>
-	<h5 class="required">Campos en rojo son obligatorios</h5>
+	<h5 class="required align-right">Campos en rojo son obligatorios</h5>
 	<?php if (!$employee->cedula): ?>
 		<ul>
 			<li><?php echo form_label('Cédula de identidad', 'cedula', array('class'=>'required')).'<br>'.form_input('cedula', $employee->cedula); ?></li>

@@ -5,7 +5,7 @@
 	<?php echo form_open('requests/save', 'id="form-request"'); ?>
 	<?php echo form_hidden('tipo', $type); ?>
 	<div class="form-content">
-		<h5 class="required">Campos en rojo son obligatorios</h5>
+		<h5 class="required align-right">Campos en rojo son obligatorios</h5>
 		<ul>
 			<h3>Datos de el estudiante</h3>
 			<li>
