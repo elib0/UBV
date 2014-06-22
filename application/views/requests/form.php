@@ -13,10 +13,10 @@
 				<?php echo anchor('students/view?height=480&width=600', '+', 'title="Agregar Estudiante" class="thickbox btn btn-success btn-sm"'); ?><br>
 			</li>
 			<li id="stundet-info">
-				Matricula #:<span id="student-matricula"></span><br>
-				Nombres y Apellidos:<span id="student-name"></span><br>
-				Aldea Actual:<span id="student-aldea"></span><br>
-				Fecha de Emisión: <?php echo date('d/m/Y') ?>
+				Matricula #: <span id="student-matricula">.</span>.<br>
+				Nombres y Apellidos: <span id="student-name"></span>.<br>
+				Aldea Actual: <span id="student-aldea"></span>.<br>
+				Fecha de Emisión: <span><?php echo date('d/m/Y') ?></span>.
 				<input type="hidden" id="aldea_actual" name="aldea_actual" value="">
 			</li>
 		</ul>
@@ -46,6 +46,11 @@
 <script type="text/javascript">
 $(function() {
 	$('#stundet-info').hide();
+	
+	$("#form-request").validity(function() {
+        $("#search-student").require();
+    });
+
 	$('#search-student').select2({
 		placeholder: 'Cedula, Nombre o Apellido...',
 		minimumInputLength: 3,
@@ -107,7 +112,6 @@ $(function() {
             }
 		}
 	});
-
 	$('#form-request').ajaxForm({
 		dataType: 'json',
 		success: function(response){

@@ -7,8 +7,8 @@
 			<h3>Configuración General</h3>
 			<?php
 			echo form_open('config/save', 'id="form-save" class="form-control"');
-			echo form_label('Nombre de la sede:', 'sede').form_input('sede', $sede);
-			echo form_label('Correo del Administrador:', 'email').form_input('email', $admin_email);
+			echo form_label('Nombre de la sede:', 'sede').form_input('sede', $sede, 'id="sede"');
+			echo form_label('Correo del Administrador:', 'email').form_input('email', $admin_email, 'id="email"');
 			echo form_submit('submit', 'Guardar', 'class="btn btn-default btn-sm"');
 			echo form_close();
 			?>
@@ -41,6 +41,12 @@
 <?php $this->load->view('partial/footer'); ?>
 <script>
 	$(function() {
+		$("#form-save").validity(function() {
+	        $("#sede, #email").require();
+	        $('#email').match('email');
+	        $('#sede').minLength(3).maxLength(100);
+	    });
+
 		$('#form-restore, #form-save').ajaxForm({
 			dataType: 'json',
 			success: function(response){

@@ -4,14 +4,14 @@
 	<h5 class="required align-right">Campos en rojo son obligatorios</h5>
 	<?php if (!$student->cedula): ?>
 		<ul>
-			<li><?php echo form_label('Cédula de identidad', 'cedula', array('class'=>'required')).'<br>'.form_input('cedula', $student->cedula); ?></li>
+			<li><?php echo form_label('Cédula de identidad', 'cedula', array('class'=>'required')).'<br>'.form_input('cedula', $student->cedula, 'id="cedula"'); ?></li>
 		</ul>
 	<?php else: ?>
 		<?php echo form_hidden('cedula', $student->cedula); ?>
 	<?php endif ?>
 	<ul>
-		<li><?php echo form_label('Nombres', 'nombre', array('class'=>'required')).'<br>'.form_input('nombre', $student->nombre); ?></li>
-		<li><?php echo form_label('Apellidos', 'apellido', array('class'=>'required')).'<br>'.form_input('apellido', $student->apellido); ?></li>
+		<li><?php echo form_label('Nombres', 'nombre', array('class'=>'required')).'<br>'.form_input('nombre', $student->nombre, 'id="nombre"'); ?></li>
+		<li><?php echo form_label('Apellidos', 'apellido', array('class'=>'required')).'<br>'.form_input('apellido', $student->apellido, 'id="apellido"'); ?></li>
 	</ul>
 	<br>
 	<ul>
@@ -35,6 +35,13 @@
 <script type="text/javascript">
 	$(function() {
 		$('#aldea').hide();
+
+		$("#form-student").validity(function() {
+	        $("#cedula, #nombre, #apellido, #search-pfg").require();
+	        $('#cedula').match('integer').minLength(3).maxLength(9);
+	        $('#nombre, #apellido').minLength(3).maxLength(20);
+	    });
+
 		$('#search-pfg').select2({
 			placeholder: 'Buscar pfg por aldea...',
 			minimumInputLength: 5,

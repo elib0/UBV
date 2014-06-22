@@ -24,7 +24,7 @@ class Configapp extends CI_Model {
 	}
 
 	public function get_all_levels(){
-		return $this->db->get('nivel')->result();
+		return $this->db->order_by('cod_nivel', 'desc')->get('nivel')->result();
 	}
 
 }

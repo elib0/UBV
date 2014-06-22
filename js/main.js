@@ -1,4 +1,5 @@
 $(function() {
+	$.validity.setup({ outputMode:"label" });
 	//All Title attributes (tooltips)
 	$('#wrapper, nav.user-menu, .logo > a').on('mouseenter','[title]',function(e){
 		//mouse over (hover)
