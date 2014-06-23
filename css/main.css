@@ -200,6 +200,9 @@ nav.main-menu {
 nav.main-menu a,
 nav.main-menu a:active,
 nav.main-menu a:visited {
+  display: inline-block;
+  width: 100px;
+  min-height: 54px;
   color: #000;
   text-decoration: none !important;
   font-weight: bold;

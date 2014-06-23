@@ -48,7 +48,7 @@ $(function() {
 	$('#stundet-info').hide();
 	
 	$("#form-request").validity(function() {
-        $("#search-student").require();
+        $("#search-student").require('La cédula del estudiante es obligatoria!');
     });
 
 	$('#search-student').select2({
