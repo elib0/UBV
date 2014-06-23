@@ -1,14 +1,17 @@
 <?php echo form_open('students/save/', 'id="form-student"'); ?>
 <div class="form-content">
-	<h3>Datos personales</h3>
 	<h5 class="required align-right">Campos en rojo son obligatorios</h5>
+	<ul>
+		<div>
+			<h3>Datos personales</h3>
+		</div>
 	<?php if (!$student->cedula): ?>
-		<ul>
-			<li><?php echo form_label('Cédula de identidad', 'cedula', array('class'=>'required')).'<br>'.form_input('cedula', $student->cedula, 'id="cedula"'); ?></li>
-		</ul>
+		<li><?php echo form_label('Cédula de identidad', 'cedula', array('class'=>'required')).'<br>'.form_input('cedula', $student->cedula, 'id="cedula"'); ?></li>
+	
 	<?php else: ?>
 		<?php echo form_hidden('cedula', $student->cedula); ?>
 	<?php endif ?>
+	</ul>
 	<ul>
 		<li><?php echo form_label('Nombres', 'nombre', array('class'=>'required')).'<br>'.form_input('nombre', $student->nombre, 'id="nombre"'); ?></li>
 		<li><?php echo form_label('Apellidos', 'apellido', array('class'=>'required')).'<br>'.form_input('apellido', $student->apellido, 'id="apellido"'); ?></li>
@@ -22,11 +25,12 @@
 	<ul>
 		<li><?php echo form_label('Dirección', 'direccion').'<br>'.form_textarea(array('name'=>'direccion', 'value'=>$student->direccion, 'cols'=>100, 'rows'=>3)); ?></li>
 	</ul>
-	<br>
-	<h3>Datos del Estudiante</h3>
 	<ul>
+		<div>
+			<h3>Datos del Estudiante</h3>
+		</div>
 		<li><?php echo form_label('Seleccionar PFG:', 'pfg', array('class'=>'required')).'<br>'.form_input('pfg', $student->cod_pfg, 'id="search-pfg"'); ?></li>
-		<li id="aldea"></li>
+		<li>Aldea:<span id="aldea"></span></li>
 	</ul>
 	<br><br><br>
 	<input type="submit" value="Guardar" class="btn btn-default">
@@ -66,7 +70,11 @@
 		            $.ajax('index.php/universities/suggest_pfg', {
 		            	dataType: "json",
 		                data: {term: id}
-		            }).done(function(data) { console.log(data);callback(data[0]); });
+		            }).done(function(data) { 
+		            	console.log(data);
+		            	$('#aldea').text(data[0].aldea).show();
+		            	callback(data[0]);
+		            });
 		        }
 			}
 		}).on('select2-highlight', function(e){

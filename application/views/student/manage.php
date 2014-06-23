@@ -47,10 +47,12 @@
 <?php $this->load->view('partial/footer'); ?>
 <script>
 	$(function() {
-		$("#table-sorter").tablesorter({
-			headers: {5:{sorter: false},3:{sorter:false}},
-			sortList: [[0,0],[2,0]]
-		});
+		if ($('#table-sorter tbody > tr').length > 1 )  {
+			$("#table-sorter").tablesorter({
+				headers: {5:{sorter: false},3:{sorter:false}},
+				sortList: [[0,0],[2,0]]
+			});
+		}
 
 		$('#search-student').select2({
 			placeholder: 'Cedula, Nombre o Apellido...',

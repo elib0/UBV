@@ -1,14 +1,16 @@
 <?php echo form_open('employees/save/'.$employee->cedula, 'id="form-employee"'); ?>
 <div class="form-content">
-	<h3>Datos personales</h3>
 	<h5 class="required align-right">Campos en rojo son obligatorios</h5>
+	<ul>
+		<div>
+			<h3>Datos personales</h3>
+		</div>
 	<?php if (!$employee->cedula): ?>
-		<ul>
-			<li><?php echo form_label('Cédula de identidad', 'cedula', array('class'=>'required')).'<br>'.form_input('cedula', $employee->cedula, 'id="cedula"'); ?></li>
-		</ul>
+		<li><?php echo form_label('Cédula de identidad', 'cedula', array('class'=>'required')).'<br>'.form_input('cedula', $employee->cedula, 'id="cedula"'); ?></li>
 	<?php else: ?>
 		<?php echo form_hidden('cedula', $employee->cedula); ?>
 	<?php endif ?>
+	</ul>
 	<ul>
 		<li><?php echo form_label('Nombres', 'nombre', array('class'=>'required')).'<br>'.form_input('nombre', $employee->nombre, 'id="nombre"'); ?></li>
 		<li><?php echo form_label('Apellidos', 'apellido', array('class'=>'required')).'<br>'.form_input('apellido', $employee->apellido, 'id="apellido"'); ?></li>
@@ -23,9 +25,11 @@
 		<li><?php echo form_label('Dirección', 'direccion', array('class'=>'required')).'<br>'.form_textarea(array('name'=>'direccion', 'value'=>$employee->direccion, 'cols'=>100, 'rows'=>3, 'id'=>"direccion")); ?></li>
 	</ul>
 	<br>
-	<h3>Datos de Empleado</h3>
 	<div><?php echo form_label('Estado:', 'estado').form_checkbox('estado', '0', !(boolean)$employee->eliminado); ?></div>
 	<ul>
+		<div>
+			<h3>Datos de Empleado</h3>
+		</div>
 		<li><?php echo form_label('Apodo', 'apodo', array('class'=>'required')).'<br>'.form_input('apodo', $employee->apodo, 'id="apodo"'); ?></li>
 		<li>
 			<?php echo form_label('Contraseña', 'contrasena', array('class'=>'required')).'<br>'.form_input('contrasena','', 'id="contrasena"');

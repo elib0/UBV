@@ -46,10 +46,12 @@
 <?php $this->load->view('partial/footer'); ?>
 <script>
 	$(function() {
-		$("#table-sorter").tablesorter({
-			headers: {4:{sorter: false}},
-			sortList: [[1,0],[2,0]]
-		});
+		if ($('#table-sorter tbody > tr').length > 1 )  {
+			$("#table-sorter").tablesorter({
+				headers: {4:{sorter: false}},
+				sortList: [[1,0],[2,0]]
+			});
+		}
 
 		$('.delete-user').click(function(event) {
 			var that = this;
