@@ -7,10 +7,12 @@
 	<div class="form-content">
 		<h5 class="required align-right">Campos en rojo son obligatorios</h5>
 		<ul>
-			<h3>Datos de el estudiante</h3>
+			<div>
+				<h3>Datos de el estudiante</h3>
+				<?php echo anchor('students/view?height=480&width=600', '+', 'title="Agregar Estudiante" class="thickbox btn btn-success btn-sm"'); ?>
+			</div>
 			<li>
 				<?php echo form_label('Cedula Estudiante', 'buscar', array('class'=>'required')).'<br>'.form_input('cedula', '', 'id="search-student"'); ?>
-				<?php echo anchor('students/view?height=480&width=600', '+', 'title="Agregar Estudiante" class="thickbox btn btn-success btn-sm"'); ?><br>
 			</li>
 			<li id="stundet-info">
 				Matricula #: <span id="student-matricula">.</span>.<br>
@@ -21,14 +23,15 @@
 			</li>
 		</ul>
 		<ul>
-			<h3>Datos de la solicitud</h3>
-			<!--<li><?php //echo form_label('Semestre solicitado', 'semestre', array('class'=>'required')).'<br>'.form_dropdown('semestre', range(1, 12)); ?></li>-->
+			<div>
+				<h3>Datos de la solicitud</h3>
+			</div>
 			<?php if ($type == 'traslado'): ?>
 			<li><?php echo form_label('Nueva Aldea:', 'aldea_nueva', array('class'=>'required')).'<br>'.form_input('aldea_nueva', '', 'id="search-aldea"'); ?></li>
 			<li>
 			<?php elseif($type == 'nota'): ?>
 				<label for="semestre">Semestre Solicitado</label>
-				<input type="number" name="semestre" value="1" min="1" max="12">
+				<input type="number" name="semestre" id="semestre" value="1" min="1" max="12">
 			</li>
 			<?php endif ?>
 		</ul>
@@ -49,6 +52,8 @@ $(function() {
 	
 	$("#form-request").validity(function() {
         $("#search-student").require('La cédula del estudiante es obligatoria!');
+        $('#search-aldea').require('La aldea es obligatoria!');
+        $('#semestre').require();
     });
 
 	$('#search-student').select2({
