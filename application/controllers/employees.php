@@ -73,8 +73,8 @@ class Employees extends Secure_Area {
 		die(json_encode( $response ));
 	}
 
-	public function suggest(){
-		$employees = $this->Employee->search($this->input->get('term'));
+	public function suggest($nivel=false){
+		$employees = $this->Employee->search($this->input->get('term'), $nivel);
 		$result = array();
 
 		if ($employees) {

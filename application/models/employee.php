@@ -183,11 +183,15 @@ class Employee extends Person {
 		return $success;
 	}
 
-	function search($cedula){
+	function search($cedula, $nivel=false){
 		$this->db->select('empleado.*, persona.*, nivel.nombre AS nivel');
 		$this->db->from('empleado');
 		$this->db->join('persona', 'persona.cedula = empleado.cedula');
 		$this->db->join('nivel', 'empleado.cod_nivel = nivel.cod_nivel');
+
+		//Si se desea filtrar por nivel
+		if ($nivel) $this->db->where('nivel.cod_nivel', $nivel);
+
 		$this->db->like("CONCAT(empleado.cedula, ' ', persona.nombre, ' ', persona.apellido)", $cedula);
 		$result = $this->db->get();
 

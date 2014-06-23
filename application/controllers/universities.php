@@ -13,13 +13,18 @@ class Universities extends Secure_Area {
 
 	public function index()
 	{
+		$data['aldeas'] = array(); 
+		$this->load->view('universities/manage', $data);
+	}
+
+	public function view(){
 		$data['municipios'] = array();
 		if ($query = $this->University->get_all_municipios()) {
 			foreach ($query->result() as $municipio) {
 				$data['municipios'][$municipio->cod_municipio] = $municipio->nombre_municipio;
 			}
 		}
-		$this->load->view('universities/manage', $data);
+		$this->load->view('universities/form', $data);
 	}
 
 	public function suggest(){
@@ -49,25 +54,23 @@ class Universities extends Secure_Area {
 	}
 
 	public function save($type='aldea'){
-		$response = array('status'=>FALSE,'messagge' => 'Imposible guardar los datos! Por favor inténtalo de nuevo');
+		$response = array('status'=>FALSE,'messagge' => 'Imposible registrar la aldea! Por favor inténtalo de nuevo');
 
-		$data['nombre'] = $this->input->post('nombre');
-		if ($type === 'aldea') {
-			$data['direccion'] = $this->input->post('direccion');
-			$data['cod_municipio'] = $this->input->post('municipio');
-			if ($this->University->save_aldea($data)) {
-				$response = array('status'=>TRUE,'messagge' => 'Aldea Registrada Correctamente!');
-			}
-		}elseif($type === 'pfg'){
-			$data['descripcion'] = $this->input->post('descripcion');
-			$data['cod_aldea'] = $this->input->post('aldea');
-			if ($this->University->save_pfg($data)) {
-				$response = array('status'=>TRUE,'messagge' => 'Pfg Registrada en la aldea: '.$data['cod_aldea'].' Correctamente!');
+		$data_aldea['nombre'] = $this->input->post('nombre');
+		$data_aldea['direccion'] = $this->input->post('direccion');
+		$data_aldea['cod_municipio'] = $this->input->post('municipio');
+		$data_aldea['cedula_coordinador'] = $this->input->post('coordinador');
+		$pfgs = explode(',', $this->input->post('pfgs'));
+		if (@$cod_aldea = $this->University->save_aldea($data_aldea)) {
+			$response = array('status'=>TRUE,'messagge' => 'Aldea Registrada Correctamente!');
+			foreach ($pfgs as $pfg) {
+				$data_pfg['nombre'] = $pfg;
+				$data_pfg['cod_aldea'] = $cod_aldea;
+				$this->University->save_pfg($data_pfg);
 			}
 		}
 
 		die(json_encode($response));
-
 	}
 
 	public function pfg()
