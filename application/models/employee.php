@@ -34,11 +34,10 @@ class Employee extends Person {
 		return $this->session->userdata('employee')!=false;
 	}
 
-	function exists($employee_cod)
+	function exists($person_cod)
 	{
 		$this->db->from('empleado');
-		$this->db->join('persona', 'empleado.cedula = persona.cedula');
-		$this->db->where('empleado.cod_empleado',$employee_cod);
+		$this->db->where('empleado.cedula',$person_cod);
 		$query = $this->db->get();
 
 		return ($query->num_rows()==1);
@@ -142,24 +141,26 @@ class Employee extends Person {
 		return $query;
 	}
 
-	function save(&$person_data, &$employee_data,$employee_id=0)
+	function save(&$person_data, &$employee_data,$person_id=false)
 	{
 		$success=FALSE;
 
 		//Run these queries as a transaction, we want to make sure we do all or nothing
 		$this->db->trans_start();
 
-		if($idaux = parent::save($person_data,$employee_id))
+		if($idaux = parent::save($person_data,$person_id))
 		{
-			if ( !$employee_id || !$this->exists($employee_id) )
+			if ( !$person_id || !$this->exists($person_id) )
 			{
 				if( $this->db->insert('empleado',$employee_data) ) {
 					$success = $idaux;
 				}
 			}else{
-				$this->db->where('cedula', $employee_id);
+				$this->db->where('cedula', $person_id);
 				if ($this->db->update('empleado',$employee_data)) {
 					$success = TRUE;
+				}else{
+					$success = FALSE;
 				}
 			}
 		}

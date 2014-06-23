@@ -1,4 +1,4 @@
-<?php echo form_open('students/save/', 'id="form-student"'); ?>
+<?php echo form_open('students/save/'.$student->cedula, 'id="form-student"'); ?>
 <div class="form-content">
 	<h5 class="required align-right">Campos en rojo son obligatorios</h5>
 	<ul>
@@ -7,9 +7,6 @@
 		</div>
 	<?php if (!$student->cedula): ?>
 		<li><?php echo form_label('Cédula de identidad', 'cedula', array('class'=>'required')).'<br>'.form_input('cedula', $student->cedula, 'id="cedula"'); ?></li>
-	
-	<?php else: ?>
-		<?php echo form_hidden('cedula', $student->cedula); ?>
 	<?php endif ?>
 	</ul>
 	<ul>
@@ -71,7 +68,6 @@
 		            	dataType: "json",
 		                data: {term: id}
 		            }).done(function(data) { 
-		            	console.log(data);
 		            	$('#aldea').text(data[0].aldea).show();
 		            	callback(data[0]);
 		            });
@@ -95,7 +91,7 @@
 					messaggeType = 'success';
 					closeTb = reload = true;
 					if (response.person_id) {
-						$('#search-student').select2('val',response.person_id,true);
+						//$('#search-student').select2('val',response.person_id,true);
 						reload = false;
 					};
 					

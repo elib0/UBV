@@ -14,7 +14,7 @@ class Person extends CI_Model {
 	function exists($person_id)
 	{
 		$this->con->from('persona');
-		$this->con->where('persona.cedula',$person_id);
+		$this->con->where('cedula',$person_id);
 		$query = $this->con->get();
 
 		return ($query->num_rows()==1);
@@ -49,7 +49,6 @@ class Person extends CI_Model {
 		{
 			if ($this->con->insert('persona',$person_data))
 			{
-				// $person_data['cedula']=$this->con->insert_id();
 				return $person_data['cedula'];
 			}
 

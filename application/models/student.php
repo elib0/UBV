@@ -10,10 +10,10 @@ class Student extends Person {
 		
 	}
 
-	function exists($student_id)
+	function exists($person_id)
 	{
 		$this->db->from('estudiante');
-		$this->db->where('cedula',$student_id);
+		$this->db->where('cedula',$person_id);
 		$query = $this->db->get();
 
 		return ($query->num_rows()==1);
@@ -80,24 +80,26 @@ class Student extends Person {
 		return FALSE;
 	}
 
-	function save(&$person_data, &$student_data,$student_id=0)
+	function save(&$person_data, &$student_data,$person_id=false)
 	{
 		$success=FALSE;
 
 		//Run these queries as a transaction, we want to make sure we do all or nothing
 		$this->db->trans_start();
 
-		if($idaux = parent::save($person_data,$student_id))
+		if($idaux = parent::save($person_data,$person_id))
 		{
-			if ( !$student_id || !$this->exists($student_id) )
+			if ( !$person_id || !$this->exists($person_id) )
 			{
 				if( $this->db->insert('estudiante',$student_data) ) {
 					$success = $idaux;
 				}
 			}else{
-				$this->db->where('cedula', $student_id);
+				$this->db->where('cedula', $person_id);
 				if ($this->db->update('estudiante',$student_data)) {
 					$success = TRUE;
+				}else{
+					$success = FALSE;
 				}
 			}
 		}

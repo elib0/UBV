@@ -7,8 +7,6 @@
 		</div>
 	<?php if (!$employee->cedula): ?>
 		<li><?php echo form_label('Cédula de identidad', 'cedula', array('class'=>'required')).'<br>'.form_input('cedula', $employee->cedula, 'id="cedula"'); ?></li>
-	<?php else: ?>
-		<?php echo form_hidden('cedula', $employee->cedula); ?>
 	<?php endif ?>
 	</ul>
 	<ul>
@@ -32,8 +30,8 @@
 		</div>
 		<li><?php echo form_label('Apodo', 'apodo', array('class'=>'required')).'<br>'.form_input('apodo', $employee->apodo, 'id="apodo"'); ?></li>
 		<li>
-			<?php echo form_label('Contraseña', 'contrasena', array('class'=>'required')).'<br>'.form_input('contrasena','', 'id="contrasena"');
-				echo form_input('contrasena','', 'id="recontrasena"');
+			<?php echo form_label('Contraseña', 'contrasena', array('class'=>'required')).'<br>'.form_password('contrasena','', 'id="contrasena"');
+				echo form_password('contrasena','', 'id="recontrasena"');
 			?>
 		</li>
 		<li><?php echo form_label('Tipo de empleado', 'nivel').'<br>'.form_dropdown('nivel', $levels,$employee->cod_nivel); ?></li>
@@ -52,7 +50,6 @@
 	        $('#cedula').match('integer').minLength(3).maxLength(9);
 	        $('#nombre, #apellido').minLength(3).maxLength(20);
 	        $('#email').match('email');
-	        $('#telefono').match('phone');
 	        $('#apodo').minLength(4).maxLength(10);
 	    });
 
@@ -69,7 +66,7 @@
 					messaggeType = 'success';
 					closeTb = true;
 				}
-				set_feedback(type, title, response.messagge, messaggeType, closeTb);
+				set_feedback(type, title, response.messagge, messaggeType, closeTb, closeTb);
 			}
 		});
 	});

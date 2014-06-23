@@ -41,23 +41,26 @@ class Students extends Secure_Area {
 	}
 
 	public function save($person_id = false){
-		$response = array('status'=>false, 'messagge'=>'Error al registrar al estudiante');
+		$response = array('status'=>false, 'messagge'=>'Error al registrar al estudiante','person_id'=>false);
 
-		$person_data['cedula'] = $this->input->post('cedula');
+		if ($this->input->post('cedula')) {
+			$person_data['cedula'] = $this->input->post('cedula');
+			$student_data['cedula'] = $person_data['cedula'];
+		}
+
+		
 		$person_data['nombre'] = $this->input->post('nombre');
 		$person_data['apellido'] = $this->input->post('apellido');
 		$person_data['telefono'] = $this->input->post('telefono');
 		$person_data['email'] = $this->input->post('correo');
 		$person_data['direccion'] = $this->input->post('direccion');
 
-		// $student_data['aldea'] = $this->input->post('aldea');
-		$student_data['matricula'] = date("dmhis");
+		$student_data['matricula'] = date("dmHis");
 		$student_data['cod_pfg'] = $this->input->post('pfg');
-		$student_data['cedula'] = $person_data['cedula'];
 		$student_data['cod_cohorte'] = 1;
 		
 
-		if (@$result = $this->Student->save($person_data, $student_data,$person_data['cedula'])) {
+		if (@$result = $this->Student->save($person_data, $student_data,$person_id)) {
 			if (is_bool($result)) {
 				if ($result) {
 					$response = array('status'=>true, 'messagge'=>'Se han actualizado los datos del estudiante satisfactoriamente!');
@@ -68,7 +71,6 @@ class Students extends Secure_Area {
 		}
 
 		echo json_encode($response);
-		// var_dump($student_data);
 	}
 
 	public function suggest(){

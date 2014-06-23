@@ -38,7 +38,11 @@ class Employees extends Secure_Area {
 	public function save($person_id = false){
 		$response = array('status'=>false, 'messagge'=>'Error al registrar al empleado');
 
-		$person_data['cedula'] = $this->input->post('cedula');
+		if ($this->input->post('cedula')) {
+			$person_data['cedula'] = $this->input->post('cedula');
+			$employee_data['cedula'] = $person_data['cedula'];
+		}
+		
 		$person_data['nombre'] = $this->input->post('nombre');
 		$person_data['apellido'] = $this->input->post('apellido');
 		$person_data['telefono'] = $this->input->post('telefono');
@@ -48,8 +52,7 @@ class Employees extends Secure_Area {
 		$employee_data['apodo'] = $this->input->post('apodo');
 		$employee_data['contrasena'] = md5($this->input->post('contrasena'));
 		$employee_data['cod_nivel'] = $this->input->post('nivel');
-		$employee_data['cedula'] = $person_data['cedula'];
-		$employee_data['eliminado'] = ( $this->input->post('estado') ) ? '0' : '1';
+		$employee_data['eliminado'] = ( $this->input->post('estado') ) ? '1': '0';
 
 		if (@$result = $this->Employee->save($person_data, $employee_data,$person_id)) {
 			if (is_bool($result)) {
