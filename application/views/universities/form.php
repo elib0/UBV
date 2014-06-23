@@ -4,19 +4,19 @@
 		<li>
 			<h3>Agregar Aldea</h3>
 			<div class="form-content">
-				<?php echo form_label('Nombre:', 'nombre', array('class'=>'required')).'<br>'.form_input('nombre', '$univercity->nombre', 'id="nombre"'); ?>
+				<?php echo form_label('Nombre:', 'nombre', array('class'=>'required')).'<br>'.form_input('nombre', $univercity->nombre, 'id="nombre"'); ?>
 				<br>
-				<?php echo form_label('Dirección:', 'direccion').'<br>'.form_textarea('direccion', '$univercity->direcion', 'id="direccion"'); ?>
+				<?php echo form_label('Dirección:', 'direccion').'<br>'.form_textarea('direccion', $univercity->direccion, 'id="direccion"'); ?>
 				<br>
-				<?php echo form_label('Coordinador:', 'coordinador', array('class'=>'required')).'<br>'.form_input('coordinador','', 'id="search-coordinador"'); ?>
+				<?php echo form_label('Coordinador:', 'coordinador', array('class'=>'required')).'<br>'.form_input('coordinador',$univercity->cedula_coordinador, 'id="search-coordinador"'); ?>
 				<br>
-				<?php echo form_label('Municipio:', 'municipio', array('class'=>'required')).'<br>'.form_dropdown('municipio', $municipios,'', 'id="search-municipios"'); ?>
+				<?php echo form_label('Municipio:', 'municipio', array('class'=>'required')).'<br>'.form_dropdown('municipio', $municipios,$univercity->cod_municipio, 'id="search-municipios"'); ?>
 			</div>
 		</li>
 		<li>
 			<?php echo form_label('Programa de formación de grado:', 'pfgs', array('class'=>'required')).'<br>'.form_input('pfgs', '', 'id="pfgs"'); ?>
 			<p>
-				Agrega los PFG pertenecientes a dicha aldea. Para separar PFG puedes usar comas (,) o Espacios. Ejemplo: Informática, Electricidad, Química.
+				Agrega los PFG pertenecientes a dicha aldea. Para separar PFG puedes usar comas (,). Ejemplo: Informática, Electricidad, Química.
 			</p>
 		</li>
 	</ul>

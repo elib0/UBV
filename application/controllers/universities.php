@@ -17,8 +17,13 @@ class Universities extends Secure_Area {
 		$this->load->view('universities/manage', $data);
 	}
 
-	public function view(){
+	public function view($cod_univercity = false){
 		$data['municipios'] = array();
+		if ($cod_univercity) {
+			$data['univercity'] =  $this->University->get_info($cod_univercity);
+		}else{
+			$data['univercity'] = (Object)array('nombre'=>'','direccion'=>'','cedula_coordinador'=>'', 'cod_municipio'=>'');
+		}
 		if ($query = $this->University->get_all_municipios()) {
 			foreach ($query->result() as $municipio) {
 				$data['municipios'][$municipio->cod_municipio] = $municipio->nombre_municipio;

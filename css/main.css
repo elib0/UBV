@@ -438,6 +438,12 @@ nav.main-menu > ul > li > ul > li:first-child {
 #wrapper section.request #stundet-info span {
   font-weight: normal;
 }
+#wrapper section.config-system ul li {
+  margin: 1.5em 0;
+}
+#wrapper section.config-system .form-control {
+  height: auto;
+}
 #wrapper.center {
   width: auto;
   max-width: 1060px;
