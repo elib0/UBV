@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50614
 File Encoding         : 65001
 
-Date: 2014-06-23 12:46:07
+Date: 2014-06-23 16:24:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,12 +27,12 @@ CREATE TABLE `aldea` (
   `cedula_coordinador` int(11) NOT NULL,
   PRIMARY KEY (`cod_aldea`),
   KEY `aldea_municipio` (`cod_municipio`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of aldea
 -- ----------------------------
-INSERT INTO `aldea` VALUES ('1', 'Aldea Universitaria Cunaguaro', 'Valencia', '7', '0');
+INSERT INTO `aldea` VALUES ('1', 'Aldea Universitaria Cunaguaro', 'Valencia', '7', '15999040');
 
 -- ----------------------------
 -- Table structure for `cohorte`
@@ -105,13 +105,12 @@ CREATE TABLE `empleado` (
   PRIMARY KEY (`cod_empleado`),
   KEY `empleado_persona` (`cedula`),
   KEY `empleado_nivel` (`cod_nivel`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of empleado
 -- ----------------------------
 INSERT INTO `empleado` VALUES ('1', '17681201', 'admin', '21232f297a57a5a743894a0e4a801fc3', '0', '0');
-INSERT INTO `empleado` VALUES ('2', '15999040', 'prueba', '21232f297a57a5a743894a0e4a801fc3', '2', '0');
 
 -- ----------------------------
 -- Table structure for `entidad_federal`
@@ -160,7 +159,7 @@ CREATE TABLE `estudiante` (
   `cedula` int(11) NOT NULL,
   `cod_pfg` int(4) NOT NULL,
   `cod_cohorte` int(11) NOT NULL,
-  PRIMARY KEY (`matricula`),
+  PRIMARY KEY (`cedula`),
   KEY `estudiante_persona` (`cedula`),
   KEY `estudiante_mencion` (`cod_pfg`),
   KEY `estudiante_cohorte` (`cod_cohorte`)
@@ -263,8 +262,7 @@ CREATE TABLE `persona` (
 -- ----------------------------
 -- Records of persona
 -- ----------------------------
-INSERT INTO `persona` VALUES ('17681201', 'Eli', 'Chavez', '0414-4720780', 'elijose.c@gmail.com', 'Trigal Norte', 'ninguna');
-INSERT INTO `persona` VALUES ('15999040', 'Prueba', 'Prueba', '', '', '', 'ninguna');
+INSERT INTO `persona` VALUES ('17681201', 'Yennifer', 'Vargas', '0414-4110780', 'yenni_var@gmail.com', 'Trigal Norte', 'ninguna');
 
 -- ----------------------------
 -- Table structure for `pfg`
@@ -277,7 +275,7 @@ CREATE TABLE `pfg` (
   `cod_aldea` int(4) DEFAULT NULL,
   PRIMARY KEY (`cod_pfg`),
   KEY `pfg_aldea` (`cod_aldea`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of pfg
