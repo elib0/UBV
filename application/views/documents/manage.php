@@ -9,7 +9,8 @@
 		</form>
 	</div>
 	<div class="documents-data">
-		<?php echo form_open('documents/save'); ?>
+		<?php echo form_open('documents/save', 'id="form-document"'); ?>
+		<input type="hidden" id="cedula" name="cedula" value="">
 		<div class="form-content">
 			<table class="tablesorter" width="100%">
 				<thead>
@@ -19,18 +20,19 @@
 					</tr>
 				</thead>
 				<tbody>
-				<?php foreach ($documents as $key => $document): ?>
+				<?php $i=1;foreach ($documents as $key => $document): ?>
 					<tr>
 					<?php 
-					echo '<td class="number-format">'.($key+1).'</td>';
+					echo '<td class="number-format">'.$i.'</td>';
 					echo "<td>$document</td>";
-					echo '<td class="number-format"><input type="checkbox" value="'.$key.'"></td>';
+					echo '<td class="number-format"><input id="'.$key.'" name="documents[]" type="checkbox" value="'.$key.'"></td>';
 					?>
 					</tr>
-				<?php endforeach ?>
+				<?php $i++; endforeach ?>
 				</tbody>
 			</table>
 			<input type="submit" value="Guardar" class="btn btn-default">
+			<?php echo anchor_popup('documents/printing/', 'Imprimir', array('class'=>'align-right btn btn-warning')) ?>
 		</div>
 		<?php echo form_close(); ?>
 	</div>
@@ -39,6 +41,10 @@
 <script>
 	$(function() {
 		$('.documents-data').hide();
+
+		$("#form-document").validity(function() {
+	        $("#search-student").require('La cédula del estudiante es obligatoria!');
+	    });
 		$('#search-student').select2({
 			placeholder: 'Cedula, Nombre o Apellido...',
 			minimumInputLength: 3,
@@ -62,8 +68,10 @@
 		}).change(function(val, added, removed){
 			if (val.removed) {
 				$('.documents-data').slideUp('fast');
+				$('cedula').val('');
 			}
 			if (val.added) {
+				$('#cedula').val(val.added.id);
 				$('#form-documents').ajaxSubmit({
 					dataType: 'json',
 					success: function(response){

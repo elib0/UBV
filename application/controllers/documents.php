@@ -14,7 +14,7 @@ class Documents extends Secure_Area {
 
 	public function index()
 	{
-		$data['documents'] = array(
+		$names = array(
 			'Verificación Académica',
 			'Carta o Constancia de Culminación del Trayecto Inicial',
 			'Constancia del cumplimiento del Servicio Comunitario',
@@ -28,6 +28,14 @@ class Documents extends Secure_Area {
 			'Autenticidad del Título de Bachiller',
 			'Notas de 1ero a 5to año'
 		);
+		$fields = $this->Document->get_documents();
+		$i = 0;
+		foreach ($fields as $field)
+		{
+			$data['documents'][$field]=$names[$i];
+			$i++;
+		}
+		
 		$this->load->view('documents/manage', $data);
 	}
 
@@ -43,7 +51,10 @@ class Documents extends Secure_Area {
 	}
 
 	public function save(){
-		
+		echo "<pre>";
+		echo $this->input->post('cedula');
+		print_r($this->input->post('documents'));
+		echo "</pre>";
 	}
 
 }

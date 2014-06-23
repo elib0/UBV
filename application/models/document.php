@@ -62,6 +62,12 @@ class Document extends CI_Model {
 		return $success;
 	}
 
+	function get_documents(){
+		$fields = $this->db->list_fields('documentos');
+		unset($fields[0]);
+		return $fields;
+	}
+
 }
 
 /* End of file document.php */
