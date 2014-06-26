@@ -6,21 +6,21 @@
 			<h3>Datos personales</h3>
 		</div>
 	<?php if (!$student->cedula): ?>
-		<li><?php echo form_label('Cédula de identidad', 'cedula', array('class'=>'required')).'<br>'.form_input('cedula', $student->cedula, 'id="cedula"'); ?></li>
+		<li><?php echo form_label('Cédula de identidad', 'cedula', array('class'=>'required')).'<br>'.form_input('cedula', $student->cedula, 'id="cedula" class="form-control"'); ?></li>
 	<?php endif ?>
 	</ul>
 	<ul>
-		<li><?php echo form_label('Nombres', 'nombre', array('class'=>'required')).'<br>'.form_input('nombre', $student->nombre, 'id="nombre"'); ?></li>
-		<li><?php echo form_label('Apellidos', 'apellido', array('class'=>'required')).'<br>'.form_input('apellido', $student->apellido, 'id="apellido"'); ?></li>
+		<li><?php echo form_label('Nombres', 'nombre', array('class'=>'required')).'<br>'.form_input('nombre', $student->nombre, 'id="nombre" class="form-control"'); ?></li>
+		<li><?php echo form_label('Apellidos', 'apellido', array('class'=>'required')).'<br>'.form_input('apellido', $student->apellido, 'id="apellido" class="form-control"'); ?></li>
 	</ul>
 	<br>
 	<ul>
-		<li><?php echo form_label('Teléfono', 'telefono').'<br>'.form_input('telefono', $student->telefono); ?></li>
-		<li><?php echo form_label('Correo Electronico', 'correo').'<br>'.form_input('correo', $student->email); ?></li>
+		<li><?php echo form_label('Teléfono', 'telefono').'<br>'.form_input('telefono', $student->telefono, 'class="form-control"'); ?></li>
+		<li><?php echo form_label('Correo Electronico', 'correo').'<br>'.form_input('correo', $student->email, 'class="form-control"'); ?></li>
 	</ul>
 	<br>
 	<ul>
-		<li><?php echo form_label('Dirección', 'direccion').'<br>'.form_textarea(array('name'=>'direccion', 'value'=>$student->direccion, 'cols'=>100, 'rows'=>3)); ?></li>
+		<li><?php echo form_label('Dirección', 'direccion').'<br>'.form_textarea(array('name'=>'direccion', 'value'=>$student->direccion, 'cols'=>100, 'rows'=>3, 'class'=>'form-control')); ?></li>
 	</ul>
 	<ul>
 		<div>

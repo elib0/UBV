@@ -4,9 +4,9 @@
 		<li>
 			<h3>Agregar Aldea</h3>
 			<div class="form-content">
-				<?php echo form_label('Nombre:', 'nombre', array('class'=>'required')).'<br>'.form_input('nombre', $univercity->nombre, 'id="nombre"'); ?>
+				<?php echo form_label('Nombre:', 'nombre', array('class'=>'required')).'<br>'.form_input('nombre', $univercity->nombre, 'id="nombre" class="form-control"'); ?>
 				<br>
-				<?php echo form_label('Dirección:', 'direccion').'<br>'.form_textarea('direccion', $univercity->direccion, 'id="direccion"'); ?>
+				<?php echo form_label('Dirección:', 'direccion').'<br>'.form_textarea(array('name'=>'direccion','value'=>$univercity->direccion,'id'=>'direccion','class'=>'form-control', 'rows'=>6)); ?>
 				<br>
 				<?php echo form_label('Coordinador:', 'coordinador', array('class'=>'required')).'<br>'.form_input('coordinador',$univercity->cedula_coordinador, 'id="search-coordinador"'); ?>
 				<br>

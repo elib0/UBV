@@ -25,6 +25,14 @@ $(function() {
 		$tooltip.remove();
 	});
 
+	$(window).scroll(function() {
+	    if ($(this).scrollTop() > 10) {
+	        $("footer").fadeOut('slow');
+	    } else {
+	        $("footer").fadeIn('fast');
+	    }
+	});
+
 	$.validity.setup({ outputMode:"label" });
 	$(".fancybox").fancybox({
 		type:'ajax',
@@ -46,7 +54,7 @@ function set_feedback(type, title, text, messageType, closeTb, reload, myButtons
 	closeTb = closeTb || false;
 	reload = reload || closeTb;
 
-	if (closeTb) { tb_remove();} //Cierra el ThinckBox
+	if (closeTb) { $.fancybox.close(); } //Cierra el Fancybox
 	//Agrega boton por defecto de cerrar(Aceptar)
 	myButtons.push(
 		{

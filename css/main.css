@@ -50,17 +50,6 @@ body.login {
 .required {
   color: #b90000;
 }
-.form-content {
-  *zoom: 1;
-}
-.form-content:before,
-.form-content:after {
-  content: '';
-  display: table;
-}
-.form-content:after {
-  clear: both;
-}
 .form-content ul {
   display: block;
   clear: both;
@@ -79,6 +68,18 @@ body.login {
 .form-content ul li {
   float: left;
   width: 50%;
+}
+.form-content .form-control {
+  width: 50%;
+  height: auto;
+  padding: 2px 12px;
+  font-size: 12px;
+}
+.form-content .form-control textarea.form-control {
+  width: 80%;
+}
+.form-content .form-control input[type=number].form-control {
+  width: 8%;
 }
 .form-content input[type=submit] {
   display: block;

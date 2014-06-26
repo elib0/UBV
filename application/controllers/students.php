@@ -55,7 +55,7 @@ class Students extends Secure_Area {
 		$person_data['email'] = $this->input->post('correo');
 		$person_data['direccion'] = $this->input->post('direccion');
 
-		$student_data['matricula'] = date("dmHis");
+		$student_data['matricula'] = uniqid(mt_rand(), TRUE);
 		$student_data['cod_pfg'] = $this->input->post('pfg');
 		$student_data['cod_cohorte'] = 1;
 		

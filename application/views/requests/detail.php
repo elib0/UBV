@@ -25,7 +25,7 @@
 		<br><br>Comentarios:<br>
 		<?php echo ($request->comentarios != '') ? $request->comentarios : 'Sin comentarios...' ; ?>
 	</div>
-	<?php echo anchor('#', 'Cerrar', 'class="align-right btn btn-default"'); ?>
+	<?php echo anchor('#', 'Cerrar', 'class="align-right btn btn-default" onclick="$.fancybox.close(true); return false;"'); ?>
 	<?php echo anchor_popup('requests/printing/'.$request->id, 'Imprimir', array('class'=>'align-right btn btn-warning')) ?>
 	<?php
 	if (!$request->status) {

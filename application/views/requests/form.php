@@ -30,13 +30,13 @@
 			<li><?php echo form_label('Nueva Aldea:', 'aldea_nueva', array('class'=>'required')).'<br>'.form_input('aldea_nueva', '', 'id="search-aldea"'); ?></li>
 			<li>
 			<?php elseif($type == 'nota'): ?>
-				<label for="semestre">Semestre Solicitado</label>
-				<input type="number" name="semestre" id="semestre" value="1" min="1" max="12">
+				<label for="semestre" class="required">Semestre Solicitado</label>
+				<input type="number" name="semestre" id="semestre" value="1" class="form-control">
 			</li>
 			<?php endif ?>
 		</ul>
 		<ul>
-			<li style=" width:100%"><?php echo form_label('Comentarios:', 'comentarios').'<br>'.form_textarea(array('name'=>'comentarios', 'cols'=>80, 'rows'=>3)); ?></li>
+			<li style=" width:100%"><?php echo form_label('Comentarios:', 'comentarios').'<br>'.form_textarea(array('name'=>'comentarios', 'cols'=>80, 'rows'=>6, 'class'=>'form-control')); ?></li>
 		</ul>
 		<p class="align-center">
 			Esta solicitud no es reversible, ni modificable una vez emitida.
@@ -53,7 +53,7 @@ $(function() {
 	$("#form-request").validity(function() {
         $("#search-student").require('La cédula del estudiante es obligatoria!');
         $('#search-aldea').require('La aldea es obligatoria!');
-        $('#semestre').require();
+        $('#semestre').match('integer').require().range(1,12);
     });
 
 	$('#search-student').select2({

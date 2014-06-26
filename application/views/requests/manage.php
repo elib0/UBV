@@ -36,7 +36,7 @@
 					<td class="number-format"><?php echo $value->fecha_solicitud ?></td>
 					<td id="<?php echo 'td-'.$value->id ?>" class="number-format"><?php echo $value->status ?></td>
 					<td class="number-format">
-					<?php echo anchor('requests/view/'.$value->id.'?height=320&width=530', 'Detalles', 'class="fancybox btn btn-info btn-xs"'); ?>
+					<?php echo anchor('requests/view/'.$value->id.'?height=350&width=530', 'Detalles', 'class="fancybox btn btn-info btn-xs"'); ?>
 					<?php echo anchor_popup('requests/printing/'.$value->id, 'Imprimir', array('class'=>'btn btn-warning btn-xs')) ?>
 					<?php echo anchor('requests/process/'.$value->id, 'Procesar', 'id="btn-process-request" class="btn btn-success btn-xs"'); ?>
 					</td>
@@ -75,7 +75,7 @@
 					<td><?php echo $value->aldea_nueva ?></td>
 					<td id="<?php echo 'td-'.$value->id ?>" class="number-format"><?php echo $value->status ?></td>
 					<td class="number-format">
-					<?php echo anchor('requests/view/'.$value->id.'?height=320&width=530', 'Detalles', 'class="fancybox btn btn-info btn-xs"'); ?>
+					<?php echo anchor('requests/view/'.$value->id.'?height=350&width=530', 'Detalles', 'class="fancybox btn btn-info btn-xs"'); ?>
 					<?php echo anchor_popup('requests/printing/'.$value->id, 'Imprimir', array('class'=>'btn btn-warning btn-xs')) ?>
 					<?php echo anchor('requests/process/'.$value->id, 'Procesar', 'id="btn-process-request" class="btn btn-success btn-xs"'); ?>
 					</td>
@@ -83,7 +83,7 @@
 				<?php endforeach ?>
 			<?php else: ?>
 				<tr>
-					<td colspan="5">No hay solicitudes de traslados en estos momentos...</td>
+					<td colspan="7">No hay solicitudes de traslados en estos momentos...</td>
 				</tr>
 			<?php endif ?>
 			</tbody>
@@ -110,7 +110,7 @@
 					<td class="number-format"><?php echo $value->fecha_solicitud ?></td>
 					<td id="<?php echo 'td-'.$value->id ?>" class="number-format"><?php echo $value->status ?></td>
 					<td class="number-format">
-					<?php echo anchor('requests/view/'.$value->id.'?height=320&width=530', 'Detalles', 'class="fancybox btn btn-info btn-xs"'); ?>
+					<?php echo anchor('requests/view/'.$value->id.'?height=350&width=530', 'Detalles', 'class="fancybox btn btn-info btn-xs"'); ?>
 					<?php echo anchor_popup('requests/printing/'.$value->id, 'Imprimir', array('class'=>'btn btn-warning btn-xs')) ?>
 					<?php echo anchor('requests/process/'.$value->id, 'Procesar', 'id="btn-process-request" id="btn-process-request" class="btn btn-success btn-xs"'); ?>
 					</td>
