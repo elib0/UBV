@@ -1,7 +1,6 @@
-$(function() {
-	$.validity.setup({ outputMode:"label" });
+$(function() {	
 	//All Title attributes (tooltips)
-	$('#wrapper, nav.user-menu, .logo > a').on('mouseenter','[title]',function(e){
+	$('#wrapper,nav.user-menu, .logo > a').on('mouseenter','[title]',function(e){
 		//mouse over (hover)
 		var title=this.title||$(this).data('title');
 		if(!title) return;
@@ -24,6 +23,16 @@ $(function() {
 		if(!$tooltip) return;
 		$(this).data('tooltip',null);
 		$tooltip.remove();
+	});
+
+	$.validity.setup({ outputMode:"label" });
+	$(".fancybox").fancybox({
+		type:'ajax',
+		autoSize : false,
+		beforeLoad : function() {                    
+            this.width = parseInt(this.href.match(/width=[0-9]+/i)[0].replace('width=',''));  
+            this.height = parseInt(this.href.match(/height=[0-9]+/i)[0].replace('height=',''));
+        }
 	});
 
 	showclock('#clock span');
@@ -64,7 +73,7 @@ function set_feedback(type, title, text, messageType, closeTb, reload, myButtons
         'closeByBackdrop': false,
         'closeByKeyboard': true,
         onhide: function(dialogRef){
-        	if (reload) { location.reload(); } //Recarga si se cierra el alert
+        	//if (reload) { location.reload(); } //Recarga si se cierra el alert
         },
         buttons: myButtons
 	};
