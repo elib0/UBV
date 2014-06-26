@@ -14,7 +14,7 @@
 			</div>
 		</li>
 		<li>
-			<?php echo form_label('Programa de formación de grado:', 'pfgs', array('class'=>'required')).'<br>'.form_input('pfgs', '', 'id="pfgs"'); ?>
+			<?php echo form_label('Programa de formación de grado:', 'pfgs', array('class'=>'required')).'<br>'.form_input('pfgs', $pfgs, 'id="pfgs"'); ?>
 			<p>
 				Agrega los PFG pertenecientes a dicha aldea. Para separar PFG puedes usar comas (,). Ejemplo: Informática, Electricidad, Química.
 			</p>
@@ -61,6 +61,15 @@
 	            results: function (data, page) {
 	                return { results: data };
 	            }
+			},
+			initSelection: function(element, callback){
+				var id=$(element).val();
+		        if (id!=="") {
+		            $.ajax('index.php/employees/suggest/2', {
+		            	dataType: "json",
+		                data: {term: id}
+		            }).done(function(data) { callback(data[0]); });
+		        }
 			}
 		});
 		$('#form-univercity').ajaxForm({

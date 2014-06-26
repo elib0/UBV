@@ -9,7 +9,7 @@
 		<ul>
 			<div>
 				<h3>Datos de el estudiante</h3>
-				<?php echo anchor('students/view?height=480&width=600', '+', 'title="Agregar Estudiante" class="thickbox btn btn-success btn-sm"'); ?>
+				<?php echo anchor('students/view?height=480&width=650', '+', 'title="Agregar Estudiante" class="fancybox btn btn-success btn-sm"'); ?>
 			</div>
 			<li>
 				<?php echo form_label('Cedula Estudiante', 'buscar', array('class'=>'required')).'<br>'.form_input('cedula', '', 'id="search-student"'); ?>
@@ -61,6 +61,7 @@ $(function() {
 		minimumInputLength: 3,
 		maximumInputLength: 11,
 		allowClear: true,
+		width: '80%',
 		formatSelection: function (item) { return item.id; },
 		// formatResult: function (item) { return item.text; },
 		ajax:{
@@ -98,10 +99,11 @@ $(function() {
 	});
 
 	$('#search-aldea').select2({
-		placeholder: 'Nombre, Municipio',
+		placeholder: 'Nombre de la aldea o Municipio a la cual pertenece',
 		minimumInputLength: 5,
 		maximumInputLength: 11,
 		allowClear: true,
+		width: '100%',
 		formatSelection: function (item) { return item.aldea; },
 		ajax:{
 			url: 'index.php/universities/suggest',

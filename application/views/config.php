@@ -14,9 +14,14 @@
 			?>
 		</li>
 		<li>
+			<h3>Cohorte</h3>
+			<?php echo anchor('cohort?height=600&width=900', 'Cohortes Anteriores', 'title="Modificar o Consultar Cohortes Anteriores" class="fancybox btn btn-primary btn-sm"'); ?>
+			<?php echo anchor('cohort/view?height=450&width=700', '+', 'title="Agregar Cohorte en Curso" class="fancybox btn btn-success btn-sm"'); ?>
+		</li>
+		<li>
 			<h3>Administración de Aldeas</h3>
-			<?php echo anchor('universities?height=600&width=900', 'Aldeas', 'title="Modificar y Administras las Aldeas Universitarias" class="thickbox btn btn-primary btn-sm"'); ?>
-			<?php echo anchor('universities/view?height=450&width=700', '+', 'title="Agregar Aldea Nueva" class="thickbox btn btn-success btn-sm"'); ?>
+			<?php echo anchor('universities?height=600&width=900', 'Aldeas', 'title="Modificar y Administras las Aldeas Universitarias" class="fancybox btn btn-primary btn-sm"'); ?>
+			<?php echo anchor('universities/view?height=450&width=700', '+', 'title="Agregar Aldea Nueva" class="fancybox btn btn-success btn-sm"'); ?>
 		</li>
 		<li>
 			<h3>Usuarios del Sistema</h3>

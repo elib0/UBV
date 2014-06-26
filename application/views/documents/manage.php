@@ -50,6 +50,7 @@
 			minimumInputLength: 3,
 			maximumInputLength: 11,
 			allowClear: true,
+			width: '50%',
 			formatSelection: function (item) { return item.id; },
 			// formatResult: function (item) { return item.text; },
 			ajax:{

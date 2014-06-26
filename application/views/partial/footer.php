@@ -12,9 +12,9 @@
     <!--<![endif]-->
     <script src="<?php echo base_url(); ?>js/main.js"></script>
     <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
-    <script src="<?php echo base_url(); ?>js/thickbox.js"></script>
     <!--<script src="<?php echo base_url(); ?>js/run_prettify.js"></script>-->
     <script src="<?php echo base_url(); ?>js/plugins.js"></script>
     <script src="<?php echo base_url(); ?>js/jquery.tablesorter.min.js"></script>
+    <script src="<?php echo base_url(); ?>js/fancybox.min.js?v=2.1.5"></script>
   </body>
 </html>

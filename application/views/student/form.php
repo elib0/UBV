@@ -83,16 +83,19 @@
 				var title = 'Error General';
 				var type = 'alert';
 				var messaggeType = 'dager';
-				var closeTb = reload = false;
+				var closeTb = false;
+				var reload = closeTb;
 
 				if (response.status){
 					title = '';
 					type = false;
 					messaggeType = 'success';
-					closeTb = reload = true;
-					if (response.person_id) {
-						//$('#search-student').select2('val',response.person_id,true);
+					closeTb = true;
+					reload = closeTb;
+
+					if ( $('section.request').length > 0 ) {
 						reload = false;
+						$('#search-student').select2('val',response.person_id,true);
 					};
 					
 				}

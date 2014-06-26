@@ -13,16 +13,22 @@ class Universities extends Secure_Area {
 
 	public function index()
 	{
-		$data['aldeas'] = array(); 
+		$data['univercities'] = $this->University->get_all_aldeas();
 		$this->load->view('universities/manage', $data);
 	}
 
 	public function view($cod_univercity = false){
 		$data['municipios'] = array();
+		$data['pfgs'] = '';
 		if ($cod_univercity) {
-			$data['univercity'] =  $this->University->get_info($cod_univercity);
+			$data['univercity'] =  $this->University->get_aldea_info($cod_univercity);
+			$pfgs = $this->University->get_aldea_pfgs($cod_univercity);
+			foreach ($pfgs->result() as $pfg) {
+				$data['pfgs'] .= $pfg->nombre.',';
+			}
+			$data['pfgs'] = trim($data['pfgs'],',');
 		}else{
-			$data['univercity'] = (Object)array('nombre'=>'','direccion'=>'','cedula_coordinador'=>'', 'cod_municipio'=>'');
+			$data['univercity'] = (Object)array('nombre'=>'','direccion'=>'','cedula_coordinador'=>'', 'cod_municipio'=>'', 'pfgs'=>'');
 		}
 		if ($query = $this->University->get_all_municipios()) {
 			foreach ($query->result() as $municipio) {
