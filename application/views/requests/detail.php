@@ -11,10 +11,10 @@
 	<div>
 		<h3>Datos de la Solicitud</h3>
 		Requerimiento: <?php echo ucwords($request->tipo) ?><br>
-		Fecha de Solicitud: <?php echo date('d F \d\e\l Y.', mysql_to_unix($request->fecha_solicitud)) ?><br>
+		Fecha de Solicitud: <?php echo date('d F \d\e\l Y. H:m:s', mysql_to_unix($request->fecha_solicitud)) ?><br>
 		Fecha de Entrega:
 		<?php 
-		echo ($request->fecha_retiro) ? date('d F \d\e\l Y.', mysql_to_unix($request->fecha_retiro)) : 'Sin entregar'; 
+		echo ($request->fecha_retiro) ? date('d F \d\e\l Y. H:m:s', mysql_to_unix($request->fecha_retiro)) : 'Sin entregar'; 
 		?><br>
 		<?php if ($request->tipo == 'traslado'): ?>
 		Traslado de: <?php echo $request->aldea_anterior ?>
