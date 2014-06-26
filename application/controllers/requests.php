@@ -103,6 +103,20 @@ class Requests extends Secure_Area {
 		echo json_encode($response);
 	}
 
+	public function search($person_id=false){
+		$student_id = $this->input->get('cedula');
+		foreach ($this->request_types as $value) {
+			$data[$value] = array();
+		}
+		$requests = $this->Request->search($student_id);
+
+		if ($requests->num_row() > 0) {
+			foreach ($requests->result() as $request) {
+				$data[$request->tipo][] = $request;
+			}
+		}
+	}
+
 }
 
 /* End of file requests.php */

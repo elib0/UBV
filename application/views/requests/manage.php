@@ -3,13 +3,11 @@
 	<h1><?php echo $title ?></h1>
 	<hr>
 	<?php
-	echo form_open('request/search', '');
 	echo form_label('Buscar estudiante:', 'buscar', array('class'=>'required')).form_input('cedula', '', 'id="search-student"');
 	?>
 	<div class="align-right">
 		Total Solicitudes: <span id="num-request"><?php echo $num_solicitudes ?></span>
 	</div>
-	</form>
 	<div id="stundet-info">
 		Matricula #:<span id="student-matricula"></span><br>
 		Nombres y Apellidos:<span id="student-name"></span><br>
@@ -157,19 +155,17 @@
 	        }
 		}
 	}).change(function(val, added, removed){
-		if (val.removed) {
-			$('#stundet-info').slideUp('fast',function(){
-				$('footer').fadeIn('400');
-			});
-		}
-		if (val.added) {
-			$('#student-matricula').text(val.added.student_cod);
-			$('#student-name').text(val.added.text);
-			$('#student-aldea').text(val.added.aldea.nombre);
-			$('#stundet-info').slideDown('slow', function(){
-				$('footer').fadeOut('400');
-			});
-		}
+		console.log(val.added);
+		$.ajax({
+			url: 'index.php/requests/search',
+			type: 'GET',
+			dataType: 'json',
+			data: {student_id: val.added.student_id},
+			success: function(response){
+				
+			}
+		});
+		
 	});
 
 	$('body').on('click', '#btn-process-request', function() {
