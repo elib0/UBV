@@ -16,7 +16,7 @@
 		<li>
 			<h3>Cohorte</h3>
 			<?php echo anchor('cohort?height=600&width=900', 'Cohortes Anteriores', 'title="Modificar o Consultar Cohortes Anteriores" class="fancybox btn btn-primary btn-sm"'); ?>
-			<?php echo anchor('cohort/view?height=450&width=700', '+', 'title="Agregar Cohorte en Curso" class="fancybox btn btn-success btn-sm"'); ?>
+			<?php echo anchor('cohort/view?height=300&width=400', '+', 'title="Agregar Cohorte en Curso" class="fancybox btn btn-success btn-sm"'); ?>
 		</li>
 		<li>
 			<h3>Administración de Aldeas</h3>
