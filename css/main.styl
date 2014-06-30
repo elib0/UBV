@@ -206,6 +206,9 @@ nav.main-menu
         background-color white
         border-radius 5px
         padding 1em
+        //Elementos ocultos por defecto
+        .documents-data, #aldea, #stundet-info,#btn-print-document
+            display none
         & > h1
             color:#FFF;
             font-weight:bold
@@ -319,6 +322,11 @@ nav.main-menu
         &.manage-documents
             .table-options
                 border-bottom 1px solid #CCC
+            #stundet-info
+                text-align: center;
+                width: 90%;
+                margin: 0 auto;
+                background-color: #428bca;
         &.request
             #stundet-info
                 background-color: #47A447;

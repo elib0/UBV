@@ -51,10 +51,27 @@ class Documents extends Secure_Area {
 	}
 
 	public function save(){
-		echo "<pre>";
-		echo $this->input->post('cedula');
-		print_r($this->input->post('documents'));
-		echo "</pre>";
+		$response = array('status'=>FALSE, 'messagge'=>'No a sido posible actualizar los recaudo!');
+		$documents = $this->input->post('documents');
+		$document_data = array();
+		if ($documents) {
+			$document_data['matricula'] = $this->Student->get_info( $this->input->post('cedula') )->matricula;
+			foreach ($documents as $value) {
+				$document_data[$value] = 1;
+			}
+		}
+
+		if (@$result = $this->Document->save($document_data,$document_data['matricula'])) {
+			if (is_bool($result)) {
+				if ($result) {
+					$response = array('status'=>TRUE, 'messagge'=>'Actualización de recaudo terminada!');
+				}
+			}elseif ($result > 0) {
+				$response = array('status'=>TRUE, 'messagge'=>'Recaudos Registrados satisfactoriamente!');
+			}
+		}
+
+		die( json_encode($response) );
 	}
 
 }

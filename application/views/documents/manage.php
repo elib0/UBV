@@ -8,6 +8,14 @@
 		<?php echo form_label('Por siguientes criterios: ', 'buscar', array('class'=>'required')).form_input('cedula', '', 'id="search-student"'); ?>
 		</form>
 	</div>
+	<div id="stundet-info">
+		Matricula #: <span id="student-matricula">.</span>.<br>
+		Nombres y Apellidos: <span id="student-name"></span>.<br>
+		PFG: <span id="student-pfg"></span>.<br>
+		Aldea Actual: <span id="student-aldea"></span>.<br>
+		Fecha de Emisión: <span><?php echo date('d/m/Y') ?></span>.
+		<input type="hidden" id="aldea_actual" name="aldea_actual" value="">
+	</div>
 	<div class="documents-data">
 		<?php echo form_open('documents/save', 'id="form-document"'); ?>
 		<input type="hidden" id="cedula" name="cedula" value="">
@@ -31,8 +39,8 @@
 				<?php $i++; endforeach ?>
 				</tbody>
 			</table>
-			<input type="submit" value="Guardar" class="btn btn-default">
-			<?php echo anchor_popup('documents/printing/', 'Imprimir', array('class'=>'align-right btn btn-warning')) ?>
+			<input type="submit" value="Guardar" class="btn btn-default align-right">
+			<?php echo anchor_popup('documents/printing/', 'Imprimir', array('class'=>'align-right btn btn-warning', 'id'=>'btn-print-document')) ?>
 		</div>
 		<?php echo form_close(); ?>
 	</div>
@@ -40,8 +48,6 @@
 <?php $this->load->view('partial/footer'); ?>
 <script>
 	$(function() {
-		$('.documents-data').hide();
-
 		$("#form-document").validity(function() {
 	        $("#search-student").require('La cédula del estudiante es obligatoria!');
 	    });
@@ -52,7 +58,6 @@
 			allowClear: true,
 			width: '50%',
 			formatSelection: function (item) { return item.id; },
-			// formatResult: function (item) { return item.text; },
 			ajax:{
 				url: 'index.php/students/suggest',
 				dataType: 'json',
@@ -68,18 +73,49 @@
 			}
 		}).change(function(val, added, removed){
 			if (val.removed) {
+				$('input:checked').removeAttr('checked');
+				$('#stundet-info').slideUp('fast');
 				$('.documents-data').slideUp('fast');
-				$('cedula').val('');
 			}
 			if (val.added) {
+				$('#student-matricula').text(val.added.student_cod);
+				$('#student-name').text(val.added.text);
+				$('#student-pfg').text(val.added.pfg.nombre);
+				$('#student-aldea').text(val.added.aldea.nombre);
+
 				$('#cedula').val(val.added.id);
 				$('#form-documents').ajaxSubmit({
 					dataType: 'json',
 					success: function(response){
-							$('.documents-data').slideDown('fast');
-							console.log(response);
+						$('.documents-data').slideDown('slow');
+						console.log(response);
+						for (var i in response) {
+							if(response[i] == 1){
+								$('#'+i).attr('checked','checked');
+							}
 						}
+					}
 				});
+
+				//Mostramos
+				$('#stundet-info').slideDown('slow');
+			}
+		});
+
+		$('#form-document').ajaxForm({
+			dataType: 'json',
+			success: function(response){
+				var title = 'Error General';
+				var type = 'alert';
+				var messaggeType = 'dager';
+				if (response.status){
+					title = '';
+					type = false;
+					messaggeType = 'primary';
+
+					$('#btn-print-document').fadeIn('fast');
+				}
+				set_feedback(type, title, response.messagge, messaggeType, false, false);
 			}
 		});
 	});

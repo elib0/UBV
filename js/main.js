@@ -52,7 +52,7 @@ function set_feedback(type, title, text, messageType, closeTb, reload, myButtons
 {
 	myButtons = myButtons || new Array();
 	closeTb = closeTb || false;
-	reload = reload || closeTb;
+	reload = reload || false;
 
 	if (closeTb) { $.fancybox.close(); } //Cierra el Fancybox
 	//Agrega boton por defecto de cerrar(Aceptar)
@@ -81,7 +81,7 @@ function set_feedback(type, title, text, messageType, closeTb, reload, myButtons
         'closeByBackdrop': false,
         'closeByKeyboard': true,
         onhide: function(dialogRef){
-        	//if (reload) { location.reload(); } //Recarga si se cierra el alert
+        	if (reload) { location.reload(); } //Recarga si se cierra el alert
         },
         buttons: myButtons
 	};

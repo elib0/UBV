@@ -277,6 +277,12 @@ nav.main-menu > ul > li > ul > li:first-child {
   border-radius: 5px;
   padding: 1em;
 }
+#wrapper section .documents-data,
+#wrapper section #aldea,
+#wrapper section #stundet-info,
+#wrapper section #btn-print-document {
+  display: none;
+}
 #wrapper section > h1 {
   color: #fff;
   font-weight: bold;
@@ -427,6 +433,12 @@ nav.main-menu > ul > li > ul > li:first-child {
 }
 #wrapper section.manage-documents .table-options {
   border-bottom: 1px solid #ccc;
+}
+#wrapper section.manage-documents #stundet-info {
+  text-align: center;
+  width: 90%;
+  margin: 0 auto;
+  background-color: #428bca;
 }
 #wrapper section.request #stundet-info {
   background-color: #47a447;

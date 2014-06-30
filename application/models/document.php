@@ -13,6 +13,7 @@ class Document extends CI_Model {
 	{
 		$this->db->from('documentos');
 		$this->db->where('matricula',$student_id);
+		$this->db->limit(1);
 		$query = $this->db->get();
 
 		return ($query->num_rows()==1);
@@ -47,14 +48,15 @@ class Document extends CI_Model {
 	{
 		$success=FALSE;
 
-		if ( !$student_id || !$this->exists($student_id) )
+		if ( !$this->exists($student_id) )
 		{
-			if( $this->db->insert('documentos',$employee_data) ) {
-				$success = $idaux;
+			if( $this->db->insert('documentos',$document_data) ) {
+				$success = 1;
 			}
 		}else{
+			$this->db->set($document_data);
 			$this->db->where('matricula', $student_id);
-			if ($this->db->update('documentos',$employee_data)) {
+			if ($this->db->update('documentos')) {
 				$success = TRUE;
 			}
 		}
