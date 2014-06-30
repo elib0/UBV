@@ -17,6 +17,7 @@
 			<li id="stundet-info">
 				Matricula #: <span id="student-matricula">.</span>.<br>
 				Nombres y Apellidos: <span id="student-name"></span>.<br>
+				PFG: <span id="student-pfg"></span>.<br>
 				Aldea Actual: <span id="student-aldea"></span>.<br>
 				Fecha de Emisión: <span><?php echo date('d/m/Y') ?></span>.
 				<input type="hidden" id="aldea_actual" name="aldea_actual" value="">
@@ -27,7 +28,10 @@
 				<h3>Datos de la solicitud</h3>
 			</div>
 			<?php if ($type == 'traslado'): ?>
-			<li><?php echo form_label('Nueva Aldea:', 'aldea_nueva', array('class'=>'required')).'<br>'.form_input('aldea_nueva', '', 'id="search-aldea"'); ?></li>
+			<li>
+				<?php echo form_label('Aldea Nueva:', 'aldea_nueva', array('class'=>'required')).'<br>'.form_input('aldea_nueva', '', 'id="search-aldea" placeholder="Debes seleccionar un estudiante primero..." disabled="disabled"'); ?>
+				<p>El traslado a otra aldea solo se hará previamente habiendo solicitado las notas, Y unicamente a aldeas que dicten el mismo PFG que cursa el estudiante.</p>
+			</li>
 			<li>
 			<?php elseif($type == 'nota'): ?>
 				<label for="semestre" class="required">Semestre Solicitado</label>
@@ -48,22 +52,19 @@
 <?php $this->load->view('partial/footer'); ?>
 <script type="text/javascript">
 $(function() {
-	$('#stundet-info').hide();
-	
 	$("#form-request").validity(function() {
         $("#search-student").require('La cédula del estudiante es obligatoria!');
-        $('#search-aldea').require('La aldea es obligatoria!');
-        $('#semestre').match('integer').require().range(1,12);
+        $('#search-aldea').require('La aldea nueva es obligatoria!');
+        $('#semestre').match('integer').require().range(1,10);
     });
 
 	$('#search-student').select2({
 		placeholder: 'Cedula, Nombre o Apellido...',
-		minimumInputLength: 3,
+		minimumInputLength: 4,
 		maximumInputLength: 11,
 		allowClear: true,
 		width: '80%',
 		formatSelection: function (item) { return item.id; },
-		// formatResult: function (item) { return item.text; },
 		ajax:{
 			url: 'index.php/students/suggest',
 			dataType: 'json',
@@ -89,36 +90,37 @@ $(function() {
 	}).change(function(val, added, removed){
 		if (val.removed) {
 			$('#stundet-info').slideUp('fast');
+			$("#search-aldea").attr('disabled', 'disabled').select2("destroy").val('');
 		}
 		if (val.added) {
 			$('#student-matricula').text(val.added.student_cod);
 			$('#student-name').text(val.added.text);
+			$('#student-pfg').text(val.added.pfg.nombre);
 			$('#student-aldea').text(val.added.aldea.nombre);
 			$('#stundet-info').slideDown('slow');
+
+			$.ajax({
+				url: 'index.php/universities/possible_changes',
+				type: 'GET',
+				dataType: 'json',
+				data: {student: val.added.student_cod,pfg: val.added.pfg.nombre},
+				success: function(response){
+					// console.table(response);
+					if (response) {
+						$('#search-aldea').attr('placeholder', 'Posibles Cambios...').removeAttr('disabled')
+						.select2({
+							formatSelection: function (item) { return item.text; },
+							data: response,
+							allowClear: true,
+							width: '100%'
+						});
+					}
+				}
+			});
+			
 		}
 	});
 
-	$('#search-aldea').select2({
-		placeholder: 'Nombre de la aldea o Municipio a la cual pertenece',
-		minimumInputLength: 5,
-		maximumInputLength: 11,
-		allowClear: true,
-		width: '100%',
-		formatSelection: function (item) { return item.aldea; },
-		ajax:{
-			url: 'index.php/universities/suggest',
-			dataType: 'json',
-			quietMillis: 100,
-			data: function (term, page) {
-                return {
-                    term: term,
-                };
-            },
-            results: function (data, page) {
-                return { results: data };
-            }
-		}
-	});
 	$('#form-request').ajaxForm({
 		dataType: 'json',
 		success: function(response){
@@ -129,6 +131,13 @@ $(function() {
 				title = '';
 				type = false;
 				messaggeType = 'primary';
+				// $.fancybox.open([{
+				// 	type: 'ajax',
+				// 	href: 'index.php/requests/view/'+response.request_id,
+				// 	autoSize : false,
+				// 	width: '530',
+				// 	height: '350'
+				// }]);
 			}
 			set_feedback(type, title, response.messagge, messaggeType, false, false);
 		}

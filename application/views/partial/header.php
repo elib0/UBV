@@ -30,7 +30,7 @@
         </p>
       </div>
     <![endif]-->
-    <div class=".message"><?php echo $system_message; ?></div>
+    <div class=".message"><?php echo $system_message ?></div>
     <?php if ($show_menu): ?>
     <nav class="main-menu">
       <ul>
@@ -57,7 +57,7 @@
       <div class="logo"><a href="index.php"><img src="images/logo.png" title="Ir al inicio" alt="" width="78px"></a></div>
       <nav class="user-menu">
         <ul>
-          <li class="session-user"><h5>Usuario: <?php echo anchor('employees/view/'.$user_info->cedula.'?height=550&width=800', $user_info->nombre.' '.$user_info->apellido, 'title="Perfil de Usuario" class="thickbox"'); ?></h5></li>
+          <li class="session-user"><h5>Usuario: <?php echo anchor('employees/view/'.$user_info->cedula.'?height=500&width=650', $user_info->nombre.' '.$user_info->apellido, 'title="Perfil de Usuario" class="fancybox"'); ?></h5></li>
           <li class="logout"><?php echo anchor('logout','Salir', 'title="Salir del Sistema"'); ?></li>
         </ul>
       </nav>

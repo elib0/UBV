@@ -38,7 +38,7 @@
 		<?php endforeach ?>
 		<?php else: ?>
 			<tr>
-				<td colspan="5">No hay estudiantes registrados actualmente</td>
+				<td colspan="6">No hay estudiantes registrados actualmente</td>
 			</tr>	
 		<?php endif ?>
 		</tbody>
@@ -60,7 +60,6 @@
 			maximumInputLength: 11,
 			allowClear: true,
 			formatSelection: function (item) { return item.id; },
-			// formatResult: function (item) { return item.text; },
 			ajax:{
 				url: 'index.php/students/suggest',
 				dataType: 'json',
@@ -71,7 +70,6 @@
 	                };
 	            },
 	            results: function (data, page) {
-	            	console.log(data);
 	                return { results: data };
 	            }
 			}

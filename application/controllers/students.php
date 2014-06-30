@@ -55,7 +55,8 @@ class Students extends Secure_Area {
 		$person_data['email'] = $this->input->post('correo');
 		$person_data['direccion'] = $this->input->post('direccion');
 
-		$student_data['matricula'] = uniqid(mt_rand(), TRUE);
+		//$student_data['matricula'] = uniqid(mt_rand(), TRUE);
+		$student_data['matricula'] = date('jnYgis');
 		$student_data['cod_pfg'] = $this->input->post('pfg');
 		$student_data['cod_cohorte'] = 1;
 		
@@ -79,7 +80,13 @@ class Students extends Secure_Area {
 
 		if ($students) {
 			foreach ($students->result() as $row) {
-				$result[] = array('id'=>$row->cedula, 'text'=>$row->apellido.' '.$row->nombre, 'student_cod'=>$row->matricula, 'aldea'=> array('cod'=>$row->cod_aldea, 'nombre'=>$row->aldea));
+				$result[] = array(
+					'id'=>$row->cedula,
+					'text'=>$row->apellido.' '.$row->nombre,
+					'student_cod'=>$row->matricula,
+					'pfg'=> array('cod'=>$row->cod_pfg, 'nombre'=>$row->pfg),
+					'aldea'=> array('cod'=>$row->cod_aldea, 'nombre'=>$row->aldea)
+				);
 			}
 		}
 

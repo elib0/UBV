@@ -23,7 +23,7 @@
 		<li><?php echo form_label('Dirección', 'direccion', array('class'=>'required')).'<br>'.form_textarea(array('name'=>'direccion', 'value'=>$employee->direccion, 'cols'=>100, 'rows'=>3, 'id'=>"direccion", 'class'=>"form-control")); ?></li>
 	</ul>
 	<br>
-	<div><?php echo form_label('Estado:', 'estado').form_checkbox('estado', '0', !(boolean)$employee->eliminado); ?></div>
+	<div><?php echo form_label('Activo:', 'estado').form_checkbox('estado', '0', !(boolean)$employee->eliminado); ?></div>
 	<ul>
 		<div>
 			<h3>Datos de Empleado</h3>
@@ -49,7 +49,7 @@
 	        // $("#recontrasena").match($('#contrasena').val());
 	        $('#cedula').match('integer').minLength(3).maxLength(9);
 	        $('#nombre, #apellido').minLength(3).maxLength(20);
-	        $('#email').match('email');
+	        $('#email').match('email').maxLength(60);
 	        $('#apodo').minLength(4).maxLength(10);
 	    });
 

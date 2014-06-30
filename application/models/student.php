@@ -80,6 +80,17 @@ class Student extends Person {
 		return FALSE;
 	}
 
+	function can_transfer($student_id=false){
+		$this->db->from('solicitud');
+		$this->con->join('estudiante', 'estudiante.matricula = solicitud.matricula');
+		$this->db->where('solicitud.tipo', 'nota');
+		$this->db->where('solicitud.status', 1);
+		$this->db->where('estudiante.matricula', $student_id);
+		$query = $this->db->get();
+
+		return ($query->num_rows() > 0);
+	}
+
 	function save(&$person_data, &$student_data,$person_id=false)
 	{
 		$success=FALSE;

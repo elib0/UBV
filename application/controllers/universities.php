@@ -51,13 +51,28 @@ class Universities extends Secure_Area {
 		die(json_encode($result));
 	}
 
+	public function possible_changes(){
+
+
+		$pfgs = $this->University->search_pfg($this->input->get('pfg'), 'pfg.nombre');
+		$result = array();
+
+		if ($pfgs) {
+			foreach ($pfgs->result() as $row) {
+				$result[] = array('id'=>$row->cod_pfg, 'text'=>$row->nombre_aldea);
+			}
+		}
+
+		die(json_encode($result));
+	}
+
 	public function suggest_pfg(){
 		$pfgs = $this->University->search_pfg($this->input->get('term'));
 		$result = array();
 
 		if ($pfgs) {
 			foreach ($pfgs->result() as $row) {
-				$result[] = array('id'=>$row->cod_pfg, 'text'=>$row->nombre, 'aldea'=>$row->nombre_aldea);
+				$result[] = array('id'=>$row->cod_pfg, 'text'=>$row->nombre, 'aldea'=>array('id'=>$row->cod_aldea, 'nombre'=>$row->nombre_aldea));
 			}
 		}
 

@@ -54,10 +54,18 @@ class Requests extends Secure_Area {
 
 	public function process($request_id = 0){
 		$response = array('status'=>false, 'messagge'=>'Imposible procesar la solicitud!');
+		
 
 		if ($this->input->is_ajax_request()) {
 			$request_data = array('status'=>1, 'fecha_retiro'=>date('Y-m-d H:i:s'));
 			if ($result = $this->Request->save($request_data,$request_id)) {
+				$request = $this->Request->get_info($request_id);
+
+				//Cambios Especiales de solicitudes
+				if ($request->tipo == 'traslado') {
+					$student_data = array('cod_pfg'=>$request->aldea_nueva);
+				}			
+
 				$response = array('status'=>true, 'messagge'=>'Su solicitud fue procesada!', 'id'=>$request_id);
 			}
 		}
@@ -84,11 +92,16 @@ class Requests extends Secure_Area {
 	public function save(){
 		$response = array('status'=>FALSE, 'messagge'=>'Hubo un problema con la solicitud, Porfavor Inténtelo de nuevo!');
 
+		$student_data = $this->Student->get_info($this->input->post('cedula'));
+
 		$request_data['tipo'] = $this->input->post('tipo');
-		$request_data['matricula'] = $this->Student->get_info($this->input->post('cedula'))->matricula;
+		$request_data['matricula'] = $student_data->matricula;
 		$request_data['fecha_solicitud'] = date('Y-m-d H:i:s');
 		$request_data['semestre_solicitado'] = $this->input->post('semestre');
-		$request_data['aldea_nueva'] = $this->input->post('aldea_nueva');
+		if ($request_data['tipo'] == 'traslado') {
+			$request_data['aldea_anterior'] = $student_data->cod_pfg;
+			$request_data['aldea_nueva'] = $this->input->post('aldea_nueva');
+		}
 		$request_data['comentarios'] = $this->input->post('comentarios');
 		if (@$result = $this->Request->save($request_data,$request_id)) {
 			if (is_bool($result)) {
@@ -96,7 +109,7 @@ class Requests extends Secure_Area {
 					$response = array('status'=>TRUE, 'messagge'=>'Se ha actualizado la solicitud!');
 				}
 			}elseif ($result > 0) {
-				$response = array('status'=>TRUE, 'messagge'=>'Su solicitud a sido procesada satisfactoriamente!');
+				$response = array('status'=>TRUE, 'messagge'=>'Su solicitud a sido procesada satisfactoriamente!', 'request_id'=>$result);
 			}
 		}
 

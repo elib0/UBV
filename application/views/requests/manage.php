@@ -125,7 +125,6 @@
 </section>
 <?php $this->load->view('partial/footer'); ?>
 <script>
-	$('#stundet-info').hide();
 	$('#search-student').select2({
 		placeholder: 'Cedula, Nombre o Apellido...',
 		minimumInputLength: 3,

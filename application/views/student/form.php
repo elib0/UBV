@@ -35,8 +35,6 @@
 <?php echo form_close(); ?>
 <script type="text/javascript">
 	$(function() {
-		$('#aldea').hide();
-
 		$("#form-student").validity(function() {
 	        $("#cedula, #nombre, #apellido, #search-pfg").require();
 	        $('#cedula').match('integer').minLength(3).maxLength(9);
@@ -68,13 +66,13 @@
 		            	dataType: "json",
 		                data: {term: id}
 		            }).done(function(data) { 
-		            	$('#aldea').text(data[0].aldea).show();
+		            	$('#aldea').text(data[0].aldea.nombre).show();
 		            	callback(data[0]);
 		            });
 		        }
 			}
 		}).on('select2-highlight', function(e){
-			$('#aldea').text(e.choice.aldea).fadeOut('fast').fadeIn('slow');
+			$('#aldea').text(e.choice.aldea.nombre).fadeOut('fast').fadeIn('slow');
 		});
 
 		$('#form-student').ajaxForm({
@@ -84,14 +82,14 @@
 				var type = 'alert';
 				var messaggeType = 'dager';
 				var closeTb = false;
-				var reload = closeTb;
+				var reload = false;
 
 				if (response.status){
 					title = '';
 					type = false;
 					messaggeType = 'success';
 					closeTb = true;
-					reload = closeTb;
+					reload = true;
 
 					if ( $('section.request').length > 0 ) {
 						reload = false;
