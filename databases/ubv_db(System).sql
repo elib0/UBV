@@ -10,13 +10,13 @@ Target Server Type    : MYSQL
 Target Server Version : 50614
 File Encoding         : 65001
 
-Date: 2014-06-23 16:24:53
+Date: 2014-06-30 21:58:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `aldea`
+-- Table structure for aldea
 -- ----------------------------
 DROP TABLE IF EXISTS `aldea`;
 CREATE TABLE `aldea` (
@@ -27,32 +27,37 @@ CREATE TABLE `aldea` (
   `cedula_coordinador` int(11) NOT NULL,
   PRIMARY KEY (`cod_aldea`),
   KEY `aldea_municipio` (`cod_municipio`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of aldea
 -- ----------------------------
-INSERT INTO `aldea` VALUES ('1', 'Aldea Universitaria Cunaguaro', 'Valencia', '7', '15999040');
+INSERT INTO `aldea` VALUES ('4', 'ALDEA BEJUMA ENFERMERIA', 'SECTOR BANCO OBRERO', '15', '17681202');
+INSERT INTO `aldea` VALUES ('5', 'ALDEA MIGUEL MARIN', 'SECTOR UNION', '15', '17681202');
+INSERT INTO `aldea` VALUES ('6', 'ALDEA MANUARE', 'MANUARE', '2', '17681202');
+INSERT INTO `aldea` VALUES ('7', 'GRANJA MILITAR EL CARUTO', 'CASCO BELEN', '2', '17681202');
+INSERT INTO `aldea` VALUES ('8', 'ENRIQUE DELGADO PALACIOS', 'NARANJILLO', '5', '17681202');
+INSERT INTO `aldea` VALUES ('9', 'DR. CARLOS ARVELO', '', '5', '17681202');
 
 -- ----------------------------
--- Table structure for `cohorte`
+-- Table structure for cohorte
 -- ----------------------------
 DROP TABLE IF EXISTS `cohorte`;
 CREATE TABLE `cohorte` (
   `cod_cohorte` int(11) NOT NULL AUTO_INCREMENT,
-  `anno` int(4) NOT NULL,
-  `inicio` int(2) NOT NULL,
-  `fin` int(2) NOT NULL,
+  `nombre` varchar(15) NOT NULL,
+  `inicio` date NOT NULL,
+  `fin` date NOT NULL,
   PRIMARY KEY (`cod_cohorte`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of cohorte
 -- ----------------------------
-INSERT INTO `cohorte` VALUES ('1', '2014', '6', '7');
+INSERT INTO `cohorte` VALUES ('1', '2014-I', '2014-06-25', '2014-07-17');
 
 -- ----------------------------
--- Table structure for `configuracion`
+-- Table structure for configuracion
 -- ----------------------------
 DROP TABLE IF EXISTS `configuracion`;
 CREATE TABLE `configuracion` (
@@ -68,11 +73,11 @@ CREATE TABLE `configuracion` (
 INSERT INTO `configuracion` VALUES ('1', 'Sistema(UBV). Eje Central.', 'admin@ubv.com.ve');
 
 -- ----------------------------
--- Table structure for `documentos`
+-- Table structure for documentos
 -- ----------------------------
 DROP TABLE IF EXISTS `documentos`;
 CREATE TABLE `documentos` (
-  `matricula` int(11) NOT NULL,
+  `matricula` int(20) unsigned NOT NULL,
   `verificacion_academica` tinyint(1) DEFAULT '0',
   `contancia_culminacion` tinyint(1) DEFAULT '0',
   `trabajo_grado` tinyint(1) DEFAULT '0',
@@ -92,7 +97,7 @@ CREATE TABLE `documentos` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `empleado`
+-- Table structure for empleado
 -- ----------------------------
 DROP TABLE IF EXISTS `empleado`;
 CREATE TABLE `empleado` (
@@ -105,15 +110,16 @@ CREATE TABLE `empleado` (
   PRIMARY KEY (`cod_empleado`),
   KEY `empleado_persona` (`cedula`),
   KEY `empleado_nivel` (`cod_nivel`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of empleado
 -- ----------------------------
 INSERT INTO `empleado` VALUES ('1', '17681201', 'admin', '21232f297a57a5a743894a0e4a801fc3', '0', '0');
+INSERT INTO `empleado` VALUES ('5', '17681202', 'coor', '21232f297a57a5a743894a0e4a801fc3', '2', '0');
 
 -- ----------------------------
--- Table structure for `entidad_federal`
+-- Table structure for entidad_federal
 -- ----------------------------
 DROP TABLE IF EXISTS `entidad_federal`;
 CREATE TABLE `entidad_federal` (
@@ -151,11 +157,11 @@ INSERT INTO `entidad_federal` VALUES ('23', 'Yaracuy');
 INSERT INTO `entidad_federal` VALUES ('24', 'Zulia');
 
 -- ----------------------------
--- Table structure for `estudiante`
+-- Table structure for estudiante
 -- ----------------------------
 DROP TABLE IF EXISTS `estudiante`;
 CREATE TABLE `estudiante` (
-  `matricula` int(11) NOT NULL,
+  `matricula` int(20) unsigned NOT NULL,
   `cedula` int(11) NOT NULL,
   `cod_pfg` int(4) NOT NULL,
   `cod_cohorte` int(11) NOT NULL,
@@ -170,7 +176,7 @@ CREATE TABLE `estudiante` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `modulo`
+-- Table structure for modulo
 -- ----------------------------
 DROP TABLE IF EXISTS `modulo`;
 CREATE TABLE `modulo` (
@@ -195,9 +201,11 @@ INSERT INTO `modulo` VALUES ('requests-notes', 'Solicitud de Notas', 'notas.png'
 INSERT INTO `modulo` VALUES ('requests-transfer', 'Solicitud de Traslado', 'traslado.png', '1', '3');
 INSERT INTO `modulo` VALUES ('students', 'Administracion de Bachilleres', 'estudiantes.png', '1', '6');
 INSERT INTO `modulo` VALUES ('universities', 'Administrar Aldeas', null, '0', '0');
+INSERT INTO `modulo` VALUES ('cohort', 'Administrar Cohortes', null, '0', '0');
+INSERT INTO `modulo` VALUES ('', '', null, '1', null);
 
 -- ----------------------------
--- Table structure for `municipio`
+-- Table structure for municipio
 -- ----------------------------
 DROP TABLE IF EXISTS `municipio`;
 CREATE TABLE `municipio` (
@@ -227,7 +235,7 @@ INSERT INTO `municipio` VALUES ('14', '7', 'San Joaquin');
 INSERT INTO `municipio` VALUES ('15', '7', 'Valencia');
 
 -- ----------------------------
--- Table structure for `nivel`
+-- Table structure for nivel
 -- ----------------------------
 DROP TABLE IF EXISTS `nivel`;
 CREATE TABLE `nivel` (
@@ -240,12 +248,12 @@ CREATE TABLE `nivel` (
 -- ----------------------------
 -- Records of nivel
 -- ----------------------------
-INSERT INTO `nivel` VALUES ('0', 'Administrador', 'home,config,students,requests-notes,requests-transfer,requests-constancy,universities,reports,employees,documents');
-INSERT INTO `nivel` VALUES ('1', 'Analista', 'home');
+INSERT INTO `nivel` VALUES ('0', 'Administrador', 'home,config,students,requests-notes,requests-transfer,requests-constancy,universities,reports,employees,documents,cohort');
+INSERT INTO `nivel` VALUES ('1', 'Analista', 'home,students,requests-notes,requests-transfer,requests-constancy,universities,reports,employees,documents');
 INSERT INTO `nivel` VALUES ('2', 'Coordinador de Aldea', 'home,students,reports');
 
 -- ----------------------------
--- Table structure for `persona`
+-- Table structure for persona
 -- ----------------------------
 DROP TABLE IF EXISTS `persona`;
 CREATE TABLE `persona` (
@@ -262,10 +270,11 @@ CREATE TABLE `persona` (
 -- ----------------------------
 -- Records of persona
 -- ----------------------------
-INSERT INTO `persona` VALUES ('17681201', 'Yennifer', 'Vargas', '0414-4110780', 'yenni_var@gmail.com', 'Trigal Norte', 'ninguna');
+INSERT INTO `persona` VALUES ('17681202', 'Luisana', 'Chavez', '0414-4144304', 'luisana@hotmail.com', 'Trigal Norte.', 'ninguna');
+INSERT INTO `persona` VALUES ('17681201', 'Eli', 'Chavez', '0414-4720780', 'elijose.c@gmail.com', 'Trigal Norte', 'ninguna');
 
 -- ----------------------------
--- Table structure for `pfg`
+-- Table structure for pfg
 -- ----------------------------
 DROP TABLE IF EXISTS `pfg`;
 CREATE TABLE `pfg` (
@@ -275,22 +284,45 @@ CREATE TABLE `pfg` (
   `cod_aldea` int(4) DEFAULT NULL,
   PRIMARY KEY (`cod_pfg`),
   KEY `pfg_aldea` (`cod_aldea`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of pfg
 -- ----------------------------
 INSERT INTO `pfg` VALUES ('1', 'Informatica', 'Ing Informatica', '1');
 INSERT INTO `pfg` VALUES ('2', 'Agronomia', 'Tecnico Superior Agronomo', '1');
+INSERT INTO `pfg` VALUES ('3', 'Informatica', null, '3');
+INSERT INTO `pfg` VALUES ('4', 'Medicina', null, '3');
+INSERT INTO `pfg` VALUES ('5', 'Terapia', null, '3');
+INSERT INTO `pfg` VALUES ('6', 'Informatica', null, '4');
+INSERT INTO `pfg` VALUES ('7', 'Enfermeria', null, '4');
+INSERT INTO `pfg` VALUES ('8', 'Electronica', null, '4');
+INSERT INTO `pfg` VALUES ('9', 'Quimica', null, '4');
+INSERT INTO `pfg` VALUES ('10', 'Polimeros', null, '4');
+INSERT INTO `pfg` VALUES ('11', 'Informatica', null, '5');
+INSERT INTO `pfg` VALUES ('12', 'Quimica', null, '5');
+INSERT INTO `pfg` VALUES ('13', 'Agropecuaria', null, '5');
+INSERT INTO `pfg` VALUES ('14', 'Quimica', null, '6');
+INSERT INTO `pfg` VALUES ('15', 'Electronica', null, '6');
+INSERT INTO `pfg` VALUES ('16', 'Agropecuaria', null, '7');
+INSERT INTO `pfg` VALUES ('17', 'MIneria', null, '7');
+INSERT INTO `pfg` VALUES ('18', 'Costura', null, '7');
+INSERT INTO `pfg` VALUES ('19', 'Enfermeria', null, '7');
+INSERT INTO `pfg` VALUES ('20', 'Artes Plasticas', null, '7');
+INSERT INTO `pfg` VALUES ('21', 'Enfermeria', null, '8');
+INSERT INTO `pfg` VALUES ('22', 'Medicina Integral', null, '8');
+INSERT INTO `pfg` VALUES ('23', 'Informatica', null, '9');
+INSERT INTO `pfg` VALUES ('24', 'Electronica', null, '9');
+INSERT INTO `pfg` VALUES ('25', 'Electricidad', null, '9');
 
 -- ----------------------------
--- Table structure for `solicitud`
+-- Table structure for solicitud
 -- ----------------------------
 DROP TABLE IF EXISTS `solicitud`;
 CREATE TABLE `solicitud` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `tipo` varchar(10) NOT NULL,
-  `matricula` int(11) NOT NULL,
+  `matricula` int(20) unsigned NOT NULL,
   `fecha_solicitud` datetime NOT NULL,
   `fecha_retiro` datetime DEFAULT NULL,
   `status` int(1) DEFAULT '0',
