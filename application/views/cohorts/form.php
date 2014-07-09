@@ -2,7 +2,7 @@
 <div>
 	<h5 class="required align-right">Campos en rojo son obligatorios</h5>
 	<ul>
-		<li><?php echo form_label('Nombre', 'nombre', array('class'=>'required')).'<br>'.form_input('nombre', 'employee->cedula', 'id="nombre" class="form-control"'); ?></li>
+		<li><?php echo form_label('Nombre', 'nombre', array('class'=>'required')).'<br>'.form_input('nombre', '', 'id="nombre" class="form-control"'); ?></li>
 	</ul>
 	<ul>
 		<li>

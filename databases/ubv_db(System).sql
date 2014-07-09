@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50614
 File Encoding         : 65001
 
-Date: 2014-06-30 21:58:11
+Date: 2014-07-09 13:30:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -54,7 +54,6 @@ CREATE TABLE `cohorte` (
 -- ----------------------------
 -- Records of cohorte
 -- ----------------------------
-INSERT INTO `cohorte` VALUES ('1', '2014-I', '2014-06-25', '2014-07-17');
 
 -- ----------------------------
 -- Table structure for configuracion
@@ -271,7 +270,7 @@ CREATE TABLE `persona` (
 -- Records of persona
 -- ----------------------------
 INSERT INTO `persona` VALUES ('17681202', 'Luisana', 'Chavez', '0414-4144304', 'luisana@hotmail.com', 'Trigal Norte.', 'ninguna');
-INSERT INTO `persona` VALUES ('17681201', 'Eli', 'Chavez', '0414-4720780', 'elijose.c@gmail.com', 'Trigal Norte', 'ninguna');
+INSERT INTO `persona` VALUES ('17681201', 'CArlos', 'Lopez', '0414-4720780', 'elijose.c@gmail.com', 'Trigal Norte', 'ninguna');
 
 -- ----------------------------
 -- Table structure for pfg
