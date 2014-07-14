@@ -91,8 +91,9 @@ class Student extends Person {
 		$this->db->from('solicitud');
 		$this->con->join('estudiante', 'estudiante.matricula = solicitud.matricula');
 		$this->db->where('solicitud.tipo', 'nota');
-		$this->db->where('solicitud.status', 1);
+		//$this->db->where('solicitud.status', 1);
 		$this->db->where('estudiante.matricula', $student_id);
+		$this->db->limit(1);
 		$query = $this->db->get();
 
 		return ($query->num_rows() > 0);

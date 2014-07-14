@@ -85,7 +85,8 @@ class Students extends Secure_Area {
 					'text'=>$row->apellido.' '.$row->nombre,
 					'student_cod'=>$row->matricula,
 					'pfg'=> array('cod'=>$row->cod_pfg, 'nombre'=>$row->pfg),
-					'aldea'=> array('cod'=>$row->cod_aldea, 'nombre'=>$row->aldea)
+					'aldea'=> array('cod'=>$row->cod_aldea, 'nombre'=>$row->aldea),
+					'can_transfer'=>$this->Student->can_transfer($row->matricula)
 				);
 			}
 		}

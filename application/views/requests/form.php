@@ -91,6 +91,7 @@ $(function() {
 	        }
 		}
 	}).change(function(val, added, removed){
+		//console.log(val.added);
 		if (val.removed) {
 			$('#stundet-info').slideUp('fast');
 			$("#search-aldea").attr('disabled', 'disabled').select2("destroy").val('');
@@ -102,24 +103,40 @@ $(function() {
 			$('#student-aldea').text(val.added.aldea.nombre);
 			$('#stundet-info').slideDown('slow');
 
-			$.ajax({
-				url: 'index.php/universities/possible_changes',
-				type: 'GET',
-				dataType: 'json',
-				data: {student: val.added.student_cod,pfg: val.added.pfg.nombre},
-				success: function(response){
-					// console.table(response);
-					if (response) {
-						$('#search-aldea').attr('placeholder', 'Posibles Cambios...').removeAttr('disabled')
-						.select2({
-							formatSelection: function (item) { return item.text; },
-							data: response,
-							allowClear: true,
-							width: '100%'
-						});
-					}
+			if($('#search-aldea').length == 1){
+				if(val.added.can_transfer){
+					$.ajax({
+						url: 'index.php/universities/possible_changes',
+						type: 'GET',
+						dataType: 'json',
+						data: {student: val.added.student_cod,pfg: val.added.pfg.nombre},
+						success: function(response){
+							// console.table(response);
+							if (response) {
+								$('#search-aldea').attr('placeholder', 'Posibles Cambios...').removeAttr('disabled')
+								.select2({
+									formatSelection: function (item) { return item.text; },
+									data: response,
+									allowClear: true,
+									width: '100%'
+								});
+							}
+						}
+					});
+				}else{
+					button = new Array();
+					button.push({
+				        label: 'Solicitar Notas',
+				        action: function(dialogItself){
+				        	location.href = 'index.php/requests/notes';
+				            dialogItself.close();
+				        }
+				    });
+					$('#search-student').select2('val','');
+					$('input[type=submit]').attr('disabled', 'disabled');
+					set_feedback(false, 'Requisito', 'Este estudiante no puede solicitar traslado sin antes a ver solicitado sus notas!', 'dager', false,false, button);
 				}
-			});
+			}
 			
 		}
 	});

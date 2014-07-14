@@ -56,14 +56,12 @@ function set_feedback(type, title, text, messageType, closeTb, reload, myButtons
 
 	if (closeTb) { $.fancybox.close(); } //Cierra el Fancybox
 	//Agrega boton por defecto de cerrar(Aceptar)
-	myButtons.push(
-		{
-	        label: 'Aceptar',
-	        action: function(dialogItself){
-	            dialogItself.close();
-	        }
-	    }
-	);
+	myButtons.push({
+        label: 'Aceptar',
+        action: function(dialogItself){
+            dialogItself.close();
+        }
+    });
 
 	var types = new Array();
  	types['default'] = BootstrapDialog.TYPE_DEFAULT;
