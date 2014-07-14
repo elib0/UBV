@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50614
 File Encoding         : 65001
 
-Date: 2014-07-09 13:30:38
+Date: 2014-07-13 23:36:09
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -54,6 +54,7 @@ CREATE TABLE `cohorte` (
 -- ----------------------------
 -- Records of cohorte
 -- ----------------------------
+INSERT INTO `cohorte` VALUES ('1', '2014-I', '2014-06-25', '2014-07-17');
 
 -- ----------------------------
 -- Table structure for configuracion
@@ -76,7 +77,7 @@ INSERT INTO `configuracion` VALUES ('1', 'Sistema(UBV). Eje Central.', 'admin@ub
 -- ----------------------------
 DROP TABLE IF EXISTS `documentos`;
 CREATE TABLE `documentos` (
-  `matricula` int(20) unsigned NOT NULL,
+  `matricula` bigint(30) unsigned NOT NULL,
   `verificacion_academica` tinyint(1) DEFAULT '0',
   `contancia_culminacion` tinyint(1) DEFAULT '0',
   `trabajo_grado` tinyint(1) DEFAULT '0',
@@ -94,6 +95,10 @@ CREATE TABLE `documentos` (
 -- ----------------------------
 -- Records of documentos
 -- ----------------------------
+INSERT INTO `documentos` VALUES ('4294967295', '1', '1', '1', '1', '1', '1', '1', '1', '0', '0', '0');
+INSERT INTO `documentos` VALUES ('42949672953', '1', '1', '1', '0', '0', '1', '1', '1', '0', '0', '0');
+INSERT INTO `documentos` VALUES ('42949672951', '1', '1', '1', '0', '0', '0', '1', '1', '0', '0', '0');
+INSERT INTO `documentos` VALUES ('42949672955', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
 
 -- ----------------------------
 -- Table structure for empleado
@@ -160,7 +165,7 @@ INSERT INTO `entidad_federal` VALUES ('24', 'Zulia');
 -- ----------------------------
 DROP TABLE IF EXISTS `estudiante`;
 CREATE TABLE `estudiante` (
-  `matricula` int(20) unsigned NOT NULL,
+  `matricula` bigint(30) unsigned NOT NULL,
   `cedula` int(11) NOT NULL,
   `cod_pfg` int(4) NOT NULL,
   `cod_cohorte` int(11) NOT NULL,
@@ -173,6 +178,11 @@ CREATE TABLE `estudiante` (
 -- ----------------------------
 -- Records of estudiante
 -- ----------------------------
+INSERT INTO `estudiante` VALUES ('42949672951', '18054822', '23', '1');
+INSERT INTO `estudiante` VALUES ('42949672952', '18054823', '7', '1');
+INSERT INTO `estudiante` VALUES ('42949672953', '18054824', '23', '1');
+INSERT INTO `estudiante` VALUES ('42949672954', '18054828', '9', '1');
+INSERT INTO `estudiante` VALUES ('42949672955', '18054830', '25', '1');
 
 -- ----------------------------
 -- Table structure for modulo
@@ -270,7 +280,12 @@ CREATE TABLE `persona` (
 -- Records of persona
 -- ----------------------------
 INSERT INTO `persona` VALUES ('17681202', 'Luisana', 'Chavez', '0414-4144304', 'luisana@hotmail.com', 'Trigal Norte.', 'ninguna');
-INSERT INTO `persona` VALUES ('17681201', 'CArlos', 'Lopez', '0414-4720780', 'elijose.c@gmail.com', 'Trigal Norte', 'ninguna');
+INSERT INTO `persona` VALUES ('17681201', 'Carlos', 'Delgado', '0414-4720780', 'elijose.c@gmail.com', 'Trigal Norte', 'ninguna');
+INSERT INTO `persona` VALUES ('18054822', 'Maria', 'Cuevas', '', '', '', 'ninguna');
+INSERT INTO `persona` VALUES ('18054823', 'Jorge', 'Franco', '', '', '', 'ninguna');
+INSERT INTO `persona` VALUES ('18054824', 'Luisana ', 'Salgado', '', '', '', 'ninguna');
+INSERT INTO `persona` VALUES ('18054828', 'Daniela', 'Hernandez', '', '', '', 'ninguna');
+INSERT INTO `persona` VALUES ('18054830', 'Leonel', 'Tramonte', '', '', '', 'ninguna');
 
 -- ----------------------------
 -- Table structure for pfg
@@ -321,18 +336,24 @@ DROP TABLE IF EXISTS `solicitud`;
 CREATE TABLE `solicitud` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `tipo` varchar(10) NOT NULL,
-  `matricula` int(20) unsigned NOT NULL,
+  `matricula` bigint(30) unsigned NOT NULL,
   `fecha_solicitud` datetime NOT NULL,
   `fecha_retiro` datetime DEFAULT NULL,
   `status` int(1) DEFAULT '0',
   `semestre_solicitado` int(2) DEFAULT NULL,
   `aldea_anterior` int(11) DEFAULT NULL,
   `aldea_nueva` int(11) DEFAULT NULL,
+  `razon` int(2) unsigned DEFAULT NULL,
   `comentarios` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `solicitud_estudiante_idx` (`matricula`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of solicitud
 -- ----------------------------
+INSERT INTO `solicitud` VALUES ('1', 'constancia', '42949672952', '2014-07-13 18:33:08', null, '0', '0', null, null, '1', '');
+INSERT INTO `solicitud` VALUES ('2', 'traslado', '42949672953', '2014-07-13 18:49:34', null, '0', '0', '23', '11', '1', '');
+INSERT INTO `solicitud` VALUES ('3', 'nota', '42949672951', '2014-07-13 23:43:02', null, '0', '10', null, null, null, '');
+INSERT INTO `solicitud` VALUES ('4', 'constancia', '42949672954', '2014-07-13 23:43:21', null, '0', '0', null, null, '1', '');
+INSERT INTO `solicitud` VALUES ('5', 'nota', '42949672953', '2014-07-14 04:42:33', null, '0', '2', null, null, null, '');
