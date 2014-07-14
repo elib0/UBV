@@ -40,6 +40,9 @@
 			<?php endif ?>
 		</ul>
 		<ul>
+			<?php if ($reasons): ?>
+				<li style=" width:100%"><?php echo form_label('Razon:', 'razon').'<br>'.form_dropdown('razon', $reasons, 'class="form-control"'); ?></li>
+			<?php endif ?>
 			<li style=" width:100%"><?php echo form_label('Comentarios:', 'comentarios').'<br>'.form_textarea(array('name'=>'comentarios', 'cols'=>80, 'rows'=>6, 'class'=>'form-control')); ?></li>
 		</ul>
 		<p class="align-center">

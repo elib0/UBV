@@ -25,7 +25,7 @@
 					<th>Acciones</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody id="nota">
 			<?php if ($nota): ?>
 				<?php foreach ($nota as $key => $value): ?>
 				<tr data-title="<?php echo $value->comentarios ?>">
@@ -62,7 +62,7 @@
 					<th>Acciones</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody  id="traslado">
 			<?php if ($traslado): ?>
 				<?php foreach ($traslado as $key => $value): ?>
 				<tr data-title="<?php echo $value->comentarios ?>">
@@ -99,7 +99,7 @@
 					<th>Acciones</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody  id="constancia">
 			<?php if ($constancia): ?>
 				<?php foreach ($constancia as $key => $value): ?>
 				<tr data-title="<?php echo $value->comentarios ?>">
@@ -154,17 +154,30 @@
 	        }
 		}
 	}).change(function(val, added, removed){
-		console.log(val.added);
-		$.ajax({
-			url: 'index.php/requests/search',
-			type: 'GET',
-			dataType: 'json',
-			data: {student_id: val.added.student_id},
-			success: function(response){
-				
-			}
-		});
-		
+		if(val.added){
+			$.ajax({
+				url: 'index.php/requests/search',
+				type: 'GET',
+				dataType: 'json',
+				data: {matricula: val.added.student_cod},
+				beforeSend: function(){
+					$('.process-request').hide('fast');
+				},
+				success: function(response){
+					var num = 0;
+					for (prop in response) {
+						if (response[prop].length > 0) {
+							$('tbody#'+prop).html(response[prop]);
+							$('tbody#'+prop).parents('.process-request').show('fast');
+						}
+						num += response[prop].length;
+					};
+					$('#num-request').text(num);
+				}
+			});
+		}else{
+			location.reload();
+		}
 	});
 
 	$('body').on('click', '#btn-process-request', function() {

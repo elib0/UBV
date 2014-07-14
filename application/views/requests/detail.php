@@ -17,8 +17,12 @@
 		echo ($request->fecha_retiro) ? date('d F \d\e\l Y. H:m:s', mysql_to_unix($request->fecha_retiro)) : 'Sin entregar'; 
 		?><br>
 		<?php if ($request->tipo == 'traslado'): ?>
-		Traslado de: <?php echo $request->aldea_anterior ?>
-		a: <?php echo $request->aldea_nueva ?>
+		<?php 
+			$aldea_anterior = $this->University->get_aldea_info_by_pfg($request->aldea_anterior);
+			$aldea_nueva = $this->University->get_aldea_info_by_pfg($request->aldea_nueva);
+		?>
+		Traslado de: <?php echo $aldea_anterior->nombre ?>
+		a: <?php echo $aldea_nueva->nombre ?>
 		<?php elseif($request->tipo == 'nota'): ?>
 		Notas del Semestre: <?php echo $request->semestre_solicitado ?>
 		<?php endif ?>

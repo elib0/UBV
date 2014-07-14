@@ -44,6 +44,36 @@ class Document extends CI_Model {
 		}
 	}
 
+	public function list_grade(){
+		$result = array();
+		$this->db->select('
+			matricula,
+			SUM(verificacion_academica+contancia_culminacion+
+			trabajo_grado+
+			consignacion_recaudos+
+			fotografia+
+			copia_cedula+
+			partida_nacimiento+
+			titulo_bachiller+
+			fondo_negro+
+			autenticidad_titulo+
+			notas_bachillerato) AS total'
+		);
+		$this->db->from('documentos');
+		$this->db->group_by('matricula');
+		$query = $this->db->get();
+		$num_fields = count($query->list_fields());
+		if ($query->num_rows()) {
+			foreach ($query->result() as $value) {
+				if ($value->total == 11) {
+					$result[] = $value;
+				}
+			}
+		}
+
+		return $result;
+	}
+
 	function save(&$document_data,$student_id=0)
 	{
 		$success=FALSE;

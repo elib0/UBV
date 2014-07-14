@@ -25,6 +25,13 @@ class Student extends Person {
 		return $this->db->get();
 	}
 
+	function count_all(){
+		$this->db->from('estudiante');
+		$this->db->join('persona', 'persona.cedula = estudiante.cedula');
+		$query = $this->db->get();
+		return $query->num_rows();
+	}
+
 	function get_info($student_id)
 	{
 		$this->db->from('estudiante');

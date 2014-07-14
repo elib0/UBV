@@ -9,6 +9,7 @@ class Home extends Secure_Area {
 		parent::__construct('home');
 		$this->load->model('Student');
 		$this->load->model('Request');
+		$this->load->model('Document');
 
 		$data['title'] = 'Inicio';
 		$this->load->vars($data);
@@ -25,6 +26,11 @@ class Home extends Secure_Area {
 		$data['notifications']['requests']['count'] = $this->Request->get_all()->num_rows();
 		$data['notifications']['requests']['description'] = 'Procesar Solicitudes pendientes o reimprimir solicitud(Notas, Traslados, Constancias de Culminacion, Consignacion de Recaudos).';
 		$data['notifications']['requests']['url'] = 'requests';
+
+		$data['notifications']['list_grade']['title'] = 'En lista de grado';
+		$data['notifications']['list_grade']['count'] = count($this->Document->list_grade());
+		$data['notifications']['list_grade']['description'] = 'Posibles graduandos que tienes todos sus recaudos.';
+		$data['notifications']['list_grade']['url'] = '';
 		$this->load->view('home', $data);
 	}
 

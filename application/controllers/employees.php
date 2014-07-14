@@ -60,7 +60,7 @@ class Employees extends Secure_Area {
 					$response = array('status'=>true, 'messagge'=>'Se han actualizado los datos del empleado satisfactoriamente!');
 				}
 			}elseif ($result > 0) {
-				$response = array('status'=>true, 'messagge'=>'El empleado se a registrado satisfactoriamente!');
+				$response = array('status'=>true, 'messagge'=>'El empleado se ha registrado satisfactoriamente!');
 			}
 		}
 

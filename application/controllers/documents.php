@@ -51,7 +51,7 @@ class Documents extends Secure_Area {
 	}
 
 	public function save(){
-		$response = array('status'=>FALSE, 'messagge'=>'No a sido posible actualizar los recaudo!');
+		$response = array('status'=>FALSE, 'messagge'=>'No ha sido posible actualizar los recaudo!');
 		$documents = $this->input->post('documents');
 		$document_data = array();
 		if ($documents) {

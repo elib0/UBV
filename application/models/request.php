@@ -35,6 +35,14 @@ class Request extends CI_Model {
 		return $success;
 	}
 
+	public function count_all(){
+		$this->db->from('solicitud');
+		$this->db->where('fecha_retiro', null);
+		$this->db->where('status <=', 0);
+		$query = $this->db->get();
+		return $query->num_rows();
+	}
+
 	public function get_all($limit = 30){
 		$this->db->select("solicitud.*, CONCAT(nombre, ' ', apellido ) AS nombre", FALSE);
 		$this->db->from('solicitud');

@@ -158,35 +158,119 @@ header #clock {
   right: 20px;
   text-align: right;
 }
-nav.user-menu ul {
+.alternative-menu,
+.alternative-menu > span {
+  position: relative;
+  display: inline;
+  margin: 0px;
+  padding: 0px;
+  cursor: pointer;
+}
+.alternative-menu span:after {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  z-index: 30;
+  margin-left: -8px;
+  width: 0;
+  height: 0;
+  border-top: 8px solid #515152;
+  border-right: 8px solid transparent;
+  border-left: 8px solid transparent;
+  content: '';
+}
+.alternative-menu > ul,
+.alternative-menu > span > ul {
+  position: absolute;
+  right: -50px;
+  left: -55px;
+  z-index: 20;
+  display: none;
+  margin: 0 auto;
+  padding: 0;
+  width: 150px;
+  color: #000;
   list-style: none;
 }
-nav.user-menu ul li {
+.alternative-menu:hover > ul,
+.alternative-menu:hover > span > ul {
+  display: block;
+  -webkit-box-shadow: 1px 1px 8px #000;
+  -moz-box-shadow: 1px 1px 8px #000;
+  box-shadow: 1px 1px 8px #000;
+}
+.alternative-menu > ul > li,
+.alternative-menu > span > ul > li {
+  margin: 0px;
+  padding: 0.6em;
+  border-bottom: 1px solid #ccc;
+  background-color: #fff;
+}
+.alternative-menu > ul > li:hover,
+.alternative-menu > span > ul > li:hover {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dedede));
+  background: -moz-linear-gradient(center top, #ededed 5%, #dedede 100%);
+}
+.alternative-menu > ul > li a,
+.alternative-menu > span > ul > li a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/*Notification (Menu Principal)*/
+nav#notifications li > div {
+  float: left;
+}
+nav#notifications div {
+  display: inline;
+  border-radius: 5px;
+  padding: 0.8em;
+  color: #000;
+  background-color: #ed0c11;
+}
+nav#notifications div a {
+  display: block;
+  width: 25px;
+  height: 25px;
+}
+nav#notifications div.notification-students {
+  background-color: #a6d1a1;
+}
+nav#notifications div.notification-requests {
+  background-color: #cb1245;
+}
+nav#notifications div.notification-list_grade {
+  background-color: #1d41e4;
+}
+nav.user-menu > ul {
+  list-style: none;
+}
+nav.user-menu > ul > li {
   float: left;
   border-right: 1px solid #515152;
   padding: 1em 10px 1em 32px;
   margin: 8px;
   color: #515152;
 }
-nav.user-menu ul li a,
-nav.user-menu ul li a:hover,
-nav.user-menu ul li a:active,
-nav.user-menu ul li a:visited {
+nav.user-menu > ul > li a,
+nav.user-menu > ul > li a:hover,
+nav.user-menu > ul > li a:active,
+nav.user-menu > ul > li a:visited {
   color: #515152;
 }
-nav.user-menu ul li h5 {
+nav.user-menu > ul > li h5 {
   padding: 0;
   margin: 0;
 }
-nav.user-menu ul li.session-user {
+nav.user-menu > ul > li.session-user {
   background: url("../images/menubar/empleado.png") no-repeat;
   background-size: 26px;
 }
-nav.user-menu ul li.logout {
+nav.user-menu > ul > li.logout {
   background: url("../images/menubar/salir.png") no-repeat;
   background-size: 26px;
 }
-nav.user-menu ul li:last-child {
+nav.user-menu > ul > li:last-child {
   border-right: none;
 }
 nav.main-menu {
@@ -375,11 +459,11 @@ nav.main-menu > ul > li > ul > li:first-child {
   width: 48.5%;
   margin-left: 0%;
   margin-right: 3%;
-  height: 200px;
   float: left;
   background-color: #009bd1;
   text-align: center;
   font-size: 2em;
+  margin-bottom: 1em;
   -webkit-transition: 1s ease all;
   -o-transition: 1s ease all;
   transition: 1s ease all;

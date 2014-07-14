@@ -4,6 +4,8 @@ class Requests extends Secure_Area {
 
 	private $default_title = 'Solicitud de ';
 	private $request_types = array('nota', 'traslado', 'constancia');
+	private $transfer_reasons = array('CAMBIO DE RESIDENCIA', 'NUEVO EMPLEO', 'MOTIVO PERSONAL');
+	private $constancy_reasons = array('CONTINUAR ESTUDIOS SUPERIORES', 'ASCENSO LABORAL', 'INSERCION LABORAL');
 
 	public function __construct()
 	{
@@ -29,18 +31,21 @@ class Requests extends Secure_Area {
 	}
 
 	public function notes(){
+		$data['reasons'] = array();
 		$data['title'] = $this->default_title.'Notas';
 		$data['type'] = $this->request_types[0];
 		$this->load->view('requests/form',$data);
 	}
 
 	public function transfer(){
+		$data['reasons'] = array('CAMBIO DE RESIDENCIA', 'NUEVO EMPLEO', 'MOTIVO PERSONAL');
 		$data['title'] = $this->default_title.ucwords($this->request_types[1]);
 		$data['type'] = $this->request_types[1];
 		$this->load->view('requests/form', $data);
 	}
 
 	public function constancy(){
+		$data['reasons'] = $this->constancy_reasons;
 		$data['title'] = $this->default_title.ucwords($this->request_types[2]).' de Culminación';
 		$data['type'] = $this->request_types[2];
 		$this->load->view('requests/form', $data);
@@ -102,6 +107,9 @@ class Requests extends Secure_Area {
 			$request_data['aldea_anterior'] = $student_data->cod_pfg;
 			$request_data['aldea_nueva'] = $this->input->post('aldea_nueva');
 		}
+		if ( $this->input->post('razon') ) {
+			$request_data['razon'] = $this->input->post('razon');
+		}
 		$request_data['comentarios'] = $this->input->post('comentarios');
 		if (@$result = $this->Request->save($request_data,$request_id)) {
 			if (is_bool($result)) {
@@ -116,18 +124,35 @@ class Requests extends Secure_Area {
 		echo json_encode($response);
 	}
 
-	public function search($person_id=false){
-		$student_id = $this->input->get('cedula');
+	public function search(){
+		$student_id = $this->input->get('matricula');
+		$data = array();
 		foreach ($this->request_types as $value) {
-			$data[$value] = array();
+			$data[$value] = '';
 		}
 		$requests = $this->Request->search($student_id);
 
-		if ($requests->num_row() > 0) {
+		if ($requests->num_rows() > 0) {
 			foreach ($requests->result() as $request) {
-				$data[$request->tipo][] = $request;
+				$tr = '<tr>'.'<td class="number-format">'.$request->id.'</td>'.
+				'<td>'.$request->nombre.'</td>'.
+				'<td class="number-format">'.$request->fecha_solicitud.'</td>'; 
+				if ($request->tipo == 'traslado') {
+					$tr .= '<td>'.$request->aldea_anterior.'</td>'.
+					'<td>'.$request->aldea_nueva.'</td>';
+				}
+				$tr .= '<td id="td-'.$request->id.'" class="number-format">'.$request->status.'</td>';
+				//Botones
+				$tr .= '<td class="number-format">'.
+				anchor('requests/view/'.$request->id.'?height=350&width=530', 'Detalles', 'class="fancybox btn btn-info btn-xs"').
+				anchor_popup('requests/printing/'.$request->id, 'Imprimir', array('class'=>'btn btn-warning btn-xs')).
+				anchor('requests/process/'.$request->id, 'Procesar', 'id="btn-process-request" id="btn-process-request" class="btn btn-success btn-xs"').
+				'</td></tr>';
+				//FIN Botones
+				$data[$request->tipo][] = $tr;
 			}
 		}
+		die(json_encode($data));
 	}
 
 }

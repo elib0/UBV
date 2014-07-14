@@ -57,6 +57,27 @@
       <div class="logo"><a href="index.php"><img src="images/logo.png" title="Ir al inicio" alt="" width="78px"></a></div>
       <nav class="user-menu">
         <ul>
+          <li>
+            <nav id="notifications" class="alternative-menu">
+              <div title="Notificaciones"><?php echo $main_notifications_count ?></div>
+              <?php
+              $li='';
+              foreach ($main_notifications as $notification => $data):
+                  $li.='<li><div class="notification-'.$notification.'">'.$data['count'].'</div>';
+
+                  if ( $data['count'] > 0  && $data['url']!= ''){ //Si tiene notificaciones se pone como enlace
+                      $li.=anchor($data['url'],$data['title']);
+                  }else{
+                      $li.='<span>'.$data['title'].'</span>';
+                  }
+                  $li.='</li>';
+              endforeach 
+              ?>
+              <ul>
+                  <?php echo $li ?>
+              </ul>
+            </nav>
+          </li>
           <li class="session-user"><h5>Usuario: <?php echo anchor('employees/view/'.$user_info->cedula.'?height=500&width=650', $user_info->nombre.' '.$user_info->apellido, 'title="Perfil de Usuario" class="fancybox"'); ?></h5></li>
           <li class="logout"><?php echo anchor('logout','Salir', 'title="Salir del Sistema"'); ?></li>
         </ul>

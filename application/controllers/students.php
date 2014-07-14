@@ -67,7 +67,7 @@ class Students extends Secure_Area {
 					$response = array('status'=>true, 'messagge'=>'Se han actualizado los datos del estudiante satisfactoriamente!');
 				}
 			}elseif ($result > 0) {
-				$response = array('status'=>true, 'messagge'=>'El estudiante se a registrado satisfactoriamente!', 'person_id'=>$result);
+				$response = array('status'=>true, 'messagge'=>'El estudiante se ha registrado satisfactoriamente!', 'person_id'=>$result);
 			}
 		}
 
