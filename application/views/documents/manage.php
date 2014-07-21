@@ -39,8 +39,8 @@
 				<?php $i++; endforeach ?>
 				</tbody>
 			</table>
-			<input type="submit" value="Guardar" class="btn btn-default align-right">
-			<?php echo anchor_popup('documents/printing/', 'Imprimir', array('class'=>'align-right btn btn-warning', 'id'=>'btn-print-document')) ?>
+			<input type="submit" value="Guardar" class="btn btn-default text-right">
+			<?php echo anchor_popup('documents/printing/', 'Imprimir', array('class'=>'text-right btn btn-warning', 'id'=>'btn-print-document')) ?>
 		</div>
 		<?php echo form_close(); ?>
 	</div>

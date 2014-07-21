@@ -45,9 +45,9 @@ class Document extends CI_Model {
 	}
 
 	public function list_grade(){
-		$result = array();
-		$this->db->select('
-			matricula,
+		$this->db->select("
+			estudiante.matricula,
+			CONCAT(nombre, ' ', apellido) AS nombre,
 			SUM(verificacion_academica+contancia_culminacion+
 			trabajo_grado+
 			consignacion_recaudos+
@@ -57,21 +57,14 @@ class Document extends CI_Model {
 			titulo_bachiller+
 			fondo_negro+
 			autenticidad_titulo+
-			notas_bachillerato) AS total'
+			notas_bachillerato) AS total", FALSE
 		);
 		$this->db->from('documentos');
-		$this->db->group_by('matricula');
-		$query = $this->db->get();
-		$num_fields = count($query->list_fields());
-		if ($query->num_rows()) {
-			foreach ($query->result() as $value) {
-				if ($value->total == 11) {
-					$result[] = $value;
-				}
-			}
-		}
-
-		return $result;
+		$this->db->join('estudiante', 'estudiante.matricula = documentos.matricula');
+		$this->db->join('persona', 'estudiante.cedula = persona.cedula');
+		$this->db->group_by('estudiante.matricula');
+		$this->db->having('total = 11');
+		return $this->db->get();
 	}
 
 	function save(&$document_data,$student_id=0)

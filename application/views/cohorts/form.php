@@ -1,6 +1,6 @@
 <?php echo form_open('cohort/save/', 'id="form-cohort"'); ?>
 <div>
-	<h5 class="required align-right">Campos en rojo son obligatorios</h5>
+	<h5 class="required text-right">Campos en rojo son obligatorios</h5>
 	<ul>
 		<li><?php echo form_label('Nombre', 'nombre', array('class'=>'required')).'<br>'.form_input('nombre', '', 'id="nombre" class="form-control"'); ?></li>
 	</ul>

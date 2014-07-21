@@ -3,10 +3,10 @@
 	<h1>General</h1>
 	<hr>
 	<ul>
-		<?php foreach ($notifications as $name => $notification): ?>
+		<?php foreach ($news as $name => $new): ?>
 			<li class="notification-<?php echo $name ?>">
-				<a href="index.php/<?php echo $notification['url'] ?>"><?php echo $notification['title'] ?><br><span><?php echo $notification['count'] ?></span></a>
-				<p><?php echo $notification['description'] ?></p>
+				<a href="index.php/<?php echo $new['url'] ?>"><?php echo $new['title'] ?><br><span><?php echo $new['count'] ?></span></a>
+				<p><?php echo $new['description'] ?></p>
 			</li>
 		<?php endforeach ?>
 	</ul>

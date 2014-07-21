@@ -43,7 +43,7 @@ class Secure_Area extends CI_Controller {
 		$data['main_notifications']['requests']['title'] = 'Solicitudes sin procesar';
 
 		$data['main_notifications']['list_grade']['url'] = '';
-		$data['main_notifications']['list_grade']['count'] = count($this->Document->list_grade());
+		$data['main_notifications']['list_grade']['count'] = $this->Document->list_grade()->num_rows();
 		$data['main_notifications']['list_grade']['title'] = 'En lista de grado';
 
 		//Cuenta total de todas las notificaciones

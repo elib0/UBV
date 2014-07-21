@@ -1,6 +1,6 @@
 <?php echo form_open('students/save/'.$student->cedula, 'id="form-student"'); ?>
 <div class="form-content">
-	<h5 class="required align-right">Campos en rojo son obligatorios</h5>
+	<h5 class="required text-right">Campos en rojo son obligatorios</h5>
 	<ul>
 		<div>
 			<h3>Datos personales</h3>

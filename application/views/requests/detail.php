@@ -1,5 +1,5 @@
 <section>
-	<div class="align-right">Numero de solicitud: <span><?php echo $request->id ?></span></div>
+	<div class="text-right">Numero de solicitud: <span><?php echo $request->id ?></span></div>
 	<div>
 		<h3>Datos Solicitante</h3>
 		Matricula: <?php echo $request->matricula ?>.<br>
@@ -29,8 +29,8 @@
 		<br><br>Comentarios:<br>
 		<?php echo ($request->comentarios != '') ? $request->comentarios : 'Sin comentarios...' ; ?>
 	</div>
-	<?php echo anchor('#', 'Cerrar', 'class="align-right btn btn-default" onclick="$.fancybox.close(true); return false;"'); ?>
-	<?php echo anchor_popup('requests/printing/'.$request->id, 'Imprimir', array('class'=>'align-right btn btn-warning')) ?>
+	<?php echo anchor('#', 'Cerrar', 'class="text-right btn btn-default" onclick="$.fancybox.close(true); return false;"'); ?>
+	<?php echo anchor_popup('requests/printing/'.$request->id, 'Imprimir', array('class'=>'text-right btn btn-warning')) ?>
 	<?php
 	if (!$request->status) {
 	 	echo anchor('requests/process/'.$request->id, 'Procesar', 'id="btn-process-request" class="btn btn-success"'); 

@@ -5,7 +5,7 @@
 	<?php echo form_open('requests/save', 'id="form-request"'); ?>
 	<?php echo form_hidden('tipo', $type); ?>
 	<div class="form-content">
-		<h5 class="required align-right">Campos en rojo son obligatorios</h5>
+		<h5 class="required text-right">Campos en rojo son obligatorios</h5>
 		<ul>
 			<div>
 				<h3>Datos de el estudiante</h3>
@@ -30,7 +30,7 @@
 			<?php if ($type == 'traslado'): ?>
 			<li>
 				<?php echo form_label('Aldea Nueva:', 'aldea_nueva', array('class'=>'required')).'<br>'.form_input('aldea_nueva', '', 'id="search-aldea" placeholder="Debes seleccionar un estudiante primero..." disabled="disabled"'); ?>
-				<p>El traslado a otra aldea solo se hará previamente habiendo solicitado las notas, Y unicamente a aldeas que dicten el mismo PFG que cursa el estudiante.</p>
+				<p class="bg-success">El traslado a otra aldea solo se hará previamente habiendo solicitado las notas, Y unicamente a aldeas que dicten el mismo PFG que cursa el estudiante.</p>
 			</li>
 			<li>
 			<?php elseif($type == 'nota'): ?>
@@ -45,7 +45,7 @@
 			<?php endif ?>
 			<li style=" width:100%"><?php echo form_label('Comentarios:', 'comentarios').'<br>'.form_textarea(array('name'=>'comentarios', 'cols'=>80, 'rows'=>6, 'class'=>'form-control')); ?></li>
 		</ul>
-		<p class="align-center">
+		<p class="text-center">
 			Esta solicitud no es reversible, ni modificable una vez emitida.
 		</p>
 		<input type="submit" value="Solicitar" class="btn btn-default">

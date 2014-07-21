@@ -21,7 +21,7 @@
 		</li>
 	</ul>
 </div>
-<input type="submit" value="Guardar" class="align-right btn btn-default">
+<input type="submit" value="Guardar" class="text-right btn btn-default">
 <?php echo form_close(); ?>
 <script type="text/javascript">
 	$(function() {

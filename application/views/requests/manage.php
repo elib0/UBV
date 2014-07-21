@@ -5,7 +5,7 @@
 	<?php
 	echo form_label('Buscar estudiante:', 'buscar', array('class'=>'required')).form_input('cedula', '', 'id="search-student"');
 	?>
-	<div class="align-right">
+	<div class="text-right">
 		Total Solicitudes: <span id="num-request"><?php echo $num_solicitudes ?></span>
 	</div>
 	<div id="stundet-info">

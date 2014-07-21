@@ -55,6 +55,18 @@ class Request extends CI_Model {
 		return $this->db->get();
 	}
 
+	public function get_by_type($type, $limit = 30){
+		$this->db->select("solicitud.*, CONCAT(nombre, ' ', apellido ) AS nombre", FALSE);
+		$this->db->from('solicitud');
+		$this->db->join('estudiante', 'solicitud.matricula = estudiante.matricula');
+		$this->db->join('persona', 'persona.cedula = estudiante.cedula');
+		$this->db->where('tipo', $type);
+		$this->db->where('status <=', 0);
+		$this->db->order_by('fecha_solicitud', 'desc');
+		$this->db->limit($limit);
+		return $this->db->get();
+	}
+
 	public function search($student_id = 0){
 		$this->db->select("solicitud.*, CONCAT(nombre, ' ', apellido ) AS nombre", FALSE);
 		$this->db->from('solicitud');

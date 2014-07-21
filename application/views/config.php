@@ -44,7 +44,7 @@
 			</div>
 		</li>
 	</ul>
-	<p class="align-center">
+	<p class="text-center bg-danger">
 		¡Cuidado: La modificacion del alguna configuracion de este modulo podria cambiar la funcionalidad del sistema!
 	</p>
 </section>

@@ -1,0 +1,28 @@
+@media screen {
+  .btn {
+    margin-top: 2em;
+  }
+  body {
+    text-align: center;
+  }
+  body table {
+    width: 100%;
+  }
+  body table tbody .tr-hidden {
+    display: none;
+  }
+  body table tbody td.expand {
+    cursor: pointer;
+  }
+  #canvas {
+    margin: 0 auto;
+  }
+}
+@media print {
+  .btn {
+    display: none;
+  }
+  .tr-hidden {
+    display: table-row;
+  }
+}
